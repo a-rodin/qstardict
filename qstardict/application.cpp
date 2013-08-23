@@ -68,15 +68,16 @@ Application::Application(int &argc, char **argv)
     m_popupWindow->setDict(m_dictCore);
     m_speaker = new Speaker;
     m_trayIcon = new TrayIcon;
+    m_popupShortcut = new QxtGlobalShortcut;
     m_mainWindow = new MainWindow;
     m_mainWindow->setDict(m_dictCore);
 #ifdef QSTARDICT_WITH_DBUS
     m_dbusAdaptor = new DBusAdaptor(m_mainWindow);
 #endif // QSTARDICT_WITH_DBUS
 
-    popupShortcut =
+    m_popupShortcut =
         new QxtGlobalShortcut(QKeySequence("Ctrl+T"), m_mainWindow);
-    QObject::connect(popupShortcut, SIGNAL(activated(QxtGlobalShortcut *)),
+    QObject::connect(m_popupShortcut, SIGNAL(activated(QxtGlobalShortcut *)),
         Application::instance()->popupWindow(),
         SLOT(showClipboardTranslation()));
 }
@@ -88,6 +89,7 @@ Application::~Application()
     delete m_popupWindow;
     delete m_speaker;
     delete m_dictCore;
+    delete m_popupShortcut;
 #ifdef QSTARDICT_WITH_TRANSLATIONS
     removeTranslator(m_translator);
     delete m_translator;
