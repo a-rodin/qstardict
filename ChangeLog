@@ -131,3 +131,5 @@
 	- added support for Qt5
 * Version 2.0.1
 	- added the author of the Hebrew translation to THANKS
+* Version 2.0.2
+	- fixed building without the "plugins.pri" file
