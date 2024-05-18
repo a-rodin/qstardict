@@ -126,3 +126,8 @@
 	- compilation fix for newer UNIX/Linux systems
 	- fix for 'unsaved prefs' thanks to Robin 'cheese' Lee from Fedora Project
 
+* Version 2.0
+	- added Hebrew translation
+	- added support for Qt5
+* Version 2.0.1
+	- added the author of the Hebrew translation to THANKS
