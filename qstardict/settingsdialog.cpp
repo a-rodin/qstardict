@@ -133,8 +133,8 @@ SettingsDialog::SettingsDialog(QWidget *parent)
     cssAliases["font.abbreviature"] = tr("Abbreviation");
     cssAliases["font.example"] = tr("Example");
     cssAliases["font.transcription"] = tr("Transcription");
-    apperanceCSSEdit->setElementsAliases(cssAliases);
-    apperanceCSSEdit->setCSS(Application::instance()->mainWindow()->defaultStyleSheet());
+    appearanceCSSEdit->setElementsAliases(cssAliases);
+    appearanceCSSEdit->setCSS(Application::instance()->mainWindow()->defaultStyleSheet());
 
     connect(m_pluginsModel, SIGNAL(itemChanged(QStandardItem*)),
             SLOT(pluginsItemChanged(QStandardItem*)));
@@ -213,8 +213,8 @@ void SettingsDialog::accept()
     popup->setPronounceWord(pronounceWordBox->isChecked());
 
     // Save translations CSS
-    Application::instance()->mainWindow()->setDefaultStyleSheet(apperanceCSSEdit->css());
-    Application::instance()->popupWindow()->setDefaultStyleSheet(apperanceCSSEdit->css());
+    Application::instance()->mainWindow()->setDefaultStyleSheet(appearanceCSSEdit->css());
+    Application::instance()->popupWindow()->setDefaultStyleSheet(appearanceCSSEdit->css());
 
     if (! Application::instance()->trayIcon()->isVisible())
         Application::instance()->mainWindow()->show();

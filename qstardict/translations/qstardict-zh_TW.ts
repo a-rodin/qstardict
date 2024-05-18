@@ -423,7 +423,7 @@
         <translation>當未找到字時顯示</translation>
     </message>
     <message>
-        <source>Apperance</source>
+        <source>Appearance</source>
         <translation>外觀</translation>
     </message>
     <message>

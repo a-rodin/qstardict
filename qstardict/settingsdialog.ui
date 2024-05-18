@@ -428,7 +428,7 @@
        <item row="1" column="0">
         <widget class="QGroupBox" name="groupBox_2">
          <property name="title">
-          <string>Apperance</string>
+          <string>Appearance</string>
          </property>
          <layout class="QGridLayout">
           <property name="margin">
@@ -553,11 +553,11 @@
      </widget>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Apperance</string>
+       <string>Appearance</string>
       </attribute>
       <layout class="QGridLayout">
        <item row="0" column="0">
-        <widget class="QStarDict::CSSEdit" name="apperanceCSSEdit" native="true"/>
+        <widget class="QStarDict::CSSEdit" name="appearanceCSSEdit" native="true"/>
        </item>
       </layout>
      </widget>

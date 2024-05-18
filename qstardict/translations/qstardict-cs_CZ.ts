@@ -545,7 +545,7 @@ potom co kurzor opustí výběr</translation>
     <message>
         <location filename="../settingsdialog.ui" line="431"/>
         <location filename="../settingsdialog.ui" line="556"/>
-        <source>Apperance</source>
+        <source>Appearance</source>
         <translation type="unfinished">Vzhled</translation>
     </message>
     <message>

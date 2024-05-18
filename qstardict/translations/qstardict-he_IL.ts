@@ -545,7 +545,7 @@
     <message>
         <location filename="../settingsdialog.ui" line="431"/>
         <location filename="../settingsdialog.ui" line="556"/>
-        <source>Apperance</source>
+        <source>Appearance</source>
         <translation>הופעה</translation>
     </message>
     <message>
