@@ -17,8 +17,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               #
 #############################################################################
 
-
-include(plugins.pri)
+isEmpty(ENABLED_PLUGINS):ENABLED_PLUGINS=stardict web
 TEMPLATE = subdirs
 SUBDIRS = $$ENABLED_PLUGINS
 
