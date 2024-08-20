@@ -1,0 +1,41 @@
+/*****************************************************************************
+ * stagewidget.h - QStarDict, a StarDict clone written with using Qt         *
+ * Copyright (C) 2024 Alexander Rodin                                        *
+ *                                                                           *
+ * This program is free software; you can redistribute it and/or modify      *
+ * it under the terms of the GNU General Public License as published by      *
+ * the Free Software Foundation; either version 2 of the License, or         *
+ * (at your option) any later version.                                       *
+ *                                                                           *
+ * This program is distributed in the hope that it will be useful,           *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of            *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
+ * GNU General Public License for more details.                              *
+ *                                                                           *
+ * You should have received a copy of the GNU General Public License along   *
+ * with this program; if not, write to the Free Software Foundation, Inc.,   *
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               *
+ *****************************************************************************/
+
+#ifndef STAGEWIDGET_H
+#define STAGEWIDGET_H
+
+#include "wordfortraining.h"
+
+namespace QStarDict
+{
+
+class StageWidget: public QWidget
+{
+    Q_OBJECT
+
+    public:
+        virtual void setWords(const QVector<WordForTraining> &wordsList);
+        virtual void startStage();
+
+        virtual QVector<WordForTraining> wordsWithErrors();
+};
+
+}
+
+#endif // STAGEWIDGET_H
