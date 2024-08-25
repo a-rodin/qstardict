@@ -28,7 +28,9 @@ FORMS += \
     cssedit.ui \
     mainwindow.ui \
     settingsdialog.ui \
-    dictbrowsersearch.ui
+    dictbrowsersearch.ui \
+    trainer/addworddialog.ui \
+    trainer/vocabularydialog.ui
 HEADERS += \
     application.h \
     cssedit.h \
@@ -44,7 +46,10 @@ HEADERS += \
     selection.h \
     settingsdialog.h \
     speaker.h \
-    trayicon.h
+    trayicon.h \
+    trainer/vocabulary.h \
+    trainer/vocabularydialog.h \
+    trainer/wordfortraining.h
 unix:isEmpty(NO_DBUS):HEADERS += \
     dbusadaptor.h
 SOURCES += \
@@ -62,7 +67,9 @@ SOURCES += \
     selection.cpp \
     settingsdialog.cpp \
     speaker.cpp \
-    trayicon.cpp
+    trayicon.cpp \
+    trainer/vocabulary.cpp \
+    trainer/vocabularydialog.cpp
 unix:isEmpty(NO_DBUS):SOURCES += \
     dbusadaptor.cpp
 

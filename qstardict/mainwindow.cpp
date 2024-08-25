@@ -38,6 +38,7 @@
 #include "popupwindow.h"
 #include "settingsdialog.h"
 #include "trayicon.h"
+#include "trainer/vocabularydialog.h"
 
 namespace QStarDict 
 {
@@ -110,6 +111,12 @@ void MainWindow::saveSettings()
     config.setValue("MainWindow/wordsListDock/geometry", wordsListDock->geometry());
     config.setValue("MainWindow/instantSearch", m_instantSearch);
     config.setValue("MainWindow/defaultStyleSheet", defaultStyleSheet());
+}
+
+void MainWindow::on_actionVocabulary_triggered()
+{
+    VocabularyDialog vocabularyDialog(this);
+    vocabularyDialog.exec();
 }
 
 void MainWindow::on_actionAbout_triggered()

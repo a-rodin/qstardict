@@ -78,6 +78,8 @@ Application::~Application()
     delete m_popupWindow;
     delete m_speaker;
     delete m_dictCore;
+    for (Vocabulary *vocabulary: m_vocabularies.values())
+        delete vocabulary;
 #ifdef QSTARDICT_WITH_TRANSLATIONS
     removeTranslator(m_translator);
     delete m_translator;
@@ -92,6 +94,16 @@ int Application::exec()
     if (text != QString::null)
         m_mainWindow->showTranslation(text);
     return QApplication::exec();
+}
+
+Vocabulary *Application::vocabulary(const QString &language)
+{
+    if (m_vocabularies.contains(language))
+        return m_vocabularies[language];
+
+    Vocabulary *vocabulary = new Vocabulary(language);
+    m_vocabularies[language] = vocabulary;
+    return vocabulary;
 }
 
 QString Application::commandLineText()
