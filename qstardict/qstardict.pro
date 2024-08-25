@@ -33,6 +33,7 @@ HEADERS += \
     application.h \
     cssedit.h \
     dictbrowser.h \
+    dictbrowsersearch.h \
     dictcore.h \
     ../plugins/dictplugin.h \
     dictwidget.h \
@@ -43,14 +44,14 @@ HEADERS += \
     selection.h \
     settingsdialog.h \
     speaker.h \
-    trayicon.h \
-    dictbrowsersearch.h
+    trayicon.h
 unix:isEmpty(NO_DBUS):HEADERS += \
     dbusadaptor.h
 SOURCES += \
     application.cpp \
     cssedit.cpp \
     dictbrowser.cpp \
+    dictbrowsersearch.cpp \
     dictcore.cpp \
     dictwidget.cpp \
     keyboard.cpp \
@@ -61,8 +62,7 @@ SOURCES += \
     selection.cpp \
     settingsdialog.cpp \
     speaker.cpp \
-    trayicon.cpp \
-    dictbrowsersearch.cpp
+    trayicon.cpp
 unix:isEmpty(NO_DBUS):SOURCES += \
     dbusadaptor.cpp
 
