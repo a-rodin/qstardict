@@ -19,6 +19,10 @@ Available plugins:
     * multitran - supports Multitran dictionaries (http://multitran.sourceforge.net)
 By default the only "stardict" and "web" plugins enabled.
 
+By default the install prefix is /usr. To change it add
+    INSTALL_PREFIX=<your prefix>
+to qmake arguments.
+
 To build and install:
 1)	qmake [switches]
 2)	make
