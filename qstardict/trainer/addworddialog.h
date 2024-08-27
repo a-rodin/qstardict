@@ -20,5 +20,24 @@
 #ifndef ADDWORDDIALOG_H
 #define ADDWORDDIALOG_H
 
+#include "ui_addworddialog.h"
+
+#include "wordfortraining.h"
+
+namespace QStarDict
+{
+
+class AddWordDialog: public QDialog, private Ui::AddWordDialog
+{
+    Q_OBJECT
+
+    public:
+        AddWordDialog(QWidget *parent = nullptr);
+
+        WordForTraining getWordForTraining();
+};
+
+}
+
 #endif // ADDWORDDIALOG_H
 

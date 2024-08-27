@@ -47,6 +47,7 @@ HEADERS += \
     settingsdialog.h \
     speaker.h \
     trayicon.h \
+    trainer/addworddialog.h \
     trainer/vocabularies.h \
     trainer/vocabulary.h \
     trainer/vocabularydialog.h \
@@ -69,6 +70,7 @@ SOURCES += \
     settingsdialog.cpp \
     speaker.cpp \
     trayicon.cpp \
+    trainer/addworddialog.cpp \
     trainer/vocabularies.cpp \
     trainer/vocabulary.cpp \
     trainer/vocabularydialog.cpp

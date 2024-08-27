@@ -19,7 +19,8 @@
 
 #include "vocabularydialog.h"
 
-#include "application.h"
+#include "../application.h"
+#include "addworddialog.h"
 #include "vocabularies.h"
 
 #include <QInputDialog>
@@ -53,6 +54,20 @@ void VocabularyDialog::on_addVocabularyButton_clicked()
         Application::instance()->vocabularies()->addVocabulary(vocabularyName);
         reloadVocabularies();
         vocabularyComboBox->setCurrentText(vocabularyName);
+    }
+}
+
+void VocabularyDialog::on_addWordButton_clicked()
+{
+    AddWordDialog addWordDialog(this);
+    int result = addWordDialog.exec();
+    if (result == QDialog::Accepted)
+    {
+        WordForTraining wordForTraining = addWordDialog.getWordForTraining();
+
+        QString vocabularyName = vocabularyComboBox->currentText();
+        Vocabulary *vocabulary = Application::instance()->vocabularies()->vocabulary(vocabularyName);
+        vocabulary->addWord(wordForTraining);
     }
 }
 

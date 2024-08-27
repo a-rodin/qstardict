@@ -1,5 +1,5 @@
 /*****************************************************************************
- * vocabularydialog.h - QStarDict, a dictionary for learning languages       *
+ * addworddialog.cpp - QStarDict, a dictionary for learning languages        *
  * Copyright (C) 2024 Alexander Rodin                                        *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
@@ -17,32 +17,27 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               *
  *****************************************************************************/
 
-#ifndef VOCABULARYDIALOG_H
-#define VOCABULARYDIALOG_H
-
-#include <QWidget>
-#include "ui_vocabularydialog.h"
+#include "addworddialog.h"
 
 namespace QStarDict
 {
 
-class VocabularyDialog: public QDialog, private Ui::VocabularyDialog
+AddWordDialog::AddWordDialog(QWidget *parent)
+    : QDialog(parent)
 {
-    Q_OBJECT
-
-    public:
-        VocabularyDialog(QWidget *parent = nullptr);
-        virtual ~VocabularyDialog();
-
-    private slots:
-        void on_addVocabularyButton_clicked();
-        void on_addWordButton_clicked();
-
-    private:
-        void reloadVocabularies();
-};
-
+    setupUi(this);
 }
 
-#endif // VOCABULARYDIALOG_H
+WordForTraining AddWordDialog::getWordForTraining()
+{
+    WordForTraining wordForTraining;
+
+    wordForTraining.setWord(wordEdit->text());
+    wordForTraining.setTranscription(transcriptionEdit->text());
+    wordForTraining.setTranslation(translationEdit->text());
+
+    return wordForTraining;
+}
+
+}
 
