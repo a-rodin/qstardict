@@ -57,6 +57,7 @@ void VocabularyDialog::on_addVocabularyButton_clicked()
 
 void VocabularyDialog::reloadVocabularies()
 {
+    vocabularyComboBox->clear();
     vocabularyComboBox->addItems(Application::instance()->vocabularies()->vocabulariesList());
 }
 
