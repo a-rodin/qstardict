@@ -33,6 +33,12 @@ class VocabularyDialog: public QDialog, private Ui::VocabularyDialog
     public:
         VocabularyDialog(QWidget *parent = nullptr);
         virtual ~VocabularyDialog();
+
+    private slots:
+        void on_addLanguageButton_clicked();
+
+    private:
+        void reloadLanguages();
 };
 
 }

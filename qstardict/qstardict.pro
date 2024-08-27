@@ -47,6 +47,7 @@ HEADERS += \
     settingsdialog.h \
     speaker.h \
     trayicon.h \
+    trainer/vocabularies.h \
     trainer/vocabulary.h \
     trainer/vocabularydialog.h \
     trainer/wordfortraining.h
@@ -68,6 +69,7 @@ SOURCES += \
     settingsdialog.cpp \
     speaker.cpp \
     trayicon.cpp \
+    trainer/vocabularies.cpp \
     trainer/vocabulary.cpp \
     trainer/vocabularydialog.cpp
 unix:isEmpty(NO_DBUS):SOURCES += \

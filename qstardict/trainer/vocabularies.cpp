@@ -1,5 +1,5 @@
 /*****************************************************************************
- * vocabulary.cpp - QStarDict, a dictionary for learning languages           *
+ * vocabularies.cpp - QStarDict, a dictionary for learning languages         *
  * Copyright (C) 2024 Alexander Rodin                                        *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
@@ -17,49 +17,36 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               *
  *****************************************************************************/
 
-#include "vocabulary.h"
+ #include "vocabularies.h"
 
-#include <QDir>
-#include <QMessageBox>
-#include <QSqlQuery>
+ #include <QDir>
+ #include <QDebug>
 
 namespace QStarDict
 {
 
-Vocabulary::Vocabulary(const QString &language)
+QStringList Vocabularies::vocabulariesList() const
 {
-    m_language = language;
-    m_db = QSqlDatabase::addDatabase("QSQLITE", m_language);
+    QStringList files = QDir(QDir::homePath() + "/.qstardict/training-vocabulary").entryList({"*.sqlite3"});
 
-    QDir databaseDir = QDir::homePath() + "/.qstardict/training-vocabulary";
-    if (! databaseDir.exists())
-        databaseDir.mkpath(".");
-    QString databaseFilename = databaseDir.absolutePath() + "/" + language + ".sqlite3";
-    m_db.setDatabaseName(databaseFilename);
-    if (! m_db.open())
-    {
-        QMessageBox::critical(nullptr, QObject::tr("Database error"),
-                QObject::tr("Cannot open vocabulary database at %1").arg(databaseFilename));
-        return;
+    QStringList vocabularies;
+    for (QString file: files) {
+        vocabularies << file.replace(".sqlite3", "");
     }
 
-    QSqlQuery query(m_db);
-    query.exec("CREATE TABLE IF NOT EXISTS words ("
-            "word TEXT PRIMARY KEY, "
-            "translation TEXT, "
-            "transcription TEXT, "
-            "studied INTEGER, "
-            "lastExcersise TEXT"
-            ")");
+    qDebug() << vocabularies;
+
+    return vocabularies;
 }
 
-Vocabulary::~Vocabulary()
+bool Vocabularies::addVocabulary(const QString &language)
 {
+    return false;
 }
 
-void Vocabulary::addWord(const WordForTraining &word)
+Vocabulary *Vocabularies::vocabulary(const QString &language)
 {
-
+    return nullptr;
 }
 
-};
+}

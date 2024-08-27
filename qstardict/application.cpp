@@ -33,6 +33,7 @@
 #ifdef QSTARDICT_WITH_DBUS
 #include "dbusadaptor.h"
 #endif // QSTARDICT_WITH_DBUS
+#include "trainer/vocabularies.h"
 
 namespace QStarDict
 {
@@ -69,6 +70,7 @@ Application::Application(int &argc, char **argv)
 #ifdef QSTARDICT_WITH_DBUS
     m_dbusAdaptor = new DBusAdaptor(m_mainWindow);
 #endif // QSTARDICT_WITH_DBUS
+    m_vocabularies = new Vocabularies;
 }
 
 Application::~Application()
@@ -78,14 +80,13 @@ Application::~Application()
     delete m_popupWindow;
     delete m_speaker;
     delete m_dictCore;
-    for (Vocabulary *vocabulary: m_vocabularies.values())
-        delete vocabulary;
 #ifdef QSTARDICT_WITH_TRANSLATIONS
     removeTranslator(m_translator);
     delete m_translator;
     removeTranslator(m_qtTranslator);
     delete m_qtTranslator;
 #endif // QSTARDICT_WITH_TRANSLATIONS
+    delete m_vocabularies;
 }
 
 int Application::exec()
@@ -94,16 +95,6 @@ int Application::exec()
     if (text != QString::null)
         m_mainWindow->showTranslation(text);
     return QApplication::exec();
-}
-
-Vocabulary *Application::vocabulary(const QString &language)
-{
-    if (m_vocabularies.contains(language))
-        return m_vocabularies[language];
-
-    Vocabulary *vocabulary = new Vocabulary(language);
-    m_vocabularies[language] = vocabulary;
-    return vocabulary;
 }
 
 QString Application::commandLineText()

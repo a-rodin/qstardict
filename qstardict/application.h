@@ -23,8 +23,6 @@
 #include <QApplication>
 #include <QMap>
 
-#include "trainer/vocabulary.h"
-
 #ifdef QSTARDICT_WITH_TRANSLATIONS
 class QTranslator;
 #endif // QSTARDICT_WITH_TRANSLATIONS
@@ -39,6 +37,7 @@ class TrayIcon;
 #ifdef QSTARDICT_WITH_DBUS
 class DBusAdaptor;
 #endif // QSTARDICT_WITH_DBUS
+class Vocabularies;
 
 /**
  * Main application class.
@@ -76,15 +75,10 @@ class Application: public QApplication
         { return m_dictCore; }
 
         /**
-         * Returns a list of languages in which vocabularies are available.
+         * Returns the training vocabularies object.
          */
-        QStringList vocabulariesList() const
-        { return m_vocabularies.keys(); }
-
-        /**
-         * Returns a vocabulary for a given language.
-         */
-        Vocabulary *vocabulary(const QString &language);
+        Vocabularies *vocabularies() const
+        { return m_vocabularies; }
 
         /**
          * Returns a pointer to the application's main window.
@@ -132,7 +126,7 @@ class Application: public QApplication
 
         QString commandLineText();
 
-        QMap<QString, Vocabulary*> m_vocabularies;
+        Vocabularies *m_vocabularies;
 };
 
 }

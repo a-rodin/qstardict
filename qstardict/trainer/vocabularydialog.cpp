@@ -18,7 +18,12 @@
  *****************************************************************************/
 
 #include "vocabularydialog.h"
+
 #include "application.h"
+#include "vocabularies.h"
+
+#include <QInputDialog>
+#include <QDebug>
 
 namespace QStarDict
 {
@@ -27,18 +32,32 @@ VocabularyDialog::VocabularyDialog(QWidget *parent)
     : QDialog(parent)
 {
     setupUi(this);
-
-    int counter = 0;
-    for (QString language: Application::instance()->vocabulariesList())
-    {
-        languageComboBox->setItemText(counter, language);
-        counter++;
-    }
+    reloadLanguages();
 }
 
 VocabularyDialog::~VocabularyDialog()
 {
 
+}
+
+void VocabularyDialog::on_addLanguageButton_clicked()
+{
+    bool ok;
+    QString language = QInputDialog::getText(this, tr("Languge name"),
+        tr("Enter the language name"),
+        QLineEdit::Normal,
+        QString(),
+        &ok);
+    if (ok && ! language.isEmpty())
+    {
+        Application::instance()->vocabularies()->addVocabulary(language);
+        reloadLanguages();
+    }
+}
+
+void VocabularyDialog::reloadLanguages()
+{
+    languageComboBox->addItems(Application::instance()->vocabularies()->vocabulariesList());
 }
 
 }

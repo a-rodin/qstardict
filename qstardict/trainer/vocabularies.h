@@ -1,5 +1,5 @@
 /*****************************************************************************
- * vocabulary.cpp - QStarDict, a dictionary for learning languages           *
+ * vocabularies.h - QStarDict, a dictionary for learning languages           *
  * Copyright (C) 2024 Alexander Rodin                                        *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
@@ -17,49 +17,24 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               *
  *****************************************************************************/
 
-#include "vocabulary.h"
+#ifndef VOCABULARIES_H
+#define VOCABULARIES_H
 
-#include <QDir>
-#include <QMessageBox>
-#include <QSqlQuery>
+#include "vocabulary.h"
 
 namespace QStarDict
 {
 
-Vocabulary::Vocabulary(const QString &language)
+class Vocabularies
 {
-    m_language = language;
-    m_db = QSqlDatabase::addDatabase("QSQLITE", m_language);
+    public:
+        QStringList vocabulariesList() const;
 
-    QDir databaseDir = QDir::homePath() + "/.qstardict/training-vocabulary";
-    if (! databaseDir.exists())
-        databaseDir.mkpath(".");
-    QString databaseFilename = databaseDir.absolutePath() + "/" + language + ".sqlite3";
-    m_db.setDatabaseName(databaseFilename);
-    if (! m_db.open())
-    {
-        QMessageBox::critical(nullptr, QObject::tr("Database error"),
-                QObject::tr("Cannot open vocabulary database at %1").arg(databaseFilename));
-        return;
-    }
-
-    QSqlQuery query(m_db);
-    query.exec("CREATE TABLE IF NOT EXISTS words ("
-            "word TEXT PRIMARY KEY, "
-            "translation TEXT, "
-            "transcription TEXT, "
-            "studied INTEGER, "
-            "lastExcersise TEXT"
-            ")");
-}
-
-Vocabulary::~Vocabulary()
-{
-}
-
-void Vocabulary::addWord(const WordForTraining &word)
-{
-
-}
-
+        bool addVocabulary(const QString &language);
+        Vocabulary *vocabulary(const QString &language);
 };
+
+}
+
+#endif // VOCABULARIES_H
+
