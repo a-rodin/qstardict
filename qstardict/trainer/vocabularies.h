@@ -22,16 +22,23 @@
 
 #include "vocabulary.h"
 
+#include <QMap>
+
 namespace QStarDict
 {
 
 class Vocabularies
 {
     public:
+        virtual ~Vocabularies();
+
         QStringList vocabulariesList() const;
 
-        bool addVocabulary(const QString &vocabularyName);
+        void addVocabulary(const QString &vocabularyName);
         Vocabulary *vocabulary(const QString &vocabularyName);
+
+    private:
+        QMap<QString, Vocabulary*> m_vocabularies;
 };
 
 }

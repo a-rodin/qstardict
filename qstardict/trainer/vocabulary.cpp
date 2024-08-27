@@ -26,15 +26,15 @@
 namespace QStarDict
 {
 
-Vocabulary::Vocabulary(const QString &language)
+Vocabulary::Vocabulary(const QString &vocabularyName)
 {
-    m_language = language;
-    m_db = QSqlDatabase::addDatabase("QSQLITE", m_language);
+    m_vocabularyName = vocabularyName;
+    m_db = QSqlDatabase::addDatabase("QSQLITE", vocabularyName);
 
     QDir databaseDir = QDir::homePath() + "/.qstardict/training-vocabulary";
     if (! databaseDir.exists())
         databaseDir.mkpath(".");
-    QString databaseFilename = databaseDir.absolutePath() + "/" + language + ".sqlite3";
+    QString databaseFilename = databaseDir.absolutePath() + "/" + vocabularyName + ".sqlite3";
     m_db.setDatabaseName(databaseFilename);
     if (! m_db.open())
     {

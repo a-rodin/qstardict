@@ -24,6 +24,12 @@
 namespace QStarDict
 {
 
+Vocabularies::~Vocabularies()
+{
+    for (Vocabulary *vocabulary: m_vocabularies.values())
+        delete vocabulary;
+}
+
 QStringList Vocabularies::vocabulariesList() const
 {
     QStringList files = QDir(QDir::homePath() + "/.qstardict/training-vocabulary").entryList({"*.sqlite3"});
@@ -36,9 +42,10 @@ QStringList Vocabularies::vocabulariesList() const
     return vocabularies;
 }
 
-bool Vocabularies::addVocabulary(const QString &vocabularyName)
+void Vocabularies::addVocabulary(const QString &vocabularyName)
 {
-    return false;
+    Vocabulary *vocabulary = new Vocabulary(vocabularyName);
+    m_vocabularies[vocabularyName] = vocabulary;
 }
 
 Vocabulary *Vocabularies::vocabulary(const QString &vocabularyName)

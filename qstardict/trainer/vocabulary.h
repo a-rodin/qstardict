@@ -32,11 +32,11 @@ namespace QStarDict
 class Vocabulary
 {
     public:
-        Vocabulary(const QString &language);
+        Vocabulary(const QString &vocabularyName);
         virtual ~Vocabulary();
 
-        QString getLanguage() const
-        { return m_language; }
+        QString getVocabularyName() const
+        { return m_vocabularyName; }
 
         void addWord(const WordForTraining &word);
         void markWordAdStudied(const WordForTraining &word);
@@ -44,7 +44,7 @@ class Vocabulary
         QVector<WordForTraining> getWordsForStudying();
 
     private:
-        QString m_language;
+        QString m_vocabularyName;
         QSqlDatabase m_db;
 };
 

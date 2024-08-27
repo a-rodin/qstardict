@@ -43,15 +43,16 @@ VocabularyDialog::~VocabularyDialog()
 void VocabularyDialog::on_addVocabularyButton_clicked()
 {
     bool ok;
-    QString vocabulary = QInputDialog::getText(this, tr("Vocabulary name"),
+    QString vocabularyName = QInputDialog::getText(this, tr("Vocabulary name"),
         tr("Enter the vocabulary name"),
         QLineEdit::Normal,
         QString(),
         &ok);
-    if (ok && ! vocabulary.isEmpty())
+    if (ok && ! vocabularyName.isEmpty())
     {
-        Application::instance()->vocabularies()->addVocabulary(vocabulary);
+        Application::instance()->vocabularies()->addVocabulary(vocabularyName);
         reloadVocabularies();
+        vocabularyComboBox->setCurrentText(vocabularyName);
     }
 }
 
