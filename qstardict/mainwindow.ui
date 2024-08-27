@@ -231,7 +231,7 @@
   </action>
   <action name="actionVocabulary">
    <property name="text">
-    <string>&amp;Vocabulary</string>
+    <string>&amp;Vocabularies</string>
    </property>
   </action>
  </widget>

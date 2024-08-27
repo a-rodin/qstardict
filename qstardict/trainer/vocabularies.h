@@ -30,8 +30,8 @@ class Vocabularies
     public:
         QStringList vocabulariesList() const;
 
-        bool addVocabulary(const QString &language);
-        Vocabulary *vocabulary(const QString &language);
+        bool addVocabulary(const QString &vocabularyName);
+        Vocabulary *vocabulary(const QString &vocabularyName);
 };
 
 }

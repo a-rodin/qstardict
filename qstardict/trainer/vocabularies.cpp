@@ -20,7 +20,6 @@
  #include "vocabularies.h"
 
  #include <QDir>
- #include <QDebug>
 
 namespace QStarDict
 {
@@ -34,17 +33,15 @@ QStringList Vocabularies::vocabulariesList() const
         vocabularies << file.replace(".sqlite3", "");
     }
 
-    qDebug() << vocabularies;
-
     return vocabularies;
 }
 
-bool Vocabularies::addVocabulary(const QString &language)
+bool Vocabularies::addVocabulary(const QString &vocabularyName)
 {
     return false;
 }
 
-Vocabulary *Vocabularies::vocabulary(const QString &language)
+Vocabulary *Vocabularies::vocabulary(const QString &vocabularyName)
 {
     return nullptr;
 }

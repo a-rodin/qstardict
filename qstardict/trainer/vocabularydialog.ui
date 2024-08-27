@@ -11,25 +11,25 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Vocabulary for studies</string>
+   <string>Vocabularies</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="languageLabel">
+      <widget class="QLabel" name="vocabularyLabel">
        <property name="text">
-        <string>Language:</string>
+        <string>Vocabulary:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="languageComboBox"/>
+      <widget class="QComboBox" name="vocabularyComboBox"/>
      </item>
      <item>
-      <widget class="QPushButton" name="addLanguageButton">
+      <widget class="QPushButton" name="addVocabularyButton">
        <property name="text">
-        <string>Add a language</string>
+        <string>Add a vocabulary</string>
        </property>
       </widget>
      </item>

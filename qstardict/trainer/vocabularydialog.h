@@ -35,10 +35,10 @@ class VocabularyDialog: public QDialog, private Ui::VocabularyDialog
         virtual ~VocabularyDialog();
 
     private slots:
-        void on_addLanguageButton_clicked();
+        void on_addVocabularyButton_clicked();
 
     private:
-        void reloadLanguages();
+        void reloadVocabularies();
 };
 
 }

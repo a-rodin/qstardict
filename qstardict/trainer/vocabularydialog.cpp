@@ -32,7 +32,7 @@ VocabularyDialog::VocabularyDialog(QWidget *parent)
     : QDialog(parent)
 {
     setupUi(this);
-    reloadLanguages();
+    reloadVocabularies();
 }
 
 VocabularyDialog::~VocabularyDialog()
@@ -40,24 +40,24 @@ VocabularyDialog::~VocabularyDialog()
 
 }
 
-void VocabularyDialog::on_addLanguageButton_clicked()
+void VocabularyDialog::on_addVocabularyButton_clicked()
 {
     bool ok;
-    QString language = QInputDialog::getText(this, tr("Languge name"),
-        tr("Enter the language name"),
+    QString vocabulary = QInputDialog::getText(this, tr("Vocabulary name"),
+        tr("Enter the vocabulary name"),
         QLineEdit::Normal,
         QString(),
         &ok);
-    if (ok && ! language.isEmpty())
+    if (ok && ! vocabulary.isEmpty())
     {
-        Application::instance()->vocabularies()->addVocabulary(language);
-        reloadLanguages();
+        Application::instance()->vocabularies()->addVocabulary(vocabulary);
+        reloadVocabularies();
     }
 }
 
-void VocabularyDialog::reloadLanguages()
+void VocabularyDialog::reloadVocabularies()
 {
-    languageComboBox->addItems(Application::instance()->vocabularies()->vocabulariesList());
+    vocabularyComboBox->addItems(Application::instance()->vocabularies()->vocabulariesList());
 }
 
 }
