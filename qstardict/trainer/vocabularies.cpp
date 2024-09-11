@@ -50,6 +50,13 @@ void Vocabularies::addVocabulary(const QString &vocabularyName)
 
 Vocabulary *Vocabularies::vocabulary(const QString &vocabularyName)
 {
+    if (vocabulariesList().contains(vocabularyName))
+    {
+        if (! m_vocabularies.contains(vocabularyName))
+            addVocabulary(vocabularyName);
+
+        return m_vocabularies[vocabularyName];
+    }
     return nullptr;
 }
 

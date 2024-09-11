@@ -23,6 +23,8 @@
 #include <QWidget>
 #include "ui_vocabularydialog.h"
 
+class QSqlTableModel;
+
 namespace QStarDict
 {
 
@@ -37,9 +39,14 @@ class VocabularyDialog: public QDialog, private Ui::VocabularyDialog
     private slots:
         void on_addVocabularyButton_clicked();
         void on_addWordButton_clicked();
+        void on_removeWordButton_clicked();
+        void on_vocabularyComboBox_currentTextChanged(const QString &);
 
     private:
         void reloadVocabularies();
+	void loadCurrentVocabulary();
+
+        QSqlTableModel *m_tableModel;
 };
 
 }

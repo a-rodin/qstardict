@@ -24,21 +24,23 @@
 #include "vocabularies.h"
 
 #include <QInputDialog>
-#include <QDebug>
+#include <QSqlTableModel>
 
 namespace QStarDict
 {
 
 VocabularyDialog::VocabularyDialog(QWidget *parent)
-    : QDialog(parent)
+    : QDialog(parent),
+      m_tableModel(nullptr)
 {
     setupUi(this);
     reloadVocabularies();
+    loadCurrentVocabulary();
 }
 
 VocabularyDialog::~VocabularyDialog()
 {
-
+    delete m_tableModel;
 }
 
 void VocabularyDialog::on_addVocabularyButton_clicked()
@@ -68,13 +70,46 @@ void VocabularyDialog::on_addWordButton_clicked()
         QString vocabularyName = vocabularyComboBox->currentText();
         Vocabulary *vocabulary = Application::instance()->vocabularies()->vocabulary(vocabularyName);
         vocabulary->addWord(wordForTraining);
+        loadCurrentVocabulary();
     }
+}
+
+void VocabularyDialog::on_removeWordButton_clicked()
+{
+    QItemSelection selection = wordsView->selectionModel()->selection();
+    for (QModelIndex index: selection.indexes())
+        m_tableModel->removeRow(index.row());
+    loadCurrentVocabulary();
+}
+
+void VocabularyDialog::on_vocabularyComboBox_currentTextChanged(const QString &)
+{
+    loadCurrentVocabulary();
 }
 
 void VocabularyDialog::reloadVocabularies()
 {
     vocabularyComboBox->clear();
     vocabularyComboBox->addItems(Application::instance()->vocabularies()->vocabulariesList());
+}
+
+void VocabularyDialog::loadCurrentVocabulary()
+{
+    QString currentVocabulary = vocabularyComboBox->currentText();
+    if (currentVocabulary.isEmpty())
+        return;
+
+    Vocabulary *vocabulary = Application::instance()->vocabularies()->vocabulary(currentVocabulary);
+    if (! vocabulary)
+        return;
+
+    QSqlDatabase db = vocabulary->db();
+
+    delete m_tableModel;
+    m_tableModel = new QSqlTableModel(nullptr, db);
+    m_tableModel->setTable("words");
+    m_tableModel->select();
+    wordsView->setModel(m_tableModel);
 }
 
 }

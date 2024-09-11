@@ -43,6 +43,9 @@ class Vocabulary
 
         QVector<WordForTraining> getWordsForStudying();
 
+	QSqlDatabase db() const
+	{ return m_db; }
+
     private:
         QString m_vocabularyName;
         QSqlDatabase m_db;

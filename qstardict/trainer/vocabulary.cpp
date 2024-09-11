@@ -19,9 +19,12 @@
 
 #include "vocabulary.h"
 
+#include <QDebug>
 #include <QDir>
 #include <QMessageBox>
+#include <QSqlError>
 #include <QSqlQuery>
+#include <QVariant>
 
 namespace QStarDict
 {
@@ -59,7 +62,18 @@ Vocabulary::~Vocabulary()
 
 void Vocabulary::addWord(const WordForTraining &word)
 {
-
+    QSqlQuery query(m_db);
+    query.prepare("INSERT INTO words (word, translation, transcription) VALUES (:word, :translation, :transcription)");
+    query.bindValue(":word", word.word());
+    query.bindValue(":translation", word.translation());
+    if (word.transcription())
+        query.bindValue(":transcription", *word.transcription());
+    else
+        query.bindValue(":transcription", QVariant::fromValue(nullptr));
+    if (! query.exec())
+    {
+        qDebug() << query.lastError();
+    }
 }
 
 };
