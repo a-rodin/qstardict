@@ -23,6 +23,7 @@ TRANSLATIONS += \
     qstardict-de_DE.ts \
     qstardict-es_ES.ts \
     qstardict-fr_FR.ts \
+    qstardict-he_IL.ts \
     qstardict-it_IT.ts \
     qstardict-lt_LT.ts \
     qstardict-pl_PL.ts \
@@ -39,6 +40,7 @@ COMPILED_TRANSLATIONS += \
     qstardict-de_DE.qm \
     qstardict-es_ES.qm \
     qstardict-fr_FR.qm \
+    qstardict-he_IL.qm \
     qstardict-it_IT.qm \
     qstardict-lt_LT.qm \
     qstardict-pl_PL.qm \
