@@ -22,7 +22,7 @@
 #include <QGridLayout>
 #include <QMouseEvent>
 #include <QSettings>
-#include <QRegExp>
+#include <QRegularExpression>
 #include "dictwidget.h"
 #include "keyboard.h"
 #include "selection.h"
@@ -41,7 +41,7 @@ PopupWindow::PopupWindow(QWidget *parent)
     translationView->setDict(m_dict);
     translationView->setMouseTracking(true);
     QGridLayout *mainLayout = new QGridLayout(this);
-    mainLayout->setMargin(0);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->addWidget(translationView);
 
     m_selection = new Selection(this);
@@ -108,7 +108,7 @@ void PopupWindow::selectionChanged(const QString &text)
 void PopupWindow::showTranslation(const QString &text)
 {
     QString simpl = text.simplified();
-    simpl.remove(QRegExp("[&%-/+?\\*#!:\\(\\)\\[\\]]+"));
+    simpl.remove(QRegularExpression("[&%-/+?\\*#!:\\(\\)\\[\\]]+"));
     if (simpl.isEmpty())
         return;
 

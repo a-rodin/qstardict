@@ -44,7 +44,7 @@ class DictWidget: public QFrame
         /**
          * Construct empty DictWidget.
          */
-        DictWidget(QWidget *parent = 0, Qt::WindowFlags f = 0);
+        DictWidget(QWidget *parent = 0, Qt::WindowFlags f = Qt::Widget);
 
         /**
          * Set source dictionary.

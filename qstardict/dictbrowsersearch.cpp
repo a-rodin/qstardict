@@ -35,7 +35,7 @@ DictBrowserSearch::DictBrowserSearch(QWidget *parent) :
 
 void DictBrowserSearch::searchAll()
 {
-    QTextDocument::FindFlags f = 0;
+    QTextDocument::FindFlags f = { };
     if (caseSensitiveCheckBox->isChecked())
         f |= QTextDocument::FindCaseSensitively;
     if (wholeWordsCheckBox->isChecked())

@@ -23,7 +23,7 @@
 #include <QFileInfoList>
 #include <QFileInfo>
 #include <QDir>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QSettings>
 #include <QDebug>
 #include <QPluginLoader>

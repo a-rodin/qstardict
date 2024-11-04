@@ -26,6 +26,7 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
+#include <QRegularExpression>
 #include <QSettings>
 #include <QStack>
 #include <glib.h>
@@ -274,23 +275,24 @@ QString StarDict::parseData(const char *data, int dictIndex, bool htmlSpaces, bo
 
 	if (expandAbbreviations)
 	{
-		QRegExp regExp("_\\S+[\\.:]");
+		QRegularExpression regExp("_\\S+[\\.:]");
 		int pos = 0;
-		while ((pos = regExp.indexIn(result, pos)) != -1)
+		QRegularExpressionMatch match;
+		while ((pos = (match = regExp.match(result, pos)).capturedStart()) != -1)
 		{
 			long ind;
-			if (m_sdLibs->SimpleLookupWord(result.mid(pos, regExp.matchedLength()).toUtf8().data(), ind, dictIndex))
+			if (m_sdLibs->SimpleLookupWord(result.mid(pos, match.capturedLength()).toUtf8().data(), ind, dictIndex))
 			{
 				QString expanded = "<font class=\"explanation\">";
 				expanded += parseData(m_sdLibs->poGetWordData(ind, dictIndex));
-				if (result[pos + regExp.matchedLength() - 1] == ':')
+				if (result[pos + match.capturedLength() - 1] == ':')
 					expanded += ':';
 				expanded += "</font>";
-				result.replace(pos, regExp.matchedLength(), expanded);
+				result.replace(pos, match.capturedLength(), expanded);
 				pos += expanded.length();
 			}
 			else
-				pos += regExp.matchedLength();
+				pos += match.capturedLength();
 		}
 	}
 	if (reformatLists)
@@ -423,8 +425,8 @@ void xdxf2html(QString &str)
 	str.replace("<tr>", "<font class=\"transcription\">[");
 	str.replace("</tr>", "]</font>");
 	str.replace("<ex>", "<font class=\"example\">");
-	str.replace(QRegExp("<k>.*<\\/k>"), "");
-	str.replace(QRegExp("(<\\/abr>)|(<\\ex>)"), "</font");
+	str.replace(QRegularExpression("<k>.*<\\/k>"), "");
+	str.replace(QRegularExpression("(<\\/abr>)|(<\\ex>)"), "</font");
 }
 
 }

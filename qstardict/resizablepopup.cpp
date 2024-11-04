@@ -21,7 +21,6 @@
 
 #include <QApplication>
 #include <QCursor>
-#include <QDesktopWidget>
 #include <QMouseEvent>
 #include <QTimerEvent>
 
@@ -53,7 +52,16 @@ void ResizablePopup::popup()
 {
     if (m_defaultSize != size())
         resize(m_defaultSize);
+
+    QWidget window;
+    window.setStyleSheet("background:transparent;");
+    window.setAttribute(Qt::WA_TranslucentBackground);
+    window.setWindowFlags(Qt::FramelessWindowHint);
+    window.setWindowState(Qt::WindowMaximized);
+    window.show();
+
     QPoint newPosition = QCursor::pos() - QPoint(30, 30);
+#if 0 // TODO
     if (newPosition.x() < 0)
         newPosition.setX(0);
     else if (newPosition.x() + width() > QApplication::desktop()->width())
@@ -62,6 +70,7 @@ void ResizablePopup::popup()
         newPosition.setY(0);
     else if (newPosition.y() + height() > QApplication::desktop()->height())
         newPosition.setY(QApplication::desktop()->height() - height());
+#endif
     move(newPosition);
     show();
     m_isPopuped = true;
