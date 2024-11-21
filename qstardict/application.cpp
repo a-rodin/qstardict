@@ -105,6 +105,15 @@ QString Application::commandLineText()
     return QString();
 }
 
+void Application::saveSettingsAndQuit()
+{
+    m_dictCore->saveSettings();
+    m_mainWindow->saveSettings();
+    m_trayIcon->saveSettings();
+    m_popupWindow->saveSettings();
+    quit();
+}
+
 }
 
 // vim: tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent textwidth=120 formatoptions=tc

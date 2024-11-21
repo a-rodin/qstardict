@@ -52,7 +52,6 @@ PopupWindow::PopupWindow(QWidget *parent)
 
 PopupWindow::~PopupWindow()
 {
-    saveSettings();
 }
 
 void PopupWindow::loadSettings()

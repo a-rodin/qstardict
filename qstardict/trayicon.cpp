@@ -52,7 +52,7 @@ TrayIcon::TrayIcon(QObject *parent)
     trayMenu->addAction(actionSettings);
 
     QAction *actionQuit = new QAction(QIcon(":/icons/application-exit.png"), tr("&Quit"), this);
-    connect(actionQuit, SIGNAL(triggered()), Application::instance(), SLOT(quit()));
+    connect(actionQuit, SIGNAL(triggered()), Application::instance(), SLOT(saveSettingsAndQuit()));
     trayMenu->addAction(actionQuit);
 
     setContextMenu(trayMenu);
