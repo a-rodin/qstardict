@@ -21,7 +21,9 @@
 
 #include <QApplication>
 #include <QCursor>
+#include <QGuiApplication>
 #include <QMouseEvent>
+#include <QScreen>
 #include <QTimerEvent>
 
 namespace
@@ -61,16 +63,14 @@ void ResizablePopup::popup()
     window.show();
 
     QPoint newPosition = QCursor::pos() - QPoint(30, 30);
-#if 0 // TODO
     if (newPosition.x() < 0)
         newPosition.setX(0);
-    else if (newPosition.x() + width() > QApplication::desktop()->width())
-        newPosition.setX(QApplication::desktop()->width() - width());
+    else if (newPosition.x() + width() > QGuiApplication::primaryScreen()->geometry().width())
+        newPosition.setX(QGuiApplication::primaryScreen()->geometry().width() - width());
     if (newPosition.y() < 0)
         newPosition.setY(0);
-    else if (newPosition.y() + height() > QApplication::desktop()->height())
-        newPosition.setY(QApplication::desktop()->height() - height());
-#endif
+    else if (newPosition.y() + height() > QGuiApplication::primaryScreen()->geometry().height())
+        newPosition.setY(QGuiApplication::primaryScreen()->geometry().height() - height());
     move(newPosition);
     show();
     m_isPopuped = true;
@@ -105,21 +105,21 @@ void ResizablePopup::leaveEvent(QEvent*)
 void ResizablePopup::mouseMoveEvent(QMouseEvent *event)
 {
     Qt::CursorShape cursorShape = Qt::ArrowCursor;
-    if ((event->x() >= 0 && event->x() < CornerSize &&
-            event->y() >= 0 && event->y() < CornerSize) ||
-        (event->x() < width() && event->x() >= width() - CornerSize &&
-            event->y() < height() && event->y() >= height() - CornerSize))
+    if ((event->position().x() >= 0 && event->position().x() < CornerSize &&
+            event->position().y() >= 0 && event->position().y() < CornerSize) ||
+        (event->position().x() < width() && event->position().x() >= width() - CornerSize &&
+            event->position().y() < height() && event->position().y() >= height() - CornerSize))
         cursorShape = Qt::SizeFDiagCursor;
-    else if ((event->x() < width() && event->x() >= width() - CornerSize &&
-                event->y() >= 0 && event->y() < CornerSize) ||
-             (event->x() >= 0 && event->x() < CornerSize &&
-                event->y() < height() && event->y() >= height() - CornerSize))
+    else if ((event->position().x() < width() && event->position().x() >= width() - CornerSize &&
+                event->position().y() >= 0 && event->position().y() < CornerSize) ||
+             (event->position().x() >= 0 && event->position().x() < CornerSize &&
+                event->position().y() < height() && event->position().y() >= height() - CornerSize))
         cursorShape = Qt::SizeBDiagCursor;
-    else if ((event->x() >= 0 && event->x() < frameWidth()) ||
-             (event->x() < width() && event->x() >= width() - frameWidth()))
+    else if ((event->position().x() >= 0 && event->position().x() < frameWidth()) ||
+             (event->position().x() < width() && event->position().x() >= width() - frameWidth()))
         cursorShape = Qt::SizeHorCursor;
-    else if ((event->y() >= 0 && event->y() < frameWidth()) ||
-             (event->y() < height() && event->y() >= height() - frameWidth()))
+    else if ((event->position().y() >= 0 && event->position().y() < frameWidth()) ||
+             (event->position().y() < height() && event->position().y() >= height() - frameWidth()))
         cursorShape = Qt::SizeVerCursor;
     
     if (cursor().shape() != cursorShape)
@@ -128,8 +128,8 @@ void ResizablePopup::mouseMoveEvent(QMouseEvent *event)
         if (event->buttons().testFlag(Qt::LeftButton))
         {
             if (m_isMoving)
-                move(pos() + (event->globalPos() - m_oldCursorPos));
-            m_oldCursorPos = event->globalPos();
+                move(pos() + (event->globalPosition().toPoint() - m_oldCursorPos));
+            m_oldCursorPos = event->globalPosition().toPoint();
             return;
         }
     m_isMoving = false;
@@ -137,7 +137,7 @@ void ResizablePopup::mouseMoveEvent(QMouseEvent *event)
 
 void ResizablePopup::mousePressEvent(QMouseEvent *event)
 {
-    if (! geometry().contains(event->globalPos()))
+    if (! geometry().contains(event->globalPosition().toPoint()))
     {
         if (m_timerCloseId)
         {
@@ -151,21 +151,21 @@ void ResizablePopup::mousePressEvent(QMouseEvent *event)
 
     if (event->buttons().testFlag(Qt::LeftButton))
     {
-        if (event->x() < CornerSize && event->y() < CornerSize)
+        if (event->position().x() < CornerSize && event->position().y() < CornerSize)
             m_resizeDirection = TopLeft;
-        else if (event->x() >= width() - CornerSize && event->y() < CornerSize)
+        else if (event->position().x() >= width() - CornerSize && event->position().y() < CornerSize)
             m_resizeDirection = TopRight;
-        else if (event->x() < CornerSize && event->y() >= height() - CornerSize)
+        else if (event->position().x() < CornerSize && event->position().y() >= height() - CornerSize)
             m_resizeDirection = BottomLeft;
-        else if (event->x() >= width() - CornerSize && event->y() >= height() - CornerSize)
+        else if (event->position().x() >= width() - CornerSize && event->position().y() >= height() - CornerSize)
             m_resizeDirection = BottomRight;
-        else if (event->x() < frameWidth())
+        else if (event->position().x() < frameWidth())
             m_resizeDirection = Left;
-        else if (event->x() >= width() - frameWidth())
+        else if (event->position().x() >= width() - frameWidth())
             m_resizeDirection = Right;
-        else if (event->y() < frameWidth())
+        else if (event->position().y() < frameWidth())
             m_resizeDirection = Top;
-        else if (event->y() >= height() - frameWidth())
+        else if (event->position().y() >= height() - frameWidth())
             m_resizeDirection = Bottom;
         else
             m_resizeDirection = None;
@@ -174,7 +174,7 @@ void ResizablePopup::mousePressEvent(QMouseEvent *event)
     }
 
     m_isMoving = true;
-    m_oldCursorPos = event->globalPos();
+    m_oldCursorPos = event->globalPosition().toPoint();
 }
 
 void ResizablePopup::mouseReleaseEvent(QMouseEvent*)
