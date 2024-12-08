@@ -26,6 +26,6 @@ Thanks to:
     Frank Ren who updated the Traditional Chinese translation
     Schimon Jehudah Zackary who added the Hebrew translation
     Temuri Doghonadze who added the Georgian translation
-    Alex Fomin who helped to port QStarDict to Qt6
+    Alex Fomin who helped to port QStarDict to Qt6 and fixed usage of deprecated functions
 
 
