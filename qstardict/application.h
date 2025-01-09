@@ -110,6 +110,13 @@ class Application: public QApplication
         DBusAdaptor *dbusAdaptor()
         { return m_dbusAdaptor; }
 #endif // QSTARDICT_WITH_DBUS
+    public slots:
+        /**
+         * The settings are saved before calling destructors because with Qt6
+         * the main window is closed before the destructors are called,
+         * which leads to incorrect settings being saved.
+         */
+        void saveSettingsAndQuit();
     private:
 #ifdef QSTARDICT_WITH_TRANSLATIONS
         QTranslator *m_translator;

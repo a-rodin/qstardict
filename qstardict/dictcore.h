@@ -62,7 +62,7 @@ class DictCore: public QObject
                 { m_plugin = plugin; }
                 void setName(const QString &name)
                 { m_name = name; }
-                bool operator == (const Dictionary &dict)
+                bool operator == (const Dictionary &dict) const
                 { return m_name == dict.m_name && m_plugin == dict.m_plugin; }
 
             private:

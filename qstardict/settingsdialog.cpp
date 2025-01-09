@@ -24,6 +24,7 @@
 #include <QStandardItemModel>
 #include <QHeaderView>
 #include <QInputDialog>
+#include <QRegularExpression>
 #include <QSettings>
 #include <math.h>
 #include "dictcore.h"
@@ -81,7 +82,7 @@ SettingsDialog::SettingsDialog(QWidget *parent)
 #ifdef Q_OS_LINUX
 	QFile desktop(QDir::homePath() + "/.config/autostart/qstardict.desktop");
 	if (desktop.open(QIODevice::ReadOnly) && QString(desktop.readAll())
-		.contains(QRegExp("\\bhidden\\s*=\\s*false", Qt::CaseInsensitive))) {
+		.contains(QRegularExpression("\\bhidden\\s*=\\s*false", QRegularExpression::CaseInsensitiveOption))) {
 		autostartBox->setChecked(true);
 	}
 #elif defined(Q_OS_WIN)

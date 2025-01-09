@@ -49,7 +49,10 @@ void Speaker::speak(const QString &word)
     
     QString s = m_speechCmd;
     s.replace("%s", word);
-    m_speechProcess->start(s, QIODevice::WriteOnly);
+    QStringList cmdTokens = QProcess::splitCommand(s);
+    QString program = cmdTokens[0];
+    QStringList arguments = cmdTokens.sliced(1);
+    m_speechProcess->start(program, arguments, QIODeviceBase::WriteOnly);
     if (! m_speechProcess->waitForStarted())
         return;
     if (! m_speechCmd.contains("%s"))

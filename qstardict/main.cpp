@@ -42,13 +42,13 @@ int main(int argc, char *argv[])
     QSettings lockFile(QDir::homePath() + "/.qstardict/qstardict.pid", QSettings::IniFormat);
     QString lastPid = lockFile.value("LastStart/pid").toString();
     if (lastPid.length() && QDir("/proc/" + lastPid).exists() &&
-        lockFile.value("LastStart/time").toDateTime() == QFileInfo("/proc/" + lastPid).created())
+        lockFile.value("LastStart/time").toDateTime() == QFileInfo("/proc/" + lastPid).lastModified())
     {
         qDebug("qstardict: already running");
         return 0;
     }
     lockFile.setValue("LastStart/pid", getpid());
-    lockFile.setValue("LastStart/time", QFileInfo("/proc/" + QString::number(getpid())).created());
+    lockFile.setValue("LastStart/time", QFileInfo("/proc/" + QString::number(getpid())).lastModified());
     lockFile.sync();
 #elif defined(Q_OS_WIN) // Q_OS_UNIX
     HANDLE hMutex = CreateMutex(NULL, true, (LPCTSTR)"qstardict");

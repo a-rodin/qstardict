@@ -27,7 +27,6 @@
 #include <QNetworkReply>
 #include <QSettings>
 #include <QUrl>
-#include <QTextCodec>
 #include "settingsdialog.h"
 
 Web::Web(QObject *parent)
@@ -90,12 +89,7 @@ Web::Translation Web::translate(const QString &dict, const QString &word)
 	QNetworkReply *reply = qnam.get(QNetworkRequest(url));
 	connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
 	loop.exec();
-	QTextCodec *codec = QTextCodec::codecForName(m_loadedDicts[dict].codec);
-	QString translation;
-	if (codec)
-		translation = codec->toUnicode(reply->readAll());
-	else
-		translation = QString::fromUtf8(reply->readAll());
+	QString translation = QString::fromUtf8(reply->readAll());
 	return Translation(dict, word, translation);
 }
 

@@ -103,7 +103,7 @@ DictWidget::DictWidget(QWidget *parent, Qt::WindowFlags f)
 	actionSearch->setShortcut(QKeySequence::Find);
 
 	QVBoxLayout *layout = new QVBoxLayout(this);
-	layout->setMargin(0);
+	layout->setContentsMargins(0, 0, 0, 0);
 	layout->setSpacing(0);
 	layout->addWidget(m_toolBar);
 	layout->addWidget(m_translationView);
@@ -152,7 +152,7 @@ void DictWidget::saveToFile()
 		}
 		QTextStream outputStream(&outputFile);
 		if (filter == tr("HTML files (*.html, *.htm)"))
-			outputStream << m_translationView->document()->toHtml("UTF-8");
+			outputStream << m_translationView->document()->toHtml();
 		else
 			outputStream << m_translationView->toPlainText();
 	}

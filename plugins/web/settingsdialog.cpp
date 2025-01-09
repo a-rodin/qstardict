@@ -23,20 +23,7 @@
 #include <QDir>
 #include <QSettings>
 #include <QListWidgetItem>
-#include <QTextCodec>
 #include "ui_adddictionarydialog.h"
-
-namespace
-{
-QStringList supportedCharsets()
-{
-	QList<QByteArray> list = QTextCodec::availableCodecs();
-	QStringList newList;
-	for (QList<QByteArray>::const_iterator i = list.begin(); i != list.end(); ++i)
-		newList << *i;
-	return newList;
-}
-}
 
 SettingsDialog::SettingsDialog(Web *plugin, QWidget *parent)
 	: QDialog(parent),
@@ -70,8 +57,6 @@ void SettingsDialog::on_editDictButton_clicked()
 	ui.authorEdit->setText(m_dicts[dict].author);
 	ui.descEdit->setText(m_dicts[dict].description);
 	ui.queryEdit->setText(m_dicts[dict].query);
-	ui.charsetEdit->addItems(supportedCharsets());
-	ui.charsetEdit->setCurrentIndex(ui.charsetEdit->findText(m_dicts[dict].charset));
 	if (dialog.exec() != QDialog::Accepted)
 		return;
 	if (ui.nameEdit->text() != dict)
@@ -82,7 +67,6 @@ void SettingsDialog::on_editDictButton_clicked()
 	m_dicts[dict].author = ui.authorEdit->text();
 	m_dicts[dict].description = ui.descEdit->toPlainText();
 	m_dicts[dict].query = ui.queryEdit->text();
-	m_dicts[dict].charset = ui.charsetEdit->currentText().toLatin1();
 	refresh();
 }
 
@@ -91,8 +75,6 @@ void SettingsDialog::on_addDictButton_clicked()
 	Ui::AddDictionaryDialog ui;
 	QDialog dialog(this);
 	ui.setupUi(&dialog);
-	ui.charsetEdit->addItems(supportedCharsets());
-	ui.charsetEdit->setCurrentIndex(ui.charsetEdit->findText("UTF-8"));
 	if (dialog.exec() != QDialog::Accepted)
 		return;
 	m_dicts[ui.nameEdit->text()] =
@@ -121,7 +103,6 @@ void SettingsDialog::accept()
 		dict.setValue("author", i->author);
 		dict.setValue("description", i->description);
 		dict.setValue("query", i->query);
-		dict.setValue("charset", i->charset);
 		m_oldDicts.remove(i.key());
 	}
 	for (QHash<QString, Dict>::const_iterator i = m_oldDicts.begin(); i != m_oldDicts.end(); ++i)

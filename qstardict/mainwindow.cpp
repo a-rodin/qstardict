@@ -60,7 +60,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    saveSettings();
 }
 
 void MainWindow::showTranslation(const QString &text)
@@ -72,7 +71,7 @@ void MainWindow::showTranslation(const QString &text)
 void MainWindow::createConnections()
 {
     connect(actionAboutQt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
-    connect(actionQuit, SIGNAL(triggered()), qApp, SLOT(quit()));
+    connect(actionQuit, SIGNAL(triggered()), Application::instance(), SLOT(saveSettingsAndQuit()));
     actionScan->setChecked(Application::instance()->popupWindow()->isScan());
     connect(actionScan, SIGNAL(toggled(bool)), 
             Application::instance()->popupWindow(), SLOT(setScan(bool)));
@@ -239,7 +238,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (! Application::instance()->trayIcon()->isVisible())
-        Application::instance()->quit();
+        Application::instance()->saveSettingsAndQuit();
 
     QMainWindow::closeEvent(event);
 }

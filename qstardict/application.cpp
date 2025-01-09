@@ -92,7 +92,7 @@ Application::~Application()
 int Application::exec()
 {
     QString text = commandLineText();
-    if (text != QString::null)
+    if (text.isEmpty())
         m_mainWindow->showTranslation(text);
     return QApplication::exec();
 }
@@ -105,7 +105,16 @@ QString Application::commandLineText()
         if(! args.at(i).startsWith('-'))
             return args.at(i);
     }
-    return QString::null;
+    return QString();
+}
+
+void Application::saveSettingsAndQuit()
+{
+    m_dictCore->saveSettings();
+    m_mainWindow->saveSettings();
+    m_trayIcon->saveSettings();
+    m_popupWindow->saveSettings();
+    quit();
 }
 
 }

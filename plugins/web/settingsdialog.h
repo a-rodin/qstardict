@@ -49,13 +49,11 @@ class SettingsDialog: public QDialog, public Ui::SettingsDialog
                 const QByteArray &c = QByteArray())
                 : author(a),
                   description(d),
-                  query(q),
-                  charset(c)
+                  query(q)
             { }
             QString author;
             QString description;
             QString query;
-            QByteArray charset;
         };
         QHash<QString, Dict> m_oldDicts;
         QHash<QString, Dict> m_dicts;
