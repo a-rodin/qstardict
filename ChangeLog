@@ -136,3 +136,6 @@
 * Version 2.0.3
 	- generated a .qm file for the Hebrew translation
 	- added a Georgian translation
+* Version 3.0.0
+	- drop Qt5 support
+	- improve documentation
