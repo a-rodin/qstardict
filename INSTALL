@@ -4,6 +4,12 @@ On Debian and Ubuntu these dependencies can be installed by running
 
    sudo apt install qt6-base-dev libglib2.0-dev build-essential
 
+An additional runtime dependency is festival (or other TTS system, which
+can be configured in QStarDict options). In order to install it on
+Debiann or Ubuntu, run
+
+    sudo apt install festival
+
 If you have QtDBus module QStarDict, will be compiled with D-Bus support.
 
 To disable D-Bus support add
