@@ -1,5 +1,16 @@
-You need Qt >= 4.2 and glib >= 2.0. If you have QtDBus module QStarDict
-will be compiled with D-Bus support.
+You need Qt >= 6.0 and glib >= 2.0 in order to compile QStarDict.
+
+On Debian and Ubuntu these dependencies can be installed by running
+
+   sudo apt install qt6-base-dev libglib2.0-dev build-essential
+
+An additional runtime dependency is festival (or other TTS system, which
+can be configured in QStarDict options). In order to install it on
+Debiann or Ubuntu, run
+
+    sudo apt install festival
+
+If you have QtDBus module QStarDict, will be compiled with D-Bus support.
 
 To disable D-Bus support add
     NO_DBUS=1
@@ -17,11 +28,13 @@ Available plugins:
     * web - supports any web search engine
     * swac - supports SWAC speaking system (http://shtooka.net)
     * multitran - supports Multitran dictionaries (http://multitran.sourceforge.net)
-By default the only "stardict" and "web" plugins enabled.
+By default the only "stardict" and "web" are plugins enabled.
+
+By default the install prefix is /usr. To change it add
+    INSTALL_PREFIX=<your prefix>
+to qmake arguments.
 
 To build and install:
-1)	qmake [switches]
+1)	qmake [switches] # or qmake6 [switches]
 2)	make
-3)	make install
-
-If you want to compile KDE 4 plasmoid please read kdeplasma/COMPILING.
+3)	sudo make install
