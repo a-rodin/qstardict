@@ -75,7 +75,7 @@ Application::Application(int &argc, char **argv)
 #endif // QSTARDICT_WITH_DBUS
 
     popupShortcut =
-        new QxtGlobalShortcut(QKeySequence(Qt::CTRL + Qt::Key_T), m_mainWindow);
+        new QxtGlobalShortcut(QKeySequence("Ctrl+T"), m_mainWindow);
     QObject::connect(popupShortcut, SIGNAL(activated(QxtGlobalShortcut *)),
         Application::instance()->popupWindow(),
         SLOT(showClipboardTranslation()));

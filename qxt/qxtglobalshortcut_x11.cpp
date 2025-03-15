@@ -29,13 +29,9 @@
 ** <http://libqxt.org>  <foundation@libqxt.org>
 *****************************************************************************/
 
-#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
-#   include <QX11Info>
-#else
-#   include <QApplication>
-#   include <qpa/qplatformnativeinterface.h>
-#   include <xcb/xcb.h>
-#endif
+#include <QApplication>
+#include <QtCore/qnativeinterface.h>
+#include <xcb/xcb.h>
 #include <QVector>
 #include <X11/Xlib.h>
 
@@ -93,14 +89,9 @@ public:
     QxtX11Data()
         : m_display(0)
     {
-#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
-        m_display = QX11Info::display();
-#else
-        QPlatformNativeInterface *native = qApp->platformNativeInterface();
-        void *display = native->nativeResourceForScreen(QByteArray("display"),
-                                                        QGuiApplication::primaryScreen());
-        m_display = reinterpret_cast<Display *>(display);
-#endif
+        QNativeInterface::QX11Application *x11App = qApp->nativeInterface<QNativeInterface::QX11Application>();
+        if (x11App)
+            m_display = x11App->display();
     }
 
     bool isValid()
@@ -164,7 +155,7 @@ bool QxtGlobalShortcutPrivate::eventFilter(void* message)
         unsigned int keystate = key->state;
 #else
 bool QxtGlobalShortcutPrivate::nativeEventFilter(const QByteArray & eventType,
-    void * message, long * result)
+    void * message, qintptr * result)
 {
     Q_UNUSED(result);
 
