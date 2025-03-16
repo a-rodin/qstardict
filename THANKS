@@ -27,5 +27,6 @@ Thanks to:
     Schimon Jehudah Zackary who added the Hebrew translation
     Temuri Doghonadze who added the Georgian translation
     Alex Fomin who helped to port QStarDict to Qt6 and fixed usage of deprecated functions
+    Alexander Turenko who added support for showing popup window by keyboard shortcut
 
 
