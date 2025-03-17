@@ -32,6 +32,7 @@ namespace QStarDict
 
 class ScatteredLettersStage;
 class TypeInStage;
+class WordWithTranslationStage;
 
 class Trainer: public QWidget
 {
@@ -45,23 +46,31 @@ class Trainer: public QWidget
         void start();
 
     private slots:
+        void wordWithTranslationStage();
+        void wordWithTranslationStageFinished();
+        // void chooseTranslationStage();
+        // void chooseTranslationStageFinished();
         void scatteredLettersStage();
         void scatteredLettersStageFinished();
         void typeInStage();
         void typeInStageFinished();
-	void allStagesFinished();
+        void allStagesFinished();
 
     private:
         QVector<WordForTraining> m_wordsList;
 
+        QVector<WordForTraining> m_wordWithTranslationWordsList;
         QVector<WordForTraining> m_scatteredLettersWordsList;
         QVector<WordForTraining> m_typeInWordsList;
 
-	QSet<WordForTraining> m_wordsWithErrorsList;
+        QSet<WordForTraining> m_wordsWithErrorsList;
 
+        WordWithTranslationStage *m_wordWithTranslationStage;
         ScatteredLettersStage *m_scatteredLettersStage;
         TypeInStage *m_typeInStage;
-	QLabel *m_allStagesFinishedLabel;
+        QLabel *m_allStagesFinishedLabel;
+
+        void removeWidgets();
 };
 
 };

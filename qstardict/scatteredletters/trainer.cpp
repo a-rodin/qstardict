@@ -23,6 +23,7 @@
 
 #include "scatteredlettersstage.h"
 #include "typeinstage.h"
+#include "wordwithtranslationstage.h"
 
 namespace QStarDict
 {
@@ -34,6 +35,7 @@ Trainer::Trainer(QWidget *parent)
     m_typeInStage = new TypeInStage;
     m_allStagesFinishedLabel = new QLabel;
 
+    // connect(m_wordWithTranslationStage, SIGNAL(nextStage()), this, SLOT(wordWithTranslationStageFinished()));
     connect(m_scatteredLettersStage, SIGNAL(nextStage()), this, SLOT(scatteredLettersStageFinished()));
     connect(m_typeInStage, SIGNAL(nextStage()), this, SLOT(typeInStageFinished()));
 
@@ -50,21 +52,31 @@ Trainer::~Trainer()
 void Trainer::setWords(const QVector<WordForTraining> &wordsList)
 {
     m_wordsList = wordsList;
+    m_wordWithTranslationWordsList = wordsList;
     m_scatteredLettersWordsList = wordsList;
     m_typeInWordsList = wordsList;
 }
 
 void Trainer::start()
 {
-    scatteredLettersStage();
+    wordWithTranslationStage();
+}
+
+void Trainer::wordWithTranslationStage()
+{
+    // TODO
+}
+
+void Trainer::wordWithTranslationStageFinished()
+{
+    // TODO
 }
 
 void Trainer::scatteredLettersStage()
 {
     m_scatteredLettersStage->setWords(m_scatteredLettersWordsList);
 
-    layout()->removeWidget(m_typeInStage);
-    m_typeInStage->setVisible(false);
+    removeWidgets();
     layout()->addWidget(m_scatteredLettersStage);
     m_scatteredLettersStage->setVisible(true);
     m_scatteredLettersStage->startStage();
@@ -81,8 +93,7 @@ void Trainer::typeInStage()
 {
     m_typeInStage->setWords(m_wordsList);
 
-    layout()->removeWidget(m_scatteredLettersStage);
-    m_scatteredLettersStage->setVisible(false);
+    removeWidgets();
     layout()->addWidget(m_typeInStage);
     m_typeInStage->setVisible(true);
     m_typeInStage->startStage();
@@ -103,6 +114,16 @@ void Trainer::allStagesFinished()
             .arg(m_wordsList.size() - m_wordsWithErrorsList.size())
             .arg(m_wordsWithErrorsList.size()));
     layout()->addWidget(m_allStagesFinishedLabel);
+}
+
+void Trainer::removeWidgets()
+{
+    layout()->removeWidget(m_wordWithTranslationStage);
+    layout()->removeWidget(m_typeInStage);
+    layout()->removeWidget(m_scatteredLettersStage);
+    m_wordWithTranslationStage->setVisible(false);
+    m_typeInStage->setVisible(false);
+    m_scatteredLettersStage->setVisible(false);
 }
 
 }

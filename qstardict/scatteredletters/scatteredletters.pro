@@ -16,9 +16,26 @@ QT += core gui widgets
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # Input
-HEADERS += scatteredletters.h scatteredlettersstage.h wordfortraining.h typeinstage.h speaker.h trainer.h
-SOURCES += main.cpp scatteredletters.cpp scatteredlettersstage.cpp typeinstage.cpp speaker.cpp trainer.cpp
-FORMS += scatteredlettersstage.ui typeinstage.ui
+HEADERS += \
+    scatteredletters.h \
+    scatteredlettersstage.h \
+    wordfortraining.h \
+    typeinstage.h \
+    speaker.h \
+    trainer.h \
+    wordwithtranslationstage.h
+SOURCES += \
+    main.cpp \
+    scatteredletters.cpp \
+    scatteredlettersstage.cpp \
+    typeinstage.cpp \
+    speaker.cpp \
+    trainer.cpp \
+    wordwithtranslationstage.cpp
+FORMS += \
+    scatteredlettersstage.ui \
+    typeinstage.ui \
+    wordwithtranslationstage.ui
 
 RESOURCES += \
     pixmaps/pixmaps.qrc
