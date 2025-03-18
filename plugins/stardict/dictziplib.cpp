@@ -297,7 +297,11 @@ int dictData::read_header(const std::string &fname, int computeCRC)
 
 bool dictData::open(const std::string& fname, int computeCRC)
 {
+#ifdef Q_OS_UNIX
     struct stat sb;
+#elif defined(Q_OS_WIN32)
+    struct _star64i32 sb;
+#endif
     int j;
     int fd;
 
@@ -306,7 +310,7 @@ bool dictData::open(const std::string& fname, int computeCRC)
 #ifdef Q_OS_UNIX
     if (stat(fname.c_str(), &sb) || !S_ISREG(sb.st_mode))
 #elif defined(Q_OS_WIN32)
-    if (_stat(fname.c_str(), &sb) || !(sb.stMode & _S_IFREG))
+    if (_stat(fname.c_str(), &sb) || !(sb.st_mode & _S_IFREG))
 #endif
     {
         //err_warning( __FUNCTION__,
@@ -327,7 +331,9 @@ bool dictData::open(const std::string& fname, int computeCRC)
         //       "Cannot open data file \"%s\"\n", fname );
         return false;
     }
-    if (fstat(fd, &sb))
+
+    struct stat sb2;
+    if (fstat(fd, &sb2))
     {
         //err_fatal_errno( __FUNCTION__,
         //       "Cannot stat data file \"%s\"\n", fname );
