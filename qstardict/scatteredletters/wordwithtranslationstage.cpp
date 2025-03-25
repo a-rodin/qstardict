@@ -26,6 +26,8 @@ WordWithTranslationStage::WordWithTranslationStage(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
+
+    connect(nextWordbutton, SIGNAL(clicked()), SLOT(nextWord()));
 }
 
 void WordWithTranslationStage::setWords(const QVector<WordForTraining> &wordsList)
@@ -36,7 +38,24 @@ void WordWithTranslationStage::setWords(const QVector<WordForTraining> &wordsLis
 
 void WordWithTranslationStage::startStage()
 {
+    nextWordButton->setVisible(true);
+    nextStageButton->setVisible(false);
+}
 
+void TypeInStage::speak()
+{
+    if (m_wordsList.size() == 0)
+        return;
+
+    m_speaker->speak(m_wordsList[m_currentWordIndex].word());;
+}
+
+void WordWithTranslationStage::nextWord()
+{
+    m_currentWordIndex++;
+
+    wordLabel->setText(m_wordsList[m_currentWordIndex].word());
+    speak();
 }
 
 }

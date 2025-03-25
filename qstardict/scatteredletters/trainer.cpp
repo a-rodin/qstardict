@@ -31,11 +31,12 @@ namespace QStarDict
 Trainer::Trainer(QWidget *parent)
     : QWidget(parent)
 {
+    m_wordWithTranslationStage = new WordWithTranslationStage;
     m_scatteredLettersStage = new ScatteredLettersStage;
     m_typeInStage = new TypeInStage;
     m_allStagesFinishedLabel = new QLabel;
 
-    // connect(m_wordWithTranslationStage, SIGNAL(nextStage()), this, SLOT(wordWithTranslationStageFinished()));
+    connect(m_wordWithTranslationStage, SIGNAL(nextStage()), this, SLOT(wordWithTranslationStageFinished()));
     connect(m_scatteredLettersStage, SIGNAL(nextStage()), this, SLOT(scatteredLettersStageFinished()));
     connect(m_typeInStage, SIGNAL(nextStage()), this, SLOT(typeInStageFinished()));
 
@@ -64,12 +65,16 @@ void Trainer::start()
 
 void Trainer::wordWithTranslationStage()
 {
-    // TODO
+    m_wordWithTranslationStage->setWords(m_wordWithTranslationWordsList);
+
+    removeWidgets();
+    layout()->addWidget(m_wordWithTranslationStage);
+    m_wordWithTranslationStage->setVisible(true);
+    m_wordWithTranslationStage->startStage();
 }
 
 void Trainer::wordWithTranslationStageFinished()
 {
-    // TODO
 }
 
 void Trainer::scatteredLettersStage()

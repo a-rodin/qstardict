@@ -41,6 +41,7 @@ class WordWithTranslationStage: public QWidget, private Ui::WordWithTranslationS
 
     public slots:
         void startStage();
+    	void nextWord();
 
     private:
         QVector<WordForTraining> m_wordsList;
