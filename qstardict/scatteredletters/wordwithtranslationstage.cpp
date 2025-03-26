@@ -19,6 +19,8 @@
 
 #include "wordwithtranslationstage.h"
 
+#include "speaker.h"
+
 namespace QStarDict
 {
 
@@ -26,8 +28,12 @@ WordWithTranslationStage::WordWithTranslationStage(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
+    m_speaker = new Speaker();
 
-    connect(nextWordbutton, SIGNAL(clicked()), SLOT(nextWord()));
+    transcriptionLabel->setVisible(false);
+
+    connect(nextWordButton, SIGNAL(clicked()), SLOT(nextWord()));
+    connect(nextStageButton, SIGNAL(clicked()), SLOT(onNextStage()));
 }
 
 void WordWithTranslationStage::setWords(const QVector<WordForTraining> &wordsList)
@@ -40,9 +46,31 @@ void WordWithTranslationStage::startStage()
 {
     nextWordButton->setVisible(true);
     nextStageButton->setVisible(false);
+
+    m_currentWordIndex = 0;
+    showCurrentWord();
+    speak();
 }
 
-void TypeInStage::speak()
+void WordWithTranslationStage::nextWord()
+{
+    m_currentWordIndex++;
+
+    if (m_currentWordIndex == m_wordsList.size())
+        emit nextStage();
+    else
+    {
+        showCurrentWord();
+        speak();
+    }
+}
+
+void WordWithTranslationStage::onNextStage()
+{
+    emit nextStage();
+}
+
+void WordWithTranslationStage::speak()
 {
     if (m_wordsList.size() == 0)
         return;
@@ -50,12 +78,21 @@ void TypeInStage::speak()
     m_speaker->speak(m_wordsList[m_currentWordIndex].word());;
 }
 
-void WordWithTranslationStage::nextWord()
+void WordWithTranslationStage::showCurrentWord()
 {
-    m_currentWordIndex++;
-
     wordLabel->setText(m_wordsList[m_currentWordIndex].word());
-    speak();
+    translationLabel->setText(m_wordsList[m_currentWordIndex].translation());
+
+if (m_currentWordIndex == m_wordsList.size() - 1)
+    {
+        nextWordButton->setVisible(false);
+        nextStageButton->setVisible(true);
+    }
+    else
+    {
+        nextWordButton->setVisible(true);
+        nextStageButton->setVisible(false);
+    }
 }
 
 }

@@ -26,8 +26,8 @@ namespace QStarDict
 {
 
 Speaker::Speaker()
+    : m_speechProcess(nullptr)
 {
-    m_speechProcess = new QProcess;
     QSettings settings;
     m_speechCmd = settings.value("Speaker/speechCmd", "festival --tts").toString();
 }
@@ -44,8 +44,12 @@ void Speaker::speak(const QString &word)
     if (m_speechCmd.isEmpty())
         return;
 
-    if (m_speechProcess->state() != QProcess::NotRunning)
-    m_speechProcess->kill();
+    if (m_speechProcess && m_speechProcess->state() != QProcess::NotRunning)
+    {
+        m_speechProcess->kill();
+        delete m_speechProcess;
+    }
+    m_speechProcess = new QProcess;
     
     QString s = m_speechCmd;
     s.replace("%s", word);

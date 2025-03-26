@@ -45,6 +45,7 @@ Trainer::Trainer(QWidget *parent)
 
 Trainer::~Trainer()
 {
+    delete m_wordWithTranslationStage;
     delete m_scatteredLettersStage;
     delete m_typeInStage;
     delete m_allStagesFinishedLabel;
@@ -75,6 +76,7 @@ void Trainer::wordWithTranslationStage()
 
 void Trainer::wordWithTranslationStageFinished()
 {
+    scatteredLettersStage();
 }
 
 void Trainer::scatteredLettersStage()
@@ -92,11 +94,13 @@ void Trainer::scatteredLettersStageFinished()
     m_scatteredLettersWordsList = m_scatteredLettersStage->wordsWithErrors();
     if (! m_typeInWordsList.isEmpty())
         typeInStage();
+    else if (! m_scatteredLettersWordsList.isEmpty())
+        scatteredLettersStage();
 }
 
 void Trainer::typeInStage()
 {
-    m_typeInStage->setWords(m_wordsList);
+    m_typeInStage->setWords(m_typeInWordsList);
 
     removeWidgets();
     layout()->addWidget(m_typeInStage);
@@ -107,12 +111,16 @@ void Trainer::typeInStage()
 void Trainer::typeInStageFinished()
 {
     m_typeInWordsList = m_typeInStage->wordsWithErrors();
+
     if (! m_scatteredLettersWordsList.isEmpty())
         scatteredLettersStage();
+    else if (! m_typeInWordsList.isEmpty())
+        typeInStage();
 }
 
 void Trainer::allStagesFinished()
 {
+    layout()->removeWidget(m_wordWithTranslationStage);
     layout()->removeWidget(m_scatteredLettersStage);
     layout()->removeWidget(m_typeInStage);
     m_allStagesFinishedLabel->setText(tr("Studied: %1 words, for repetition: %2 words")
