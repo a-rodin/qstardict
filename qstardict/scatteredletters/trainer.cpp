@@ -91,11 +91,15 @@ void Trainer::scatteredLettersStage()
 
 void Trainer::scatteredLettersStageFinished()
 {
+    for (const WordForTraining &wordWithError: m_scatteredLettersStage->wordsWithErrors())
+        m_wordsWithErrorsList.insert(wordWithError);
     m_scatteredLettersWordsList = m_scatteredLettersStage->wordsWithErrors();
     if (! m_typeInWordsList.isEmpty())
         typeInStage();
     else if (! m_scatteredLettersWordsList.isEmpty())
         scatteredLettersStage();
+    else
+        allStagesFinished();
 }
 
 void Trainer::typeInStage()
@@ -110,19 +114,21 @@ void Trainer::typeInStage()
 
 void Trainer::typeInStageFinished()
 {
+    for (const WordForTraining &wordWithError: m_typeInStage->wordsWithErrors())
+        m_wordsWithErrorsList.insert(wordWithError);
     m_typeInWordsList = m_typeInStage->wordsWithErrors();
 
     if (! m_scatteredLettersWordsList.isEmpty())
         scatteredLettersStage();
     else if (! m_typeInWordsList.isEmpty())
         typeInStage();
+    else
+        allStagesFinished();
 }
 
 void Trainer::allStagesFinished()
 {
-    layout()->removeWidget(m_wordWithTranslationStage);
-    layout()->removeWidget(m_scatteredLettersStage);
-    layout()->removeWidget(m_typeInStage);
+    removeWidgets();
     m_allStagesFinishedLabel->setText(tr("Studied: %1 words, for repetition: %2 words")
             .arg(m_wordsList.size() - m_wordsWithErrorsList.size())
             .arg(m_wordsWithErrorsList.size()));

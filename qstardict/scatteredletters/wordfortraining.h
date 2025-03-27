@@ -20,6 +20,11 @@
 #ifndef WORDFORTRAINING_H
 #define WORDFORTRAINING_H
 
+#include <QHash>
+
+namespace QStarDict
+{
+
 class WordForTraining
 {
     public:
@@ -33,9 +38,20 @@ class WordForTraining
         QString translation() const
         { return m_translation; }
 
+        friend bool operator ==(const WordForTraining &first, const WordForTraining &second);
+        friend size_t qHash(const WordForTraining &word, size_t seed);
+
     private:
         QString m_word;
         QString m_translation;
 };
+
+inline bool operator ==(const WordForTraining &first, const WordForTraining &second)
+{ return first.m_word == second.m_word && first.m_translation == second.m_translation; }
+
+inline size_t qHash(const WordForTraining &word, size_t seed = 0)
+{ return qHashMulti(seed, word.m_word, word.m_translation); }
+
+}
 
 #endif // WORDFORTRAINING_H

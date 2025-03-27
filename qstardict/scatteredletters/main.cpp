@@ -25,10 +25,10 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    QVector<WordForTraining> wordsList;
-    wordsList.push_back(WordForTraining("hello", "привет"));
-    wordsList.push_back(WordForTraining("verisimilitude", "правдоподобие, похожесть на правду"));
-    wordsList.push_back(WordForTraining("hi", "привет"));
+    QVector<QStarDict::WordForTraining> wordsList;
+    wordsList.push_back(QStarDict::WordForTraining("hello", "привет"));
+    wordsList.push_back(QStarDict::WordForTraining("verisimilitude", "правдоподобие, похожесть на правду"));
+    wordsList.push_back(QStarDict::WordForTraining("hi", "привет"));
 
     QStarDict::Trainer trainer;
     trainer.setWords(wordsList);
