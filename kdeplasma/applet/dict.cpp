@@ -195,7 +195,6 @@ void QStarDictApplet::dataUpdated(const QString& source, const Plasma::DataEngin
 //             cg.writeEntry("KnownDictionaries", m_dicts);
 
     }
-//     Q_UNUSED(source);
     /*if (m_flash) {
         m_flash->kill();
     }*/
@@ -270,9 +269,8 @@ void QStarDictApplet::define()
     updateConstraints();
 }
 
-void QStarDictApplet::autoDefine(const QString &word)
+void QStarDictApplet::autoDefine([[maybe_unused]] const QString &word)
 {
-    Q_UNUSED(word)
     m_timer->start();
 }
 

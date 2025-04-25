@@ -41,10 +41,9 @@ static QHash<Identifier, quint32> keyIDs;
 static quint32 hotKeySerial = 0;
 static bool qxt_mac_handler_installed = false;
 
-OSStatus qxt_mac_handle_hot_key(EventHandlerCallRef nextHandler, EventRef event, void* data)
+OSStatus qxt_mac_handle_hot_key([[maybe_unused]] EventHandlerCallRef nextHandler,
+    EventRef event, [[maybe_unused]] void* data)
 {
-    Q_UNUSED(nextHandler);
-    Q_UNUSED(data);
     if (GetEventClass(event) == kEventClassKeyboard && GetEventKind(event) == kEventHotKeyPressed)
     {
         EventHotKeyID keyID;

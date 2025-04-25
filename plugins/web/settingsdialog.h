@@ -46,7 +46,7 @@ class SettingsDialog: public QDialog, public Ui::SettingsDialog
             Dict(const QString &a = QString(),
                 const QString &d = QString(),
                 const QString &q = QString(),
-                const QByteArray &c = QByteArray())
+                [[maybe_unused]] const QByteArray &c = QByteArray())
                 : author(a),
                   description(d),
                   query(q)

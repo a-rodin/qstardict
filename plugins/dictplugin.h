@@ -246,15 +246,15 @@ class DictPlugin
          * Return a list of similar to "word" words from all loaded dictionaries.
          * Works only if SearchSimilar feature is enabled.
          */
-        virtual QStringList findSimilarWords(const QString &dict, const QString &word)
-        { Q_UNUSED(dict); return QStringList(word); }
+        virtual QStringList findSimilarWords([[maybe_unused]] const QString &dict, const QString &word)
+        { return QStringList(word); }
         
         /**
          * Return a required resource. Scheme of URLs:
          *   plugin://plugin_name/...
          */
-        virtual QVariant resource(int type, const QUrl &name)
-        { Q_UNUSED(type) Q_UNUSED(name) return QVariant(); }
+        virtual QVariant resource([[maybe_unused]] int type, [[maybe_unused]] const QUrl &name)
+        { return QVariant(); }
 
         /**
          * Return an information about dictionary. The dictionary may be not loaded
@@ -265,8 +265,8 @@ class DictPlugin
         /**
          * Run a settings dialog and return QDialog::DialogCode.
          */
-        virtual int execSettingsDialog(QWidget *parent = 0)
-        { Q_UNUSED(parent); return 0; }
+        virtual int execSettingsDialog([[maybe_unused]] QWidget *parent = 0)
+        { return 0; }
 
     protected:
         /**

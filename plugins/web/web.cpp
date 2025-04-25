@@ -70,12 +70,10 @@ Web::DictInfo Web::dictInfo(const QString &dict)
 	return info;
 }
 
-bool Web::isTranslatable(const QString &dict, const QString &word)
+bool Web::isTranslatable(const QString &dict, [[maybe_unused]] const QString &word)
 {
 	if (! m_loadedDicts.contains(dict))
 		return false;
-	// TODO
-	Q_UNUSED(word);
 	return true;
 }
 

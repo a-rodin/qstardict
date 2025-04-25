@@ -78,11 +78,10 @@ struct QStarDictEngine::Private
 
 
 
-QStarDictEngine::QStarDictEngine(QObject* parent, const QVariantList& args)
+QStarDictEngine::QStarDictEngine(QObject* parent, [[maybe_unused]] const QVariantList& args)
     : Plasma::DataEngine(parent, args)
     , d(new Private)
 {
-    Q_UNUSED(args)
 //     QTime a;a.start();
 #ifdef Q_OS_WIN
     QFileInfoList files = QDir(QSTARDICT_PLUGINS_DIR).entryInfoList(QStringList("*0.dll"),QDir::Files|QDir::NoDotAndDotDot);
