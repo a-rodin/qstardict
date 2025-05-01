@@ -66,14 +66,14 @@ inline bool MapFile::open(const char *file_name, unsigned long file_size)
     }
 #elif defined( _WIN32)
 #ifdef UNICODE
-    gunichar2 *fn = g_utf8_to_utf16(file_name, -1, NULL, NULL, NULL);
+    LPCWSTR fn = (LPCWSTR)g_utf8_to_utf16(file_name, -1, NULL, NULL, NULL);
 #else // UNICODE
-    gchar *fn = file_name;
+    LPCSTR fn = file_name;
 #endif // UNICODE
     hFile = CreateFile(fn, GENERIC_READ, 0, NULL, OPEN_ALWAYS,
                        FILE_ATTRIBUTE_NORMAL, 0);
 #ifdef UNICODE
-    g_free(fn);
+    g_free((gunichar2*)fn);
 #endif // UNICODE
     hFileMap = CreateFileMapping(hFile, NULL, PAGE_READONLY, 0,
                                  file_size, NULL);
