@@ -80,7 +80,6 @@ SettingsDialog::SettingsDialog(QWidget *parent)
     // Load global settings
     systemTrayBox->setChecked(app->trayIcon()->isVisible());
     instantSearchBox->setChecked(app->mainWindow()->isInstantSearch());
-    speechCmdEdit->setText(app->speaker()->speechCmd());
 #ifdef Q_OS_LINUX
 	QFile desktop(QDir::homePath() + "/.config/autostart/qstardict.desktop");
 	if (desktop.open(QIODevice::ReadOnly) && QString(desktop.readAll())
@@ -95,6 +94,9 @@ SettingsDialog::SettingsDialog(QWidget *parent)
 #else
 	autostartBox->setVisible(false);
 #endif
+    speechCmdEdit->setText(app->speaker()->speechCmd());
+    ipaPronounceBox->setChecked(app->mainWindow()->showIpaPronouncers());
+    espeakCmdEdit->setText(app->espeakSpeaker()->speechCmd());
 
     // Load popup shortcut settings
     shortcutPopupEdit->setText(app->popupShortcut()->shortcut().toString());
@@ -170,7 +172,6 @@ void SettingsDialog::accept()
     // Save global settings
     app->trayIcon()->setVisible(systemTrayBox->isChecked());
     app->mainWindow()->setInstantSearch(instantSearchBox->isChecked());
-    app->speaker()->setSpeechCmd(speechCmdEdit->text());
 #ifdef Q_OS_LINUX
 	QDir home = QDir::home();
 	if (!home.exists(".config/autostart")) {
@@ -198,6 +199,10 @@ void SettingsDialog::accept()
 	else
 		reg.remove(QCoreApplication::applicationName());
 #endif
+    app->speaker()->setSpeechCmd(speechCmdEdit->text());
+    app->mainWindow()->setShowIpaPronouncers(ipaPronounceBox->isChecked());
+    app->popupWindow()->setShowIpaPronouncers(ipaPronounceBox->isChecked());
+    app->espeakSpeaker()->setSpeechCmd(espeakCmdEdit->text());
 
     // Save popup shortcut settings
     app->popupShortcut()->setShortcut(QKeySequence(shortcutPopupEdit->text()));

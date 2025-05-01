@@ -1,6 +1,6 @@
 /*****************************************************************************
  * mainwindow.h - QStarDict, a StarDict clone written with using Qt          *
- * Copyright (C) 2007 Alexander Rodin                                        *
+ * Copyright (C) 2007-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -55,7 +55,7 @@ class MainWindow: public QMainWindow, private Ui::MainWindow
         /**
          * Set instant search mode. If instantSearch is true
          * translation will be shown when typing, otherwise only when
-         * "Search" button clicked.
+         * "Search" button clicked. \
          */
         void setInstantSearch(bool instantSearch);
 
@@ -81,6 +81,11 @@ class MainWindow: public QMainWindow, private Ui::MainWindow
          */
         QString defaultStyleSheet() const
         { return translationView->defaultStyleSheet(); }
+
+        void setShowIpaPronouncers(bool showIpaPronouncers)
+        { translationView->setShowIpaPronouncers(showIpaPronouncers); }
+        bool showIpaPronouncers() const
+        { return translationView->showIpaPronouncers(); }
 
         void reload();
 

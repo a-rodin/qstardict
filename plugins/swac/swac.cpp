@@ -108,7 +108,7 @@ Swac::Translation Swac::translate(const QString &dict, const QString &word)
 	{
 		if (i > 0)
 			article += "<br/>\n";
-		article += "<img src=':/icons/sound.png'/> &nbsp; <a href=\"" + query.value(1).toString() + query.value(2).toString() + "\">" + query.value(0).toString() + "</a>";
+		article += "<img src=':/pics/sound.png'/> &nbsp; <a href=\"" + query.value(1).toString() + query.value(2).toString() + "\">" + query.value(0).toString() + "</a>";
 		i++;
 	}
 

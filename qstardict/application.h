@@ -85,10 +85,16 @@ class Application: public QApplication
         { return m_popupWindow; }
 
         /**
-         * Returns a pointer to the application's speacker.
+         * Returns a pointer to the application's speaker.
          */
         Speaker *speaker()
         { return m_speaker; }
+
+        /**
+         * Returns a pointer to the application's eSpeak speaker.
+         */
+        Speaker *espeakSpeaker()
+        { return m_espeakSpeaker; }
 
         /**
          * Returns a pointer to the tray icon.
@@ -123,6 +129,7 @@ class Application: public QApplication
         MainWindow *m_mainWindow;
         PopupWindow *m_popupWindow;
         Speaker *m_speaker;
+        Speaker *m_espeakSpeaker;
         TrayIcon *m_trayIcon;
         QxtGlobalShortcut *m_popupShortcut;
 #ifdef QSTARDICT_WITH_DBUS

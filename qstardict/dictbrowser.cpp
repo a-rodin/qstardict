@@ -1,6 +1,6 @@
 /*****************************************************************************
  * dictbrowser.cpp - QStarDict, a StarDict clone written using Qt            *
- * Copyright (C) 2007 Alexander Rodin                                        *
+ * Copyright (C) 2007-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -16,7 +16,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,   *
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               *
  *****************************************************************************/
-#include <QtDebug>
+
 #include "dictbrowser.h"
 
 #include <QDesktopServices>
@@ -26,6 +26,9 @@
 #include <QTextDocument>
 #include <QTextDocumentFragment>
 #include "../plugins/dictplugin.h"
+#include "application.h"
+#include "ipa.h"
+#include "speaker.h"
 
 namespace
 {
@@ -56,12 +59,14 @@ DictBrowser::DictBrowser(QWidget *parent)
     : QTextBrowser(parent),
       m_dict(0),
       m_highlighted(false),
-      m_searchUndo(false)
+      m_searchUndo(false),
+      m_showIpaPronouncers(true)
 {
     document()->setDefaultStyleSheet(translationCSS);
     setOpenLinks(false);
     setOpenExternalLinks(false);
     connect(this, SIGNAL(anchorClicked(const QUrl &)), SLOT(on_anchorClicked(const QUrl &)));
+    connect(this, &QTextBrowser::sourceChanged, this, &DictBrowser::on_sourceChanged);
 }
 
 QVariant DictBrowser::loadResource(int type, const QUrl &name)
@@ -71,7 +76,7 @@ QVariant DictBrowser::loadResource(int type, const QUrl &name)
         QString str = name.toString(QUrl::RemoveScheme);
         QString result = m_dict->translate(str);
         if (result.isEmpty())
-            result = "<table><tr><td><img src=\":/icons/dialog-warning.png\" width=64 height=64/></td><td valign=middle>" +
+            result = "<table><tr><td><img src=\":/pics/dialog-warning.png\" width=64 height=64/></td><td valign=middle>" +
                 tr("The word <b>%1</b> is not found.").arg(str) +
                 "</td></tr></table>";
         return "<title>Translation for \"" + str + "\"</title>\n"
@@ -158,6 +163,26 @@ void DictBrowser::mousePressEvent(QMouseEvent *event)
     QTextBrowser::mousePressEvent(event);
 }
 
+void DictBrowser::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (m_showIpaPronouncers)
+    {
+        // check whether the click was on a pronounce button
+        QTextCursor cursor = cursorForPosition(event->pos());
+        cursor.select(QTextCursor::WordUnderCursor);
+        QUrl url = cursor.charFormat().anchorHref();
+        if (url.scheme() == "pronounce")
+        {
+            QString ipa = QUrl::fromPercentEncoding(url.toString(QUrl::RemoveScheme).toUtf8());
+            QString kirshenbaum = Ipa::ipaToKirshenbaum(ipa);
+            Application::instance()->espeakSpeaker()->speak("[[" + kirshenbaum + "]]");
+            return;
+        }
+    }
+
+    QTextBrowser::mousePressEvent(event);
+}
+
 void DictBrowser::on_anchorClicked(const QUrl &link)
 {
     QString scheme = link.scheme();
@@ -165,6 +190,37 @@ void DictBrowser::on_anchorClicked(const QUrl &link)
         setSource(link);
     else
         QDesktopServices::openUrl(link);
+}
+
+void DictBrowser::on_sourceChanged(const QUrl &)
+{
+    if (m_showIpaPronouncers)
+        addIpaPronouncers();
+}
+
+void DictBrowser::addIpaPronouncers()
+{
+    const static QVector<QRegularExpression> transcriptionRegExps = {
+        Ipa::broadTranscriptionRegExp(),
+        Ipa::narrowTranscriptionRegExp()
+    };
+    for (const QRegularExpression &transcriptionRegExp: transcriptionRegExps)
+    {
+        QTextDocument *doc = document();
+        QTextCursor cursor;
+        int position = 0;
+        while (! (cursor = doc->find(transcriptionRegExp, position)).isNull())
+        {
+            QString transcription = cursor.selectedText();
+            QString ipa = transcriptionRegExp.match(transcription).captured(2);
+
+            cursor.insertHtml("<font class=\"transcription\">" + transcription + "</font>"
+                "<a href=\"pronounce:" + QUrl::toPercentEncoding(ipa) + "\">"
+                "<img style=\"vertical-align: middle\" src=\":/pics/pronounce.png\">"
+                "</a>");
+            position = cursor.position();
+        }
+    }
 }
 
 }

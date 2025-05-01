@@ -88,6 +88,11 @@ class PopupWindow: public ResizablePopup
         QString defaultStyleSheet() const
         { return translationView->defaultStyleSheet(); }
 
+        void setShowIpaPronouncers(bool showIpaPronouncers)
+        { translationView->setShowIpaPronouncers(showIpaPronouncers); }
+        bool showIpaPronouncers() const
+        { return translationView->showIpaPronouncers(); }
+
     public slots:
         /**
          * Enable or disable scanning of selection.

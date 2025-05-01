@@ -90,6 +90,11 @@ class DictWidget: public QFrame
 
         QString defaultStyleSheet() const
         { return m_translationView->document()->defaultStyleSheet(); }
+
+        void setShowIpaPronouncers(bool showIpaPronouncers)
+        { m_translationView->setShowIpaPronouncers(showIpaPronouncers); }
+        bool showIpaPronouncers() const
+        { return m_translationView->showIpaPronouncers(); }
         
         void reload()
         { m_translationView->reload(); }

@@ -1,6 +1,6 @@
 /*****************************************************************************
  * dictbrowser.h - QStarDict, a StarDict clone written with using Qt         *
- * Copyright (C) 2007 Alexander Rodin                                        *
+ * Copyright (C) 2007-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -54,6 +54,19 @@ class DictBrowser: public QTextBrowser
         const DictCore* dict() const
         { return m_dict; }
 
+        /**
+          * Set whether to show buttons near IPA transcriptions which allow
+          * the user to listen the pronunciation of these transcriptions.
+          */
+        void setShowIpaPronouncers(bool showIpaPronouncers)
+        { m_showIpaPronouncers = showIpaPronouncers; }
+
+        /**
+          * Return true if the IPA pronouncer is enabled.
+          */
+        bool showIpaPronouncers() const
+        { return m_showIpaPronouncers; }
+
         QVariant loadResource(int type, const QUrl &name);
 
     signals:
@@ -65,9 +78,11 @@ class DictBrowser: public QTextBrowser
     protected:
         void mouseMoveEvent(QMouseEvent *event);
         void mousePressEvent(QMouseEvent *event);
+        void mouseReleaseEvent(QMouseEvent *event);
 
     private slots:
         void on_anchorClicked(const QUrl &link);
+        void on_sourceChanged(const QUrl &link);
 
     private:
         DictCore *m_dict;
@@ -76,6 +91,10 @@ class DictBrowser: public QTextBrowser
         QTextCharFormat m_oldFormat;
         bool m_highlighted;
         bool m_searchUndo;
+
+        bool m_showIpaPronouncers;
+
+        void addIpaPronouncers();
 };
 
 }

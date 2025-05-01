@@ -76,7 +76,7 @@
            <string>Edit</string>
           </property>
           <property name="icon" >
-           <iconset resource="pixmaps/pixmaps.qrc" >:/icons/edit.png</iconset>
+           <iconset resource="pixmaps/pixmaps.qrc" >:/pics/edit.png</iconset>
           </property>
          </widget>
         </item>
@@ -89,7 +89,7 @@
            <string>Add</string>
           </property>
           <property name="icon" >
-           <iconset resource="pixmaps/pixmaps.qrc" >:/icons/list-add.png</iconset>
+           <iconset resource="pixmaps/pixmaps.qrc" >:/pics/list-add.png</iconset>
           </property>
          </widget>
         </item>
@@ -102,7 +102,7 @@
            <string>Remove</string>
           </property>
           <property name="icon" >
-           <iconset resource="pixmaps/pixmaps.qrc" >:/icons/list-remove.png</iconset>
+           <iconset resource="pixmaps/pixmaps.qrc" >:/pics/list-remove.png</iconset>
           </property>
          </widget>
         </item>

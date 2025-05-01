@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/icons" >
+    <qresource prefix="/pics" >
         <file>arrow-down.png</file>
         <file>arrow-up.png</file>
         <file>list-add.png</file>

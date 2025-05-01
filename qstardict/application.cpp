@@ -27,6 +27,7 @@
 #endif // QSTARDICT_WITH_TRANSLATIONS
 
 #include <QKeySequence>
+#include <QSettings>
 #include "../qxt/qxtglobalshortcut.h"
 
 #include "dictcore.h"
@@ -46,6 +47,8 @@ Application::Application(int &argc, char **argv)
 {
     setOrganizationName("qstardict");
     setApplicationName("qstardict");
+    QSettings settings;
+    setApplicationVersion(QSTARDICT_VERSION);
     setQuitOnLastWindowClosed(false);
 
 #ifdef QSTARDICT_WITH_TRANSLATIONS
@@ -67,6 +70,9 @@ Application::Application(int &argc, char **argv)
     m_popupWindow = new PopupWindow;
     m_popupWindow->setDict(m_dictCore);
     m_speaker = new Speaker;
+    m_speaker->setSpeechCmd(settings.value("Speaker/speechCmd", "espeak").toString());
+    m_espeakSpeaker = new Speaker;
+    m_espeakSpeaker->setSpeechCmd(settings.value("Speaker/espeakCmd", "espeak").toString());
     m_trayIcon = new TrayIcon;
     m_popupShortcut = new QxtGlobalShortcut;
     m_mainWindow = new MainWindow;
@@ -84,10 +90,14 @@ Application::Application(int &argc, char **argv)
 
 Application::~Application()
 {
+    QSettings settings;
     delete m_trayIcon;
     delete m_mainWindow;
     delete m_popupWindow;
+    settings.setValue("Speaker/speechCmd", m_speaker->speechCmd());
     delete m_speaker;
+    settings.setValue("Speaker/espeakCmd", m_espeakSpeaker->speechCmd());
+    delete m_espeakSpeaker;
     delete m_dictCore;
     delete m_popupShortcut;
 #ifdef QSTARDICT_WITH_TRANSLATIONS

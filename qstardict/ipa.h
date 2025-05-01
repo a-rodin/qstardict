@@ -1,6 +1,7 @@
 /*****************************************************************************
- * speaker.cpp - QStarDict, a StarDict clone written using Qt                *
- * Copyright (C) 2008 Alexander Rodin                                        *
+ * ipa.h - QStarDict, a dictionary application for learning foreign          *
+ *         languages                                                         *
+ * Copyright (C) 2023 Alexander Rodin                                        *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -17,48 +18,33 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               *
  *****************************************************************************/
 
-#include "speaker.h"
 
-#include <QProcess>
-#include <QSettings>
+#ifndef IPA_H
+#define IPA_H
 
-namespace QStarDict
+#include <QString>
+#include <QRegularExpression>
+
+class Ipa
 {
+    public:
+        /**
+         * Convert a transcription in International Phonetic Alphabet into Kirshenbaum
+         * notation acceptable by espeak.
+         */
+        static QString ipaToKirshenbaum(QString ipa);
 
-Speaker::Speaker()
-{
-    m_speechProcess = new QProcess;
-}
+        /**
+         * Return a regular expression which detects transcriptions in form /.../.
+         * The second capture is the expression inside the brackets.
+         */
+        static QRegularExpression narrowTranscriptionRegExp();
 
-Speaker::~Speaker()
-{
-    delete m_speechProcess;
-}
+        /**
+         * Return a regular expression which detects transcriptions in form [...].
+         * The second capture is the expression inside the brackets.
+         */
+        static QRegularExpression broadTranscriptionRegExp();
+};
 
-void Speaker::speak(const QString &word)
-{
-    if (m_speechCmd.isEmpty())
-        return;
-
-    if (m_speechProcess->state() != QProcess::NotRunning)
-    m_speechProcess->kill();
-    
-    QString s = m_speechCmd;
-    s.replace("%s", word);
-    QStringList cmdTokens = QProcess::splitCommand(s);
-    QString program = cmdTokens[0];
-    QStringList arguments = cmdTokens.sliced(1);
-    m_speechProcess->start(program, arguments, QIODeviceBase::WriteOnly);
-    if (! m_speechProcess->waitForStarted())
-        return;
-    if (! m_speechCmd.contains("%s"))
-    {
-        m_speechProcess->write(word.toUtf8());
-        m_speechProcess->closeWriteChannel();
-    }
-}
-
-}
-
-// vim: tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent textwidth=120 formatoptions=tc
-
+#endif // IPA_H

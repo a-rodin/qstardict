@@ -14,7 +14,7 @@
   </property>
   <property name="windowIcon" >
    <iconset resource="pixmaps/pixmaps.qrc" >
-    <normaloff>:/icons/qstardict.png</normaloff>:/icons/qstardict.png</iconset>
+    <normaloff>:/pics/qstardict.png</normaloff>:/pics/qstardict.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget" >
    <layout class="QGridLayout" >
@@ -42,7 +42,7 @@
         </property>
         <property name="icon" >
          <iconset resource="pixmaps/pixmaps.qrc" >
-          <normaloff>:/icons/clear-right.png</normaloff>:/icons/clear-right.png</iconset>
+          <normaloff>:/pics/clear-right.png</normaloff>:/pics/clear-right.png</iconset>
         </property>
         <property name="toolButtonStyle" >
          <enum>Qt::ToolButtonIconOnly</enum>
@@ -62,7 +62,7 @@
         </property>
         <property name="icon" >
          <iconset resource="pixmaps/pixmaps.qrc" >
-          <normaloff>:/icons/search-filter.png</normaloff>:/icons/search-filter.png</iconset>
+          <normaloff>:/pics/search-filter.png</normaloff>:/pics/search-filter.png</iconset>
         </property>
         <property name="toolButtonStyle" >
          <enum>Qt::ToolButtonTextBesideIcon</enum>
@@ -140,7 +140,7 @@
   <action name="actionQuit" >
    <property name="icon" >
     <iconset resource="pixmaps/pixmaps.qrc" >
-     <normaloff>:/icons/application-exit.png</normaloff>:/icons/application-exit.png</iconset>
+     <normaloff>:/pics/application-exit.png</normaloff>:/pics/application-exit.png</iconset>
    </property>
    <property name="text" >
     <string>&amp;Quit</string>
@@ -162,7 +162,7 @@
   <action name="actionSettings" >
    <property name="icon" >
     <iconset resource="pixmaps/pixmaps.qrc" >
-     <normaloff>:/icons/configure.png</normaloff>:/icons/configure.png</iconset>
+     <normaloff>:/pics/configure.png</normaloff>:/pics/configure.png</iconset>
    </property>
    <property name="text" >
     <string>&amp;Configure QStarDict</string>
@@ -179,7 +179,7 @@
   <action name="actionHelp" >
    <property name="icon" >
     <iconset resource="pixmaps/pixmaps.qrc" >
-     <normaloff>:/icons/help-contents.png</normaloff>:/icons/help-contents.png</iconset>
+     <normaloff>:/pics/help-contents.png</normaloff>:/pics/help-contents.png</iconset>
    </property>
    <property name="text" >
     <string>QStarDict &amp;Help</string>

@@ -37,6 +37,7 @@ HEADERS += \
     dictcore.h \
     ../plugins/dictplugin.h \
     dictwidget.h \
+    ipa.h \
     keyboard.h \
     mainwindow.h \
     popupwindow.h \
@@ -54,6 +55,7 @@ SOURCES += \
     dictbrowsersearch.cpp \
     dictcore.cpp \
     dictwidget.cpp \
+    ipa.cpp \
     keyboard.cpp \
     main.cpp \
     mainwindow.cpp \

@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/icons">
+    <qresource prefix="/pics">
         <file>help-contents.png</file>
         <file>application-exit.png</file>
         <file>arrow-down.png</file>
@@ -17,6 +17,7 @@
         <file>go-previous.png</file>
         <file>list-add.png</file>
         <file>list-remove.png</file>
+        <file>pronounce.png</file>
         <file>qstardict.png</file>
         <file>qstardict-disabled.png</file>
         <file>search-filter.png</file>

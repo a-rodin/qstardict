@@ -79,26 +79,26 @@ DictWidget::DictWidget(QWidget *parent, Qt::WindowFlags f)
 	m_toolBar = new DictWidgetToolbar(this);
 	m_toolBar->setMouseTracking(true);
 
-	QAction *actionBackward = m_toolBar->addAction(QIcon(":/icons/go-previous.png"), tr("Go to &previous translation"),
+	QAction *actionBackward = m_toolBar->addAction(QIcon(":/pics/go-previous.png"), tr("Go to &previous translation"),
 			m_translationView, SLOT(backward()));
 	actionBackward->setDisabled(true);
 	connect(m_translationView, SIGNAL(backwardAvailable(bool)), actionBackward, SLOT(setEnabled(bool)));
 
-	QAction *actionForward = m_toolBar->addAction(QIcon(":/icons/go-next.png"), tr("Go to &next translation"),
+	QAction *actionForward = m_toolBar->addAction(QIcon(":/pics/go-next.png"), tr("Go to &next translation"),
 			m_translationView, SLOT(forward()));
 	actionForward->setDisabled(true);
 	connect(m_translationView, SIGNAL(forwardAvailable(bool)), actionForward, SLOT(setEnabled(bool)));
 
-	m_toolBar->addAction(QIcon(":/icons/document-save-as.png"), tr("&Save to file"),
+	m_toolBar->addAction(QIcon(":/pics/document-save-as.png"), tr("&Save to file"),
 			this, SLOT(saveToFile()));
 
-	m_toolBar->addAction(QIcon(":/icons/document-print.png"), tr("Prin&t translation"),
+	m_toolBar->addAction(QIcon(":/pics/document-print.png"), tr("Prin&t translation"),
 			this, SLOT(print()));
 
-	m_toolBar->addAction(QIcon(":/icons/speaker.png"), tr("Speak &word"),
+	m_toolBar->addAction(QIcon(":/pics/speaker.png"), tr("Speak &word"),
 			this, SLOT(speak()));
 
-	QAction *actionSearch = m_toolBar->addAction(QIcon(":/icons/system-search.png"), tr("Search"), this, SLOT(handleSearch()));
+	QAction *actionSearch = m_toolBar->addAction(QIcon(":/pics/system-search.png"), tr("Search"), this, SLOT(handleSearch()));
 	actionSearch->setCheckable(true);
 	actionSearch->setShortcut(QKeySequence::Find);
 
