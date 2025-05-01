@@ -217,10 +217,8 @@ const QString IPA_REGEXP =
 
 QString Ipa::ipaToKirshenbaum(QString ipa)
 {
-    qDebug("ipa: %s", ipa.toUtf8().data());
     for (const QPair<QRegularExpression, QString> &mapping: IPA_TO_KIRSHENBAUM_MAPPING)
         ipa.replace(mapping.first, mapping.second);
-    qDebug("kirshenbaum: [[%s]]", ipa.toUtf8().data());
     return ipa;
 }
 
@@ -231,5 +229,5 @@ QRegularExpression Ipa::narrowTranscriptionRegExp()
 
 QRegularExpression Ipa::broadTranscriptionRegExp()
 {
-    return QRegularExpression("[^a-zA-Z0-9](\\[(" + IPA_REGEXP + ")\\])");
+    return QRegularExpression("(\\[(" + IPA_REGEXP + ")\\])");
 }
