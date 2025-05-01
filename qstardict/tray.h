@@ -1,6 +1,6 @@
 /*****************************************************************************
- * trayicon.h - QStarDict, a StarDict clone written with using Qt            *
- * Copyright (C) 2008 Alexander Rodin                                        *
+ * tray.h - QStarDict, a StarDict clone written with using Qt                *
+ * Copyright (C) 2008-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -17,21 +17,21 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               *
  *****************************************************************************/
 
-#ifndef TRAYICON_H
-#define TRAYICON_H
+#ifndef TRAY_H
+#define TRAY_H
 
 #include <QSystemTrayIcon>
 
 namespace QStarDict
 {
 
-class TrayIcon: public QSystemTrayIcon
+class Tray: public QSystemTrayIcon
 {
     Q_OBJECT
 
     public:
-        TrayIcon(QObject *parent = 0);
-        virtual ~TrayIcon();
+        Tray(QObject *parent = 0);
+        virtual ~Tray();
 
         void saveSettings();
 
@@ -46,7 +46,7 @@ class TrayIcon: public QSystemTrayIcon
 
 }
 
-#endif // TRAYICON_H
+#endif // TRAY_H
 
 // vim: tabstop=4 softtabstop=4 shiftwidth=4 expandtab cindent
 

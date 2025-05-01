@@ -29,14 +29,22 @@ CSSEdit::CSSEdit(QWidget *parent)
 {
     setupUi(this);
 
-    connect(m_elementCombo, SIGNAL(currentIndexChanged(int)), SLOT(setCurrentElement(int)));
-    connect(m_fontCombo, SIGNAL(currentFontChanged(const QFont&)), SLOT(propertyChanged()));
-    connect(m_sizeSpin, SIGNAL(valueChanged(int)), SLOT(propertyChanged()));
-    connect(m_boldButton, SIGNAL(toggled(bool)), SLOT(propertyChanged()));
-    connect(m_italicButton, SIGNAL(toggled(bool)), SLOT(propertyChanged()));
-    connect(m_underlineButton, SIGNAL(toggled(bool)), SLOT(propertyChanged()));
-    connect(m_colorButton, SIGNAL(clicked()), SLOT(colorSelectClicked()));
-    connect(m_backgroundButton, SIGNAL(clicked()), SLOT(colorSelectClicked()));
+    connect(m_elementCombo, &QComboBox::currentIndexChanged,
+        this, &CSSEdit::setCurrentElement);
+    connect(m_fontCombo, &QFontComboBox::currentFontChanged,
+        this, &CSSEdit::propertyChanged);
+    connect(m_sizeSpin, &QSpinBox::valueChanged,
+        this, &CSSEdit::propertyChanged);
+    connect(m_boldButton, &QToolButton::toggled,
+        this, &CSSEdit::propertyChanged);
+    connect(m_italicButton, &QToolButton::toggled,
+        this, &CSSEdit::propertyChanged);
+    connect(m_underlineButton, &QToolButton::toggled,
+        this, &CSSEdit::propertyChanged);
+    connect(m_colorButton, &QToolButton::clicked,
+        this, &CSSEdit::colorSelectClicked);
+    connect(m_backgroundButton, &QToolButton::clicked,
+        this, &CSSEdit::colorSelectClicked);
 }
 
 void CSSEdit::setCSS(const QString &css)

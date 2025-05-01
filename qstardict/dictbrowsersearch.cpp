@@ -28,9 +28,12 @@ DictBrowserSearch::DictBrowserSearch(QWidget *parent) :
 {
     setupUi(this);
 
-    connect(searchEdit, SIGNAL(textEdited(QString)), this, SLOT(searchAll()));
-    connect(caseSensitiveCheckBox, SIGNAL(clicked()), this, SLOT(searchAll()));
-    connect(wholeWordsCheckBox, SIGNAL(clicked()), this, SLOT(searchAll()));
+    connect(searchEdit, &QLineEdit::textEdited,
+            this, &DictBrowserSearch::searchAll);
+    connect(caseSensitiveCheckBox, &QCheckBox::clicked,
+            this, &DictBrowserSearch::searchAll);
+    connect(wholeWordsCheckBox, &QCheckBox::clicked,
+            this, &DictBrowserSearch::searchAll);
 }
 
 void DictBrowserSearch::searchAll()

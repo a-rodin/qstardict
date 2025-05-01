@@ -496,7 +496,7 @@
     </message>
 </context>
 <context>
-    <name>QStarDict::TrayIcon</name>
+    <name>QStarDict::Tray</name>
     <message>
         <source>QStarDict</source>
         <translation>QStarDict</translation>

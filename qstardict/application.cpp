@@ -34,7 +34,7 @@
 #include "mainwindow.h"
 #include "popupwindow.h"
 #include "speaker.h"
-#include "trayicon.h"
+#include "tray.h"
 #ifdef QSTARDICT_WITH_DBUS
 #include "dbusadaptor.h"
 #endif // QSTARDICT_WITH_DBUS
@@ -73,7 +73,7 @@ Application::Application(int &argc, char **argv)
     m_speaker->setSpeechCmd(settings.value("Speaker/speechCmd", "espeak").toString());
     m_espeakSpeaker = new Speaker;
     m_espeakSpeaker->setSpeechCmd(settings.value("Speaker/espeakCmd", "espeak").toString());
-    m_trayIcon = new TrayIcon;
+    m_tray = new Tray;
     m_popupShortcut = new QxtGlobalShortcut;
     m_mainWindow = new MainWindow;
     m_mainWindow->setDict(m_dictCore);
@@ -83,15 +83,14 @@ Application::Application(int &argc, char **argv)
 
     m_popupShortcut =
         new QxtGlobalShortcut(QKeySequence("Ctrl+T"), m_mainWindow);
-    QObject::connect(m_popupShortcut, SIGNAL(activated(QxtGlobalShortcut *)),
-        Application::instance()->popupWindow(),
-        SLOT(showClipboardTranslation()));
+    QObject::connect(m_popupShortcut, &QxtGlobalShortcut::activated,
+        Application::instance()->popupWindow(), &PopupWindow::showClipboardTranslation);
 }
 
 Application::~Application()
 {
     QSettings settings;
-    delete m_trayIcon;
+    delete m_tray;
     delete m_mainWindow;
     delete m_popupWindow;
     settings.setValue("Speaker/speechCmd", m_speaker->speechCmd());
@@ -131,7 +130,7 @@ void Application::saveSettingsAndQuit()
 {
     m_dictCore->saveSettings();
     m_mainWindow->saveSettings();
-    m_trayIcon->saveSettings();
+    m_tray->saveSettings();
     m_popupWindow->saveSettings();
     quit();
 }

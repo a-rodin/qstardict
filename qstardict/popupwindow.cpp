@@ -46,7 +46,8 @@ PopupWindow::PopupWindow(QWidget *parent)
     mainLayout->addWidget(translationView);
 
     m_selection = new Selection(this);
-    connect(m_selection, SIGNAL(changed(const QString&)), this, SLOT(selectionChanged(const QString&)));
+    connect(m_selection, &Selection::changed,
+            this, &PopupWindow::selectionChanged);
 
     loadSettings();
 }

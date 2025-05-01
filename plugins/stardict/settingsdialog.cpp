@@ -32,7 +32,8 @@ SettingsDialog::SettingsDialog(StarDict *plugin, QWidget *parent)
     expandAbbreviationsBox->setChecked(m_plugin->m_expandAbbreviations);
     dictDirsList->addItems(m_plugin->m_dictDirs);
 
-    connect(this, SIGNAL(accepted()), SLOT(apply()));
+    connect(this, &SettingsDialog::accepted,
+            this, &SettingsDialog::apply);
 }
 
 void SettingsDialog::on_addDictDirButton_clicked()

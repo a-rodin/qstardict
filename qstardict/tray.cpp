@@ -1,6 +1,6 @@
 /*****************************************************************************
- * trayicon.cpp - QStarDict, a StarDict clone written with using Qt          *
- * Copyright (C) 2008 Alexander Rodin                                        *
+ * tray.cpp - QStarDict, a StarDict clone written with using Qt              *
+ * Copyright (C) 2008-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -17,7 +17,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               *
  *****************************************************************************/
 
-#include "trayicon.h"
+#include "tray.h"
 
 #include <QClipboard>
 #include <QMenu>
@@ -31,7 +31,7 @@
 namespace QStarDict
 {
 
-TrayIcon::TrayIcon(QObject *parent)
+Tray::Tray(QObject *parent)
     : QSystemTrayIcon(parent)
 {
     QMenu *trayMenu = new QMenu(tr("QStarDict"));
@@ -40,19 +40,22 @@ TrayIcon::TrayIcon(QObject *parent)
     actionScan->setCheckable(true);
     actionScan->setChecked(Application::instance()->popupWindow()->isScan());
     setScanEnabled(Application::instance()->popupWindow()->isScan());
-    connect(actionScan, SIGNAL(toggled(bool)),
-            Application::instance()->popupWindow(), SLOT(setScan(bool)));
-    connect(Application::instance()->popupWindow(), SIGNAL(scanChanged(bool)),
-            actionScan, SLOT(setChecked(bool)));
-    connect(Application::instance()->popupWindow(), SIGNAL(scanChanged(bool)), SLOT(setScanEnabled(bool)));
+    connect(actionScan, &QAction::toggled,
+            Application::instance()->popupWindow(), &PopupWindow::setScan);
+    connect(Application::instance()->popupWindow(), &PopupWindow::scanChanged,
+            actionScan, &QAction::setChecked);
+    connect(Application::instance()->popupWindow(), &PopupWindow::scanChanged,
+            this, &Tray::setScanEnabled);
     trayMenu->addAction(actionScan);
 
     QAction *actionSettings = new QAction(QIcon(":/pics/configure.png"), tr("&Configure QStarDict"), this);
-    connect(actionSettings, SIGNAL(triggered()), SLOT(on_actionSettings_triggered()));
+    connect(actionSettings, &QAction::triggered,
+        this, &Tray::on_actionSettings_triggered);
     trayMenu->addAction(actionSettings);
 
     QAction *actionQuit = new QAction(QIcon(":/pics/application-exit.png"), tr("&Quit"), this);
-    connect(actionQuit, SIGNAL(triggered()), Application::instance(), SLOT(saveSettingsAndQuit()));
+    connect(actionQuit, &QAction::triggered,
+        Application::instance(), &Application::saveSettingsAndQuit);
     trayMenu->addAction(actionQuit);
 
     setContextMenu(trayMenu);
@@ -62,12 +65,12 @@ TrayIcon::TrayIcon(QObject *parent)
     loadSettings();
 }
 
-TrayIcon::~TrayIcon()
+Tray::~Tray()
 {
     saveSettings();
 }
 
-void TrayIcon::on_activated(QSystemTrayIcon::ActivationReason reason)
+void Tray::on_activated(QSystemTrayIcon::ActivationReason reason)
 {
     switch (reason)
     {
@@ -89,26 +92,26 @@ void TrayIcon::on_activated(QSystemTrayIcon::ActivationReason reason)
     }
 }
 
-void TrayIcon::on_actionSettings_triggered()
+void Tray::on_actionSettings_triggered()
 {
     SettingsDialog dialog(Application::instance()->mainWindow());
     dialog.exec();
 }
 
-void TrayIcon::setScanEnabled(bool enabled)
+void Tray::setScanEnabled(bool enabled)
 {
     QIcon icon(enabled ? ":/pics/qstardict.png" : ":/pics/qstardict-disabled.png");
     setIcon(icon);
     setToolTip(tr("QStarDict: scanning is %1").arg(enabled ? tr("enabled") : tr("disabled")));
 }
 
-void TrayIcon::saveSettings()
+void Tray::saveSettings()
 {
     QSettings config;
     config.setValue("TrayIcon/visible", isVisible());
 }
 
-void TrayIcon::loadSettings()
+void Tray::loadSettings()
 {
     QSettings config;
     setVisible(config.value("TrayIcon/visible", true).toBool());

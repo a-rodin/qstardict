@@ -630,7 +630,7 @@ potom co kurzor opustí výběr</translation>
     </message>
 </context>
 <context>
-    <name>QStarDict::TrayIcon</name>
+    <name>QStarDict::Tray</name>
     <message>
         <location filename="../trayicon.cpp" line="37"/>
         <source>QStarDict</source>

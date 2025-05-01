@@ -85,7 +85,8 @@ Web::Translation Web::translate(const QString &dict, const QString &word)
 	QEventLoop loop;
 	QNetworkAccessManager qnam;
 	QNetworkReply *reply = qnam.get(QNetworkRequest(url));
-	connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+	connect(reply, &QNetworkReply::finished,
+            &loop, &QEventLoop::quit);
 	loop.exec();
 	QString translation = QString::fromUtf8(reply->readAll());
 	return Translation(dict, word, translation);

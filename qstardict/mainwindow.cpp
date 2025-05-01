@@ -38,7 +38,7 @@
 #include "application.h"
 #include "popupwindow.h"
 #include "settingsdialog.h"
-#include "trayicon.h"
+#include "tray.h"
 #include "../qxt/qxtglobalshortcut.h"
 
 namespace QStarDict 
@@ -73,25 +73,24 @@ void MainWindow::createConnections()
 {
     Application * const app = Application::instance();
 
-    connect(actionAboutQt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
-    connect(actionQuit, SIGNAL(triggered()), Application::instance(), SLOT(saveSettingsAndQuit()));
+    connect(actionAboutQt, &QAction::triggered, qApp, &QApplication::aboutQt);
+    connect(actionQuit, &QAction::triggered,
+            Application::instance(), &Application::saveSettingsAndQuit);
     actionScan->setChecked(Application::instance()->popupWindow()->isScan());
-    connect(actionScan, SIGNAL(toggled(bool)), 
-            app->popupWindow(), SLOT(setScan(bool)));
-    connect(app->popupWindow(), SIGNAL(scanChanged(bool)),
-            actionScan, SLOT(setChecked(bool)));
-    connect(wordsList, SIGNAL(itemActivated(QListWidgetItem*)),
-            SLOT(wordsListItemActivated(QListWidgetItem*)));
-    connect(wordsList, SIGNAL(itemClicked(QListWidgetItem*)),
-            SLOT(wordsListItemActivated(QListWidgetItem*)));
+    connect(actionScan, &QAction::toggled, 
+            app->popupWindow(), &PopupWindow::setScan);
+    connect(app->popupWindow(), &PopupWindow::scanChanged,
+            actionScan, &QAction::setChecked);
+    connect(wordsList, &QListWidget::itemActivated,
+            this, &MainWindow::wordsListItemActivated);
+    connect(wordsList, &QListWidget::itemClicked,
+            this, &MainWindow::wordsListItemActivated);
 
-    connect(translationView, SIGNAL(wordTranslated(const QString&)),
-            SLOT(wordTranslated(const QString&)));
+    connect(translationView, &DictWidget::wordTranslated,
+            this, &MainWindow::wordTranslated);
 
-    connect(app->popupShortcut(),
-        SIGNAL(activated(QxtGlobalShortcut *)),
-        app->popupWindow(),
-        SLOT(showClipboardTranslation()));
+    connect(app->popupShortcut(), &QxtGlobalShortcut::activated,
+        app->popupWindow(), &PopupWindow::showClipboardTranslation);
 }
 
 void MainWindow::loadSettings()
@@ -102,7 +101,7 @@ void MainWindow::loadSettings()
     restoreGeometry(config.value("MainWindow/geometry", QByteArray()).toByteArray());
     restoreState(config.value("MainWindow/state", QByteArray()).toByteArray());
     setVisible(config.value("MainWindow/visible", true).toBool());
-    if (isHidden() && ! app->trayIcon()->isVisible())
+    if (isHidden() && ! app->tray()->isVisible())
         show();
     wordsListDock->setFloating(config.value("MainWindow/wordsListDock/floating", wordsListDock->isFloating()).toBool());
     wordsListDock->setGeometry(config.value("MainWindow/wordsListDock/geometry", wordsListDock->geometry()).toRect());
@@ -221,9 +220,11 @@ void MainWindow::setInstantSearch(bool instantSearch)
         return;
     m_instantSearch = instantSearch;
     if (m_instantSearch)
-        connect(searchBox, SIGNAL(textEdited(const QString&)), SLOT(queryEdited(const QString&)));
+        connect(searchBox, &QLineEdit::textEdited,
+                this, &MainWindow::queryEdited);
     else
-        disconnect(searchBox, SIGNAL(textEdited(const QString&)), this, SLOT(queryEdited(const QString&)));
+        disconnect(searchBox, &QLineEdit::textEdited,
+                this, &MainWindow::queryEdited);
 }
 
 void MainWindow::setDict(DictCore *dict)
@@ -254,7 +255,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    if (! Application::instance()->trayIcon()->isVisible())
+    if (! Application::instance()->tray()->isVisible())
         Application::instance()->saveSettingsAndQuit();
 
     QMainWindow::closeEvent(event);

@@ -65,7 +65,7 @@ DictBrowser::DictBrowser(QWidget *parent)
     document()->setDefaultStyleSheet(translationCSS);
     setOpenLinks(false);
     setOpenExternalLinks(false);
-    connect(this, SIGNAL(anchorClicked(const QUrl &)), SLOT(on_anchorClicked(const QUrl &)));
+    connect(this, &DictBrowser::anchorClicked, this, &DictBrowser::on_anchorClicked);
     connect(this, &QTextBrowser::sourceChanged, this, &DictBrowser::on_sourceChanged);
 }
 

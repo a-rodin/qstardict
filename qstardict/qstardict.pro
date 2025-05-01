@@ -45,7 +45,7 @@ HEADERS += \
     selection.h \
     settingsdialog.h \
     speaker.h \
-    trayicon.h
+    tray.h
 unix:isEmpty(NO_DBUS):HEADERS += \
     dbusadaptor.h
 SOURCES += \
@@ -64,7 +64,7 @@ SOURCES += \
     selection.cpp \
     settingsdialog.cpp \
     speaker.cpp \
-    trayicon.cpp
+    tray.cpp
  unix:isEmpty(NO_DBUS):SOURCES += \
     dbusadaptor.cpp
 

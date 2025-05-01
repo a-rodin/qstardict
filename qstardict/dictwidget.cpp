@@ -68,37 +68,37 @@ DictWidget::DictWidget(QWidget *parent, Qt::WindowFlags f)
 	m_translationView->verticalScrollBar()->setCursor(Qt::ArrowCursor);
 	m_translationView->horizontalScrollBar()->setCursor(Qt::ArrowCursor);
 	m_translationView->setOpenExternalLinks(true);
-	connect(m_translationView, SIGNAL(sourceChanged(const QUrl&)), SLOT(on_translationView_sourceChanged(const QUrl&)));
+	connect(m_translationView, &DictBrowser::sourceChanged,
+            this, &DictWidget::on_translationView_sourceChanged);
 
 	m_search = new DictBrowserSearch(this);
-	connect(m_search, SIGNAL(search(const QString &,QTextDocument::FindFlags)),
-			m_translationView, SLOT(search(const QString &,QTextDocument::FindFlags)));
-	connect(m_translationView, SIGNAL(searchResult(bool)), m_search, SLOT(searchResult(bool)));
+	connect(m_search, &DictBrowserSearch::search, m_translationView, &DictBrowser::search);
+	connect(m_translationView, &DictBrowser::searchResult, m_search, &DictBrowserSearch::searchResult);
 	m_search->hide();
 
 	m_toolBar = new DictWidgetToolbar(this);
 	m_toolBar->setMouseTracking(true);
 
 	QAction *actionBackward = m_toolBar->addAction(QIcon(":/pics/go-previous.png"), tr("Go to &previous translation"),
-			m_translationView, SLOT(backward()));
+			m_translationView, &DictBrowser::backward);
 	actionBackward->setDisabled(true);
-	connect(m_translationView, SIGNAL(backwardAvailable(bool)), actionBackward, SLOT(setEnabled(bool)));
+	connect(m_translationView, &DictBrowser::backwardAvailable, actionBackward, &QAction::setEnabled);
 
 	QAction *actionForward = m_toolBar->addAction(QIcon(":/pics/go-next.png"), tr("Go to &next translation"),
-			m_translationView, SLOT(forward()));
+			m_translationView, &DictBrowser::forward);
 	actionForward->setDisabled(true);
-	connect(m_translationView, SIGNAL(forwardAvailable(bool)), actionForward, SLOT(setEnabled(bool)));
+	connect(m_translationView, &DictBrowser::forwardAvailable, actionForward, &QAction::setEnabled);
 
 	m_toolBar->addAction(QIcon(":/pics/document-save-as.png"), tr("&Save to file"),
-			this, SLOT(saveToFile()));
+			this, &DictWidget::saveToFile);
 
 	m_toolBar->addAction(QIcon(":/pics/document-print.png"), tr("Prin&t translation"),
-			this, SLOT(print()));
+			this, &DictWidget::print);
 
 	m_toolBar->addAction(QIcon(":/pics/speaker.png"), tr("Speak &word"),
-			this, SLOT(speak()));
+			this, &DictWidget::speak);
 
-	QAction *actionSearch = m_toolBar->addAction(QIcon(":/pics/system-search.png"), tr("Search"), this, SLOT(handleSearch()));
+	QAction *actionSearch = m_toolBar->addAction(QIcon(":/pics/system-search.png"), tr("Search"), this, &DictWidget::handleSearch);
 	actionSearch->setCheckable(true);
 	actionSearch->setShortcut(QKeySequence::Find);
 

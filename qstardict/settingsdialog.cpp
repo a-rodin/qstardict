@@ -33,7 +33,7 @@
 #include "popupwindow.h"
 #include "application.h"
 #include "speaker.h"
-#include "trayicon.h"
+#include "tray.h"
 #include "../qxt/qxtglobalshortcut.h"
 
 namespace
@@ -78,7 +78,7 @@ SettingsDialog::SettingsDialog(QWidget *parent)
     dictsTableView->setColumnWidth(2, 120);
 
     // Load global settings
-    systemTrayBox->setChecked(app->trayIcon()->isVisible());
+    systemTrayBox->setChecked(app->tray()->isVisible());
     instantSearchBox->setChecked(app->mainWindow()->isInstantSearch());
 #ifdef Q_OS_LINUX
 	QFile desktop(QDir::homePath() + "/.config/autostart/qstardict.desktop");
@@ -145,8 +145,8 @@ SettingsDialog::SettingsDialog(QWidget *parent)
     appearanceCSSEdit->setElementsAliases(cssAliases);
     appearanceCSSEdit->setCSS(Application::instance()->mainWindow()->defaultStyleSheet());
 
-    connect(m_pluginsModel, SIGNAL(itemChanged(QStandardItem*)),
-            SLOT(pluginsItemChanged(QStandardItem*)));
+    connect(m_pluginsModel, &QStandardItemModel::itemChanged,
+            this, &SettingsDialog::pluginsItemChanged);
 }
 
 void SettingsDialog::accept()
@@ -170,7 +170,7 @@ void SettingsDialog::accept()
     dict->setLoadedDicts(loadedDicts);
 
     // Save global settings
-    app->trayIcon()->setVisible(systemTrayBox->isChecked());
+    app->tray()->setVisible(systemTrayBox->isChecked());
     app->mainWindow()->setInstantSearch(instantSearchBox->isChecked());
 #ifdef Q_OS_LINUX
 	QDir home = QDir::home();
@@ -234,14 +234,14 @@ void SettingsDialog::accept()
     Application::instance()->mainWindow()->setDefaultStyleSheet(appearanceCSSEdit->css());
     Application::instance()->popupWindow()->setDefaultStyleSheet(appearanceCSSEdit->css());
 
-    if (! app->trayIcon()->isVisible())
+    if (! app->tray()->isVisible())
         app->mainWindow()->show();
 
     app->mainWindow()->reload();
 
     app->dictCore()->saveSettings();
     app->mainWindow()->saveSettings();
-    app->trayIcon()->saveSettings();
+    app->tray()->saveSettings();
     app->popupWindow()->saveSettings();
 
     QDialog::accept();

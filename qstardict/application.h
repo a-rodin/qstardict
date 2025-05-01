@@ -33,7 +33,7 @@ class DictCore;
 class MainWindow;
 class PopupWindow;
 class Speaker;
-class TrayIcon;
+class Tray;
 #ifdef QSTARDICT_WITH_DBUS
 class DBusAdaptor;
 #endif // QSTARDICT_WITH_DBUS
@@ -97,10 +97,10 @@ class Application: public QApplication
         { return m_espeakSpeaker; }
 
         /**
-         * Returns a pointer to the tray icon.
+         * Returns a pointer to the tray.
          */
-        TrayIcon *trayIcon()
-        { return m_trayIcon; }
+        Tray *tray()
+        { return m_tray; }
         /**
          * Returns a pointer to the popupShortcut instance.
          */
@@ -130,7 +130,7 @@ class Application: public QApplication
         PopupWindow *m_popupWindow;
         Speaker *m_speaker;
         Speaker *m_espeakSpeaker;
-        TrayIcon *m_trayIcon;
+        Tray *m_tray;
         QxtGlobalShortcut *m_popupShortcut;
 #ifdef QSTARDICT_WITH_DBUS
         DBusAdaptor *m_dbusAdaptor;
