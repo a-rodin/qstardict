@@ -8,11 +8,13 @@
         <file>arrow-up.png</file>
         <file>clear-right.png</file>
         <file>configure.png</file>
+        <file>dialog-close.png</file>
         <file>dialog-information.png</file>
         <file>dialog-warning.png</file>
         <file>document-print.png</file>
         <file>document-save-as.png</file>
         <file>download.png</file>
+        <file>edit-select.png</file>
         <file>go-next.png</file>
         <file>go-previous.png</file>
         <file>list-add.png</file>
@@ -21,10 +23,8 @@
         <file>qstardict.png</file>
         <file>qstardict-disabled.png</file>
         <file>search-filter.png</file>
+        <file>system-search.png</file>
         <file>speaker.png</file>
         <file>view-refresh.png</file>
-        <file>dialog-close.png</file>
-        <file>system-search.png</file>
-        <file>edit-select.png</file>
     </qresource>
 </RCC>
