@@ -90,6 +90,7 @@ Application::Application(int &argc, char **argv)
 Application::~Application()
 {
     QSettings settings;
+    delete m_popupShortcut;
     delete m_tray;
     delete m_mainWindow;
     delete m_popupWindow;
@@ -98,7 +99,6 @@ Application::~Application()
     settings.setValue("Speaker/espeakCmd", m_espeakSpeaker->speechCmd());
     delete m_espeakSpeaker;
     delete m_dictCore;
-    delete m_popupShortcut;
 #ifdef QSTARDICT_WITH_TRANSLATIONS
     removeTranslator(m_translator);
     delete m_translator;
