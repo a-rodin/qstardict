@@ -107,9 +107,7 @@ class DictWidget: public QFrame
 
     private slots:
         void on_translationView_sourceChanged(const QUrl &name);
-        void saveToFile();
         void speak();
-        void print();
         void handleSearch();
 
     private:
