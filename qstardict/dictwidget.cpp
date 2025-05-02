@@ -24,8 +24,7 @@
 #include <QToolBar>
 #include <QAction>
 #include <QIcon>
-#include <QDir>
-#include <QFile>
+#include <QTextDocumentFragment>
 #include <QTextStream>
 #include <QMessageBox>
 #include <QMouseEvent>
@@ -89,9 +88,13 @@ DictWidget::DictWidget(QWidget *parent, Qt::WindowFlags f)
 	m_toolBar->addAction(QIcon(":/pics/speaker.png"), tr("Speak &word"),
 			this, &DictWidget::speak);
 
-	QAction *actionSearch = m_toolBar->addAction(QIcon(":/pics/system-search.png"), tr("Search"), this, &DictWidget::handleSearch);
+	QAction *actionSearch = m_toolBar->addAction(QIcon(":/pics/system-search.png"), tr("Search"),
+            this, &DictWidget::handleSearch);
 	actionSearch->setCheckable(true);
 	actionSearch->setShortcut(QKeySequence::Find);
+
+    QAction *actionAddWord = m_toolBar->addAction(QIcon(":/pics/word-add.png"), tr("&Add word for studying"),
+            this, &DictWidget::addWord);
 
 	QVBoxLayout *layout = new QVBoxLayout(this);
 	layout->setContentsMargins(0, 0, 0, 0);
@@ -126,6 +129,26 @@ void DictWidget::setDefaultStyleSheet(const QString &css)
 {
 	m_translationView->document()->setDefaultStyleSheet(css);
 	m_translationView->reload();
+}
+
+void DictWidget::addWord()
+{
+    auto translatedWord = m_translationView->source().toString(QUrl::RemoveScheme);
+    auto cursor = m_translationView->textCursor();
+    QString translation;
+    if (cursor.hasSelection()) {
+        translation = cursor.selection().toHtml();
+    } else {
+        QMessageBox::warning(
+            this,
+            tr("Adding a word for studying"),
+            tr("Please select a part of the article with the translation that " \
+               "you want to add for studying and try again."));
+        return;
+    }
+
+    qDebug("word: %s", translatedWord.toUtf8().data());
+    qDebug("translation: %s", translation.toUtf8().data());
 }
 
 }

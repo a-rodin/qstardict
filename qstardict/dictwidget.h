@@ -109,6 +109,7 @@ class DictWidget: public QFrame
         void on_translationView_sourceChanged(const QUrl &name);
         void speak();
         void handleSearch();
+        void addWord();
 
     private:
         DictBrowser *m_translationView;
