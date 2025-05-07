@@ -32,7 +32,9 @@
 #include "application.h"
 #include "dictbrowser.h"
 #include "dictbrowsersearch.h"
+#include "ipa.h"
 #include "speaker.h"
+#include "vocabulary.h"
 
 namespace
 {
@@ -93,7 +95,7 @@ DictWidget::DictWidget(QWidget *parent, Qt::WindowFlags f)
 	actionSearch->setCheckable(true);
 	actionSearch->setShortcut(QKeySequence::Find);
 
-    QAction *actionAddWord = m_toolBar->addAction(QIcon(":/pics/word-add.png"), tr("&Add word for studying"),
+    m_toolBar->addAction(QIcon(":/pics/word-add.png"), tr("&Add word for studying"),
             this, &DictWidget::addWord);
 
 	QVBoxLayout *layout = new QVBoxLayout(this);
@@ -133,12 +135,13 @@ void DictWidget::setDefaultStyleSheet(const QString &css)
 
 void DictWidget::addWord()
 {
-    auto translatedWord = m_translationView->source().toString(QUrl::RemoveScheme);
-    auto cursor = m_translationView->textCursor();
+    auto word = m_translationView->source().toString(QUrl::RemoveScheme);
+
+    QTextCursor cursor = m_translationView->textCursor();
     QString translation;
-    if (cursor.hasSelection()) {
-        translation = cursor.selection().toPlainText();
-    } else {
+    if (cursor.hasSelection())
+        translation = cursor.selection().toPlainText().trimmed();
+    else {
         QMessageBox::warning(
             this,
             tr("Adding a word for studying"),
@@ -147,8 +150,18 @@ void DictWidget::addWord()
         return;
     }
 
-    qDebug("word: %s", translatedWord.toUtf8().data());
+    QString transcription;
+    auto broadTranscriptionRegExp = Ipa::broadTranscriptionRegExp();
+    auto transcriptionCursor = m_translationView->document()->find(
+        broadTranscriptionRegExp, cursor, QTextDocument::FindBackward);
+    if (transcriptionCursor.hasSelection())
+        transcription = transcriptionCursor.selection().toPlainText();
+
+    qDebug("word: %s", word.toUtf8().data());
     qDebug("translation: %s", translation.toUtf8().data());
+    qDebug("transcription: %s", transcription.toUtf8().data());
+
+    Application::instance()->vocabulary()->addWord(word, translation, transcription);
 }
 
 }

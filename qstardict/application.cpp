@@ -35,6 +35,7 @@
 #include "popupwindow.h"
 #include "speaker.h"
 #include "tray.h"
+#include "vocabulary.h"
 #ifdef QSTARDICT_WITH_DBUS
 #include "dbusadaptor.h"
 #endif // QSTARDICT_WITH_DBUS
@@ -85,6 +86,8 @@ Application::Application(int &argc, char **argv)
         new QxtGlobalShortcut(QKeySequence("Ctrl+T"), m_mainWindow);
     QObject::connect(m_popupShortcut, &QxtGlobalShortcut::activated,
         Application::instance()->popupWindow(), &PopupWindow::showClipboardTranslation);
+
+    m_vocabulary = new Vocabulary();
 }
 
 Application::~Application()
