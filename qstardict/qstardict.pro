@@ -38,6 +38,7 @@ HEADERS += \
     ../plugins/dictplugin.h \
     dictwidget.h \
     ipa.h \
+    ipaspeaker.h \
     keyboard.h \
     mainwindow.h \
     popupwindow.h \
@@ -57,6 +58,7 @@ SOURCES += \
     dictcore.cpp \
     dictwidget.cpp \
     ipa.cpp \
+    ipaspeaker.cpp \
     keyboard.cpp \
     main.cpp \
     mainwindow.cpp \

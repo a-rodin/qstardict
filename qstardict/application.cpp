@@ -31,6 +31,7 @@
 #include "../qxt/qxtglobalshortcut.h"
 
 #include "dictcore.h"
+#include "ipaspeaker.h"
 #include "mainwindow.h"
 #include "popupwindow.h"
 #include "speaker.h"
@@ -72,8 +73,8 @@ Application::Application(int &argc, char **argv)
     m_popupWindow->setDict(m_dictCore);
     m_speaker = new Speaker;
     m_speaker->setSpeechCmd(settings.value("Speaker/speechCmd", "espeak").toString());
-    m_espeakSpeaker = new Speaker;
-    m_espeakSpeaker->setSpeechCmd(settings.value("Speaker/espeakCmd", "espeak").toString());
+    m_ipaSpeaker = new IpaSpeaker;
+    m_ipaSpeaker->setSpeechCmd(settings.value("Speaker/espeakCmd", "espeak").toString());
     m_tray = new Tray;
     m_popupShortcut = new QxtGlobalShortcut;
     m_mainWindow = new MainWindow;
@@ -99,8 +100,8 @@ Application::~Application()
     delete m_popupWindow;
     settings.setValue("Speaker/speechCmd", m_speaker->speechCmd());
     delete m_speaker;
-    settings.setValue("Speaker/espeakCmd", m_espeakSpeaker->speechCmd());
-    delete m_espeakSpeaker;
+    settings.setValue("Speaker/espeakCmd", m_ipaSpeaker->speechCmd());
+    delete m_ipaSpeaker;
     delete m_dictCore;
 #ifdef QSTARDICT_WITH_TRANSLATIONS
     removeTranslator(m_translator);

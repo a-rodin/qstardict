@@ -29,6 +29,7 @@
 #include <QKeySequence>
 #include <math.h>
 #include "dictcore.h"
+#include "ipaspeaker.h"
 #include "mainwindow.h"
 #include "popupwindow.h"
 #include "application.h"
@@ -96,7 +97,7 @@ SettingsDialog::SettingsDialog(QWidget *parent)
 #endif
     speechCmdEdit->setText(app->speaker()->speechCmd());
     ipaPronounceBox->setChecked(app->mainWindow()->showIpaPronouncers());
-    espeakCmdEdit->setText(app->espeakSpeaker()->speechCmd());
+    espeakCmdEdit->setText(app->ipaSpeaker()->speechCmd());
 
     // Load popup shortcut settings
     shortcutPopupEdit->setText(app->popupShortcut()->shortcut().toString());
@@ -202,7 +203,7 @@ void SettingsDialog::accept()
     app->speaker()->setSpeechCmd(speechCmdEdit->text());
     app->mainWindow()->setShowIpaPronouncers(ipaPronounceBox->isChecked());
     app->popupWindow()->setShowIpaPronouncers(ipaPronounceBox->isChecked());
-    app->espeakSpeaker()->setSpeechCmd(espeakCmdEdit->text());
+    app->ipaSpeaker()->setSpeechCmd(espeakCmdEdit->text());
 
     // Save popup shortcut settings
     app->popupShortcut()->setShortcut(QKeySequence(shortcutPopupEdit->text()));

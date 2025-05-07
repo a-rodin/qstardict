@@ -28,6 +28,7 @@
 #include "../plugins/dictplugin.h"
 #include "application.h"
 #include "ipa.h"
+#include "ipaspeaker.h"
 #include "speaker.h"
 
 namespace
@@ -173,9 +174,8 @@ void DictBrowser::mouseReleaseEvent(QMouseEvent *event)
         QUrl url = cursor.charFormat().anchorHref();
         if (url.scheme() == "pronounce")
         {
-            QString ipa = QUrl::fromPercentEncoding(url.toString(QUrl::RemoveScheme).toUtf8());
-            QString kirshenbaum = Ipa::ipaToKirshenbaum(ipa);
-            Application::instance()->espeakSpeaker()->speak("[[" + kirshenbaum + "]]");
+            QString transcription = QUrl::fromPercentEncoding(url.toString(QUrl::RemoveScheme).toUtf8());
+            Application::instance()->ipaSpeaker()->speak(transcription);
             return;
         }
     }
@@ -212,10 +212,9 @@ void DictBrowser::addIpaPronouncers()
         while (! (cursor = doc->find(transcriptionRegExp, position)).isNull())
         {
             QString transcription = cursor.selectedText();
-            QString ipa = transcriptionRegExp.match(transcription).captured(2);
 
             cursor.insertHtml("<font class=\"transcription\">" + transcription + "</font>"
-                "<a href=\"pronounce:" + QUrl::toPercentEncoding(ipa) + "\">"
+                "<a href=\"pronounce:" + QUrl::toPercentEncoding(transcription) + "\">"
                 "<img style=\"vertical-align: middle\" src=\":/pics/pronounce.png\">"
                 "</a>");
             position = cursor.position();

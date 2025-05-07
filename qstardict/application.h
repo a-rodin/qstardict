@@ -30,6 +30,7 @@ class QxtGlobalShortcut;
 namespace QStarDict
 {
 class DictCore;
+class IpaSpeaker;
 class MainWindow;
 class PopupWindow;
 class Speaker;
@@ -92,10 +93,10 @@ class Application: public QApplication
         { return m_speaker; }
 
         /**
-         * Returns a pointer to the application's eSpeak speaker.
+         * Returns a pointer to the application's IPA speaker.
          */
-        Speaker *espeakSpeaker()
-        { return m_espeakSpeaker; }
+        IpaSpeaker *ipaSpeaker()
+        { return m_ipaSpeaker; }
 
         /**
          * Returns a pointer to the tray.
@@ -137,7 +138,7 @@ class Application: public QApplication
         MainWindow *m_mainWindow;
         PopupWindow *m_popupWindow;
         Speaker *m_speaker;
-        Speaker *m_espeakSpeaker;
+        IpaSpeaker *m_ipaSpeaker;
         Tray *m_tray;
         QxtGlobalShortcut *m_popupShortcut;
         Vocabulary *m_vocabulary;
