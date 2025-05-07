@@ -137,7 +137,7 @@ void DictWidget::addWord()
     auto cursor = m_translationView->textCursor();
     QString translation;
     if (cursor.hasSelection()) {
-        translation = cursor.selection().toHtml();
+        translation = cursor.selection().toPlainText();
     } else {
         QMessageBox::warning(
             this,
