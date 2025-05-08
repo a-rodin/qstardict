@@ -30,10 +30,19 @@ class Vocabulary
 {
     public:
         Vocabulary();
+        virtual ~Vocabulary();
 
+        /**
+         * Add a new word to the vocabulary. If a word already exists, the translation and transcription
+         * are updated and the "studied" field is reset.
+         */
         void addWord(const QString &word, const QString &translation, const QString &transcription);
 
-        // QString getWordForStudy();
+        /**
+         * Return n words for studying.
+         */
+        QVector<WordForTraining> getWordsForTraining(unsigned n);
+
         // void markAsStudied(const QString &word);
 
     private:

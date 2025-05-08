@@ -115,6 +115,7 @@ class Application: public QApplication
          */
         Vocabulary *vocabulary()
         { return m_vocabulary; }
+
 #ifdef QSTARDICT_WITH_DBUS
         /**
          * Returns a pointer to the DBusAdaptor instance.

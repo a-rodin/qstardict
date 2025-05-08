@@ -74,9 +74,23 @@ void Vocabulary::addWord(const QString &word, const QString &translation, const 
     query.bindValue(":translation", translation);
     query.bindValue(":transcription", transcription);
     if (! query.exec())
-    {
         qDebug() << query.lastError();
-    }
+}
+
+void Vocabulary::getWordsForTraining(unsigned n)
+{
+    QSqlQuery query(m_db);
+    query.prepare(
+            "SELECT DISTINCT word, translation, transcription\n"
+            "FROM words\n"
+            "WHERE\n"
+            "	(studied IS NULL OR NOT studied) AND\n"
+            "	(lastExcersise IS NULL OR strftime(\"%s\", datetime()) - strftime(\"%s\", lastExcersise) > 60 * 60 * 24)\n"
+            "ORDER BY random()\n"
+            "LIMIT :limit\n");
+    query.bindValue(":limit", n);
+    if (! query.exec()
+        qDebug() << query.lastError();
 }
 
 }
