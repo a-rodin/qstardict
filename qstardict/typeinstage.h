@@ -1,6 +1,7 @@
 /*****************************************************************************
- * vocabulary.h - QStarDict, a StarDict clone written using Qt               *
- * Copyright (C) 2025 Alexander Rodin                                        *
+ * typeinstage.h - QStarDict, a dictionary application for learning foreign  *
+ *                 languages                                                 *
+ * Copyright (C) 2024-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -17,50 +18,51 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               *
  *****************************************************************************/
 
-#ifndef VOCABULARY_H
-#define VOCABULARY_H
+#ifndef TYPEINSTAGE_H
+#define TYPEINSTAGE_H
 
-#include <QString>
-#include <QSqlDatabase>
-
+#include "ui_typeinstage.h"
 #include "wordfortraining.h"
 
 namespace QStarDict
 {
 
-class Vocabulary
+class IpaSpeaker;
+
+class TypeInStage: public QWidget, private Ui::TypeInStage
 {
+    Q_OBJECT
+
     public:
-        Vocabulary();
-        virtual ~Vocabulary();
+        TypeInStage(QWidget *parent = 0);
+        virtual ~TypeInStage();
 
-        /**
-         * Add a new word to the vocabulary. If the word already exists, the translation and transcription
-         * are updated and the "studied" field is reset.
-         */
-        void addWord(const QString &word, const QString &translation, const QString &transcription);
+        void setWords(const QVector<WordForTraining> &wordsList);
 
-        /**
-         * Return n words for a training.
-         */
-        QVector<WordForTraining> getWordsForTraining(unsigned n);
+        QVector<WordForTraining> wordsWithErrors()
+        { return m_wordsWithErrors; }
 
-        /**
-         * Return n random translations.
-         */
-        QStringList getRandomTranslations(unsigned n, const QStringList &skipList = QStringList());
+    signals:
+        void nextStage();
 
-        /**
-         * Update the "studied" and "lastExcersize" fields for a word.
-         * "lastExcersize" is set to the current time.
-         */
-        void updateWord(const QString &word, bool studied);
+    public slots:
+        void startStage();
+
+    private slots:
+        void speak();
+        void onEnterPressed();
+        void onWordEntered();
+        void onNextStage();
+        void nextWord();
 
     private:
-        QSqlDatabase m_db;
+        QVector<WordForTraining> m_wordsList;
+        int m_currentWordIndex;
+        QVector<WordForTraining> m_wordsWithErrors;
+        IpaSpeaker *m_ipaSpeaker;
 };
 
 }
 
-#endif // VOCABULARY_H
+#endif // TYPEINSTAGE_H
 

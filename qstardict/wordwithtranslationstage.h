@@ -1,5 +1,6 @@
 /*****************************************************************************
- * vocabulary.h - QStarDict, a StarDict clone written using Qt               *
+ * wordwithtranslationstage.h - QStarDict, a dictionary application for      *
+ *                              learning foregin languages                   *
  * Copyright (C) 2025 Alexander Rodin                                        *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
@@ -17,50 +18,45 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               *
  *****************************************************************************/
 
-#ifndef VOCABULARY_H
-#define VOCABULARY_H
+#ifndef WORDWITHTRANSLATIONSTAGE_H
+#define WORDWITHTRANSLATIONSTAGE_H
 
-#include <QString>
-#include <QSqlDatabase>
+#include "ui_wordwithtranslationstage.h"
 
 #include "wordfortraining.h"
 
 namespace QStarDict
 {
 
-class Vocabulary
+class IpaSpeaker;
+
+class WordWithTranslationStage: public QWidget, private Ui::WordWithTranslationStage
 {
+    Q_OBJECT
+
     public:
-        Vocabulary();
-        virtual ~Vocabulary();
+        WordWithTranslationStage(QWidget *parent = nullptr);
 
-        /**
-         * Add a new word to the vocabulary. If the word already exists, the translation and transcription
-         * are updated and the "studied" field is reset.
-         */
-        void addWord(const QString &word, const QString &translation, const QString &transcription);
+        void setWords(const QVector<WordForTraining> &wordsList);
 
-        /**
-         * Return n words for a training.
-         */
-        QVector<WordForTraining> getWordsForTraining(unsigned n);
+    signals:
+        void nextStage();
 
-        /**
-         * Return n random translations.
-         */
-        QStringList getRandomTranslations(unsigned n, const QStringList &skipList = QStringList());
-
-        /**
-         * Update the "studied" and "lastExcersize" fields for a word.
-         * "lastExcersize" is set to the current time.
-         */
-        void updateWord(const QString &word, bool studied);
+    public slots:
+        void startStage();
+    	void nextWord();
+    	void onNextStage();
 
     private:
-        QSqlDatabase m_db;
+        QVector<WordForTraining> m_wordsList;
+        int m_currentWordIndex;
+        IpaSpeaker *m_ipaSpeaker;
+
+        void speak();
+        void showCurrentWord();
 };
 
 }
 
-#endif // VOCABULARY_H
+#endif // WORDWITHTRANSLATIONSTAGE_H
 

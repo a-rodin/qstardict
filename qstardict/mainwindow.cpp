@@ -38,6 +38,7 @@
 #include "application.h"
 #include "popupwindow.h"
 #include "settingsdialog.h"
+#include "trainer.h"
 #include "tray.h"
 #include "vocabulary.h"
 #include "../qxt/qxtglobalshortcut.h"
@@ -133,6 +134,15 @@ void MainWindow::saveSettings()
         app->popupShortcut()->shortcut().toString());
     config.setValue("MainWindow/popupShortcutEnabled",
         app->popupShortcut()->isEnabled());
+}
+
+void MainWindow::on_actionStartTraining_triggered()
+{
+    auto words = Application::instance()->vocabulary()->getWordsForTraining(5);
+    Trainer *trainer = new Trainer;
+    trainer->setWords(words);
+    trainer->start();
+    trainer->show();
 }
 
 void MainWindow::on_actionAbout_triggered()

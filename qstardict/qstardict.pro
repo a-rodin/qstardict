@@ -25,12 +25,17 @@ macx {
 include(../qstardict.pri)
 
 FORMS += \
+    choosetranslationstage.ui \
     cssedit.ui \
     dictbrowsersearch.ui \
     mainwindow.ui \
-    settingsdialog.ui
+    scatteredlettersstage.ui \
+    settingsdialog.ui \
+    typeinstage.ui \
+    wordwithtranslationstage.ui
 HEADERS += \
     application.h \
+    choosetranslationstage.h \
     cssedit.h \
     dictbrowser.h \
     dictbrowsersearch.h \
@@ -43,16 +48,22 @@ HEADERS += \
     mainwindow.h \
     popupwindow.h \
     resizablepopup.h \
+    scatteredletters.h \
+    scatteredlettersstage.h \
     selection.h \
     settingsdialog.h \
     speaker.h \
+    trainer.h \
     tray.h \
+    typeinstage.h \
     vocabulary.h \
-    wordfortraining.h
+    wordfortraining.h \
+    wordwithtranslationstage.h
 unix:isEmpty(NO_DBUS):HEADERS += \
     dbusadaptor.h
 SOURCES += \
     application.cpp \
+    choosetranslationstage.cpp \
     cssedit.cpp \
     dictbrowser.cpp \
     dictbrowsersearch.cpp \
@@ -65,11 +76,16 @@ SOURCES += \
     mainwindow.cpp \
     popupwindow.cpp \
     resizablepopup.cpp \
+    scatteredletters.cpp \
+    scatteredlettersstage.cpp \
     selection.cpp \
     settingsdialog.cpp \
     speaker.cpp \
+    trainer.cpp \
     tray.cpp \
-    vocabulary.cpp
+    typeinstage.cpp \
+    vocabulary.cpp \
+    wordwithtranslationstage.cpp
  unix:isEmpty(NO_DBUS):SOURCES += \
     dbusadaptor.cpp
 

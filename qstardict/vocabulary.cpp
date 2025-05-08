@@ -52,7 +52,7 @@ Vocabulary::Vocabulary()
             "translation TEXT,\n"
             "transcription TEXT,\n"
             "studied INTEGER,\n"
-            "lastExcersise TEXT"
+            "last_excercise TEXT"
             ")");
 }
 
@@ -69,7 +69,7 @@ void Vocabulary::addWord(const QString &word, const QString &translation, const 
             "    (word, translation, transcription)\n"
             "    VALUES (:word, :translation, :transcription)\n"
             "    ON CONFLICT (word)\n"
-            "    DO UPDATE SET translation = :word, transcription = :transcription, studied = NULL;");
+            "    DO UPDATE SET translation = :word, transcription = :transcription, studied = 0;");
     query.bindValue(":word", word);
     query.bindValue(":translation", translation);
     query.bindValue(":transcription", transcription);
@@ -91,7 +91,7 @@ QVector<WordForTraining> Vocabulary::getWordsForTraining(unsigned n)
     query.bindValue(":limit", n);
     if (! query.exec())
     {
-        qDebug() << query.lastError();
+        qDebug() << "getWordsForTraining error: " << query.lastError();
         return {};
     }
 
@@ -107,6 +107,45 @@ QVector<WordForTraining> Vocabulary::getWordsForTraining(unsigned n)
     }
 
     return result;
+}
+
+QStringList Vocabulary::getRandomTranslations(unsigned n, const QStringList &skipList)
+{
+    QStringList escapedSkipList;
+    for (auto translation: skipList)
+        escapedSkipList << "\"" + translation.replace("\"", "\\\"") + "\"";
+    QSqlQuery query(m_db);
+    QString queryString = QString(
+            "SELECT translation FROM words\n"
+            "WHERE translation NOT IN (%1)\n"
+            "ORDER BY random()\n"
+            "LIMIT :limit").arg(escapedSkipList.join(", "));
+    query.prepare(queryString);
+    query.bindValue(":limit", n);
+    if (! query.exec())
+    {
+        qDebug() << "getRandomTranslations error: " << query.lastError();
+        return {};
+    }
+
+    QStringList result;
+    while (query.next())
+        result << query.value("translation").toString();
+
+    return result;
+}
+
+void Vocabulary::updateWord(const QString &word, bool studied)
+{
+    QSqlQuery query(m_db);
+    query.prepare(
+        "UPDATE words\n"
+        "SET studied = :studied, last_excercise = datetime()\n"
+        "WHERE word = :word");
+    query.bindValue(":studied", studied ? 1 : 0);
+    query.bindValue(":word", word);
+    if (! query.exec())
+        qDebug() << "updateWord error: " << query.lastError();
 }
 
 }
