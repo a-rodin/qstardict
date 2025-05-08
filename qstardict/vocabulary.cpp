@@ -46,11 +46,12 @@ Vocabulary::Vocabulary()
     }
 
     QSqlQuery query(m_db);
-    query.exec("CREATE TABLE IF NOT EXISTS words ("
-            "word TEXT PRIMARY KEY, "
-            "translation TEXT, "
-            "transcription TEXT, "
-            "studied INTEGER, "
+    query.exec(
+            "CREATE TABLE IF NOT EXISTS words (\n"
+            "word TEXT PRIMARY KEY,\n"
+            "translation TEXT,\n"
+            "transcription TEXT,\n"
+            "studied INTEGER,\n"
             "lastExcersise TEXT"
             ")");
 }
@@ -59,7 +60,12 @@ Vocabulary::Vocabulary()
 void Vocabulary::addWord(const QString &word, const QString &translation, const QString &transcription)
 {
     QSqlQuery query(m_db);
-    query.prepare("INSERT INTO words (word, translation, transcription) VALUES (:word, :translation, :transcription)");
+    query.prepare(
+            "INSERT INTO words\n"
+            "    (word, translation, transcription)\n"
+            "    VALUES (:word, :translation, :transcription)\n"
+            "    ON CONFLICT (word)\n"
+            "    DO UPDATE SET translation = :word, transcription = :transcription, studied = NULL;");
     query.bindValue(":word", word);
     query.bindValue(":translation", translation);
     query.bindValue(":transcription", transcription);
