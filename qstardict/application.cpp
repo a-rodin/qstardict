@@ -94,6 +94,7 @@ Application::Application(int &argc, char **argv)
 Application::~Application()
 {
     QSettings settings;
+    delete m_vocabulary;
     delete m_popupShortcut;
     delete m_tray;
     delete m_mainWindow;

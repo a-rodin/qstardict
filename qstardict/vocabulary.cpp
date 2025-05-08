@@ -56,6 +56,10 @@ Vocabulary::Vocabulary()
             ")");
 }
 
+Vocabulary::~Vocabulary()
+{
+    m_db.close();
+}
 
 void Vocabulary::addWord(const QString &word, const QString &translation, const QString &transcription)
 {
