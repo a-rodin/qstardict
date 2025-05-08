@@ -103,9 +103,10 @@ class MainWindow: public QMainWindow, private Ui::MainWindow
         void closeEvent(QCloseEvent *event);
 
     private slots:
-        void on_actionAbout_triggered();
+        void on_actionStartTraining_triggered();
         void on_actionSettings_triggered();
         void on_actionHelp_triggered();
+        void on_actionAbout_triggered();
         void on_queryButton_clicked();
 
         void wordsListItemActivated(QListWidgetItem *item);

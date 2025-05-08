@@ -77,7 +77,7 @@ void Vocabulary::addWord(const QString &word, const QString &translation, const 
         qDebug() << query.lastError();
 }
 
-void Vocabulary::getWordsForTraining(unsigned n)
+QVector<WordForTraining> Vocabulary::getWordsForTraining(unsigned n)
 {
     QSqlQuery query(m_db);
     query.prepare(
@@ -89,8 +89,24 @@ void Vocabulary::getWordsForTraining(unsigned n)
             "ORDER BY random()\n"
             "LIMIT :limit\n");
     query.bindValue(":limit", n);
-    if (! query.exec()
+    if (! query.exec())
+    {
         qDebug() << query.lastError();
+        return {};
+    }
+
+    QVector<WordForTraining> result;
+    while (query.next())
+    {
+        QString word = query.value("word").toString();
+        QString translation = query.value("translation").toString();
+        QString transcription = query.value("transcription").toString();
+
+        WordForTraining wordForTraining(word, translation, transcription);
+        result << wordForTraining;
+    }
+
+    return result;
 }
 
 }

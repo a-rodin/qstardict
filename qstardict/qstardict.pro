@@ -47,7 +47,8 @@ HEADERS += \
     settingsdialog.h \
     speaker.h \
     tray.h \
-    vocabulary.h
+    vocabulary.h \
+    wordfortraining.h
 unix:isEmpty(NO_DBUS):HEADERS += \
     dbusadaptor.h
 SOURCES += \

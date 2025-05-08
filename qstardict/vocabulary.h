@@ -23,6 +23,8 @@
 #include <QString>
 #include <QSqlDatabase>
 
+#include "wordfortraining.h"
+
 namespace QStarDict
 {
 
@@ -39,7 +41,7 @@ class Vocabulary
         void addWord(const QString &word, const QString &translation, const QString &transcription);
 
         /**
-         * Return n words for studying.
+         * Return n words for a training.
          */
         QVector<WordForTraining> getWordsForTraining(unsigned n);
 

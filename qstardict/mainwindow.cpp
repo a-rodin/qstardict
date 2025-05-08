@@ -39,6 +39,7 @@
 #include "popupwindow.h"
 #include "settingsdialog.h"
 #include "tray.h"
+#include "vocabulary.h"
 #include "../qxt/qxtglobalshortcut.h"
 
 namespace QStarDict 
@@ -51,9 +52,9 @@ MainWindow::MainWindow(QWidget *parent)
     m_dict = 0;
     translationView->setDict(m_dict);
 
-    menu_File->insertActions(actionQuit, translationView->toolBar()->actions());
+    menuFile->insertActions(actionQuit, translationView->toolBar()->actions());
 
-    menu_Options->insertAction(menu_Options->actions().first(), wordsListDock->toggleViewAction());
+    menuSettings->insertAction(menuSettings->actions().first(), wordsListDock->toggleViewAction());
     createConnections();
 
     loadSettings();
@@ -73,7 +74,6 @@ void MainWindow::createConnections()
 {
     Application * const app = Application::instance();
 
-    connect(actionAboutQt, &QAction::triggered, qApp, &QApplication::aboutQt);
     connect(actionQuit, &QAction::triggered,
             Application::instance(), &Application::saveSettingsAndQuit);
     actionScan->setChecked(Application::instance()->popupWindow()->isScan());
@@ -85,6 +85,7 @@ void MainWindow::createConnections()
             this, &MainWindow::wordsListItemActivated);
     connect(wordsList, &QListWidget::itemClicked,
             this, &MainWindow::wordsListItemActivated);
+    connect(actionAboutQt, &QAction::triggered, qApp, &QApplication::aboutQt);
 
     connect(translationView, &DictWidget::wordTranslated,
             this, &MainWindow::wordTranslated);
