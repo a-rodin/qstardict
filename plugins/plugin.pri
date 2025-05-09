@@ -1,5 +1,6 @@
 #############################################################################
-# plugin.pri - QStarDict, a StarDict clone written using Qt                 #
+# plugin.pri - QStarDict, a dictionary application for learning foreign     #
+#              languages                                                    #
 # Copyright (C) 2008 Alexander Rodin                                        #
 #                                                                           #
 # This program is free software; you can redistribute it and/or modify      #

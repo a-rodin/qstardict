@@ -1,6 +1,7 @@
 #############################################################################
-# qstardict.pri - QStarDict, a StarDict clone written with using Qt         #
-# Copyright (C) 2008 Alexander Rodin                                        #
+# qstardict.pri - QStarDict, a dictionary application for learning foreign  #
+#                 languages                                                 #
+# Copyright (C) 2008-2025 Alexander Rodin                                   #
 #                                                                           #
 # This program is free software; you can redistribute it and/or modify      #
 # it under the terms of the GNU General Public License as published by      #
@@ -24,11 +25,8 @@ QT = \
     gui \
     network \
     xml \
-    sql
-
-greaterThan(QT_MAJOR_VERSION, 4) {
-  QT += widgets
-}
+    sql \
+    widgets
 
 CONFIG += \
     qt \
@@ -36,8 +34,7 @@ CONFIG += \
     relase
 unix {
     CONFIG += link_pkgconfig
-    PKGCONFIG += glib-2.0
-    LIBS += -lz -lX11
+    PKGCONFIG += glib-2.0 zlib x11
 }
 macx {
     # universal binaries
