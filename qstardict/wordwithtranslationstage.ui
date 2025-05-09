@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>WordWithTranslationStage</class>
- <widget class="QWidget" name="WordWithTranslationStage">
+ <class>QStarDict::WordWithTranslationStage</class>
+ <widget class="QWidget" name="QStarDict::WordWithTranslationStage">
   <property name="geometry">
    <rect>
     <x>0</x>

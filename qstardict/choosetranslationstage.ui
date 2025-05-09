@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ChooseTranslationStage</class>
- <widget class="QWidget" name="ChooseTranslationStage">
+ <class>QStarDict::ChooseTranslationStage</class>
+ <widget class="QWidget" name="QStarDict::ChooseTranslationStage">
   <property name="geometry">
    <rect>
     <x>0</x>
