@@ -112,7 +112,7 @@ void PopupWindow::selectionChanged(const QString &text)
 void PopupWindow::showTranslation(const QString &text)
 {
     QString simpl = text.simplified();
-    simpl.remove(QRegularExpression("[&%-/+?\\*#!:\\(\\)\\[\\]]+"));
+    simpl.remove(QRegularExpression("[&%-/+?\\*#!:\\(\\)\\[\\],\\.]+"));
     if (simpl.isEmpty())
         return;
 
