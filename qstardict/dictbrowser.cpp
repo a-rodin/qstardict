@@ -81,8 +81,9 @@ QVariant DictBrowser::loadResource(int type, const QUrl &name)
             result = "<table><tr><td><img src=\":/pics/dialog-warning.png\" width=64 height=64/></td><td valign=middle>" +
                 tr("The word <b>%1</b> is not found.").arg(str) +
                 "</td></tr></table>";
-        return "<title>Translation for \"" + str + "\"</title>\n"
+        m_loadedArticleHtml = "<title>Translation for \"" + str + "\"</title>\n"
             + "<body>" + result + "</body>";
+        return m_loadedArticleHtml;
     }
     else if (name.scheme() == "plugin")
     {

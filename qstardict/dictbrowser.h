@@ -68,7 +68,17 @@ class DictBrowser: public QTextBrowser
         bool showIpaPronouncers() const
         { return m_showIpaPronouncers; }
 
+        /**
+         * A reimplementation of QTextBrowser's "loadResource" method.
+         */
         QVariant loadResource(int type, const QUrl &name);
+
+        /**
+         * Return the original source HTML of the loaded article. The result
+         * is different from the result of "toHtml()" method.
+         */
+        const QString &loadedArticleHtml()
+        { return m_loadedArticleHtml; }
 
     signals:
         void searchResult(bool success);
@@ -87,6 +97,7 @@ class DictBrowser: public QTextBrowser
 
     private:
         DictCore *m_dict;
+        QString m_loadedArticleHtml;
 
         QTextCursor m_oldCursor;
         QTextCharFormat m_oldFormat;

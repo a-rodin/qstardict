@@ -136,7 +136,12 @@ void DictWidget::setDefaultStyleSheet(const QString &css)
 
 void DictWidget::addWord()
 {
-    auto word = m_translationView->source().toString(QUrl::RemoveScheme);
+    auto html = m_translationView->loadedArticleHtml();
+
+    static QRegularExpression titleRegExp("<font class=\"title\">([^(</font>)]*)</font>");
+    auto word = titleRegExp.match(html).captured(1);
+    static QRegularExpression transcriptionRegExp("<font class=\"transcription\">([^(</font>)]*)</font>");
+    auto transcription = transcriptionRegExp.match(html).captured(1);
 
     QTextCursor cursor = m_translationView->textCursor();
     QString translation;
@@ -150,13 +155,6 @@ void DictWidget::addWord()
                "you want to add for studying and try again."));
         return;
     }
-
-    QString transcription;
-    auto broadTranscriptionRegExp = Ipa::broadTranscriptionRegExp();
-    auto transcriptionCursor = m_translationView->document()->find(
-        broadTranscriptionRegExp, cursor, QTextDocument::FindBackward);
-    if (transcriptionCursor.hasSelection())
-        transcription = transcriptionCursor.selection().toPlainText();
 
     qDebug("word: %s", word.toUtf8().data());
     qDebug("translation: %s", translation.toUtf8().data());
