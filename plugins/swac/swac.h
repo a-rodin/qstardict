@@ -1,7 +1,9 @@
 /*****************************************************************************
- * This file is a part of QStarDict, a StarDict clone written using Qt       *
+ * This file is a part of QStarDict, a dictionary application for learning   *
+ * foreign languages.                                                        *
  * swac.cpp - Plugin for words audio collections SWAC                        *
  * Copyright (C) 2008 Nicolas Vion <nico@picapo.net>                         *
+ * Copyright (C) 2025 Alexander Rodin                                        *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -35,7 +37,7 @@ class Swac: public QObject, public QStarDict::DictPlugin
 #endif
 
 public:
-	Swac(QObject *parent = 0);
+	Swac(QObject *parent = nullptr);
 	~Swac();
 
 	QString name() const

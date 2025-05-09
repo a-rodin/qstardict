@@ -1,5 +1,6 @@
 /*****************************************************************************
- * resizablepopup.h - QStarDict, a StarDict clone written with using Qt      *
+ * resizablepopup.h - QStarDict, a dictionary application for learning       *
+ *                    foreign languages                                      *
  * Copyright (C) 2007 Alexander Rodin                                        *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
@@ -41,15 +42,16 @@ class ResizablePopup: public QFrame
         /**
          * Construct a ResizablePopup widget.
          */
-        ResizablePopup(QWidget *parent = 0);
+        ResizablePopup(QWidget *parent = nullptr);
 
         /**
          * Return timeout before hiding after mouse leaving.
          */
         int timeoutBeforeHide() const
         { return m_timeoutBeforeHide; }
+
         /**
-         * Return a default size of new-shown popup.
+         * Return the default size of a newly shown popup.
          */
         const QSize& defaultSize() const
         { return m_defaultSize; }
@@ -60,11 +62,13 @@ class ResizablePopup: public QFrame
          */
         void setTimeoutBeforeHide(int timeoutBeforeHide)
         { m_timeoutBeforeHide = timeoutBeforeHide; }
+
         /**
          * Set default size of new-shown popup.
          */
         void setDefaultSize(const QSize &defaultSize)
         { m_defaultSize = defaultSize; }
+
         /**
          * Show popup under mouse cursor.
          */

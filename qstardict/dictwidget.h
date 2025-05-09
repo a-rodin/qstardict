@@ -1,5 +1,6 @@
 /*****************************************************************************
- * dictwidget.h - QStarDict, a StarDict clone written with using Qt          *
+ * dictwidget.h - QStarDict, a dictionary application for learning foreign   *
+ *                languages                                                  *
  * Copyright (C) 2007 Alexander Rodin                                        *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
@@ -44,7 +45,7 @@ class DictWidget: public QFrame
         /**
          * Construct empty DictWidget.
          */
-        DictWidget(QWidget *parent = 0, Qt::WindowFlags f = Qt::Widget);
+        DictWidget(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::Widget);
 
         /**
          * Set source dictionary.

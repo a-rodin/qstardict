@@ -1,5 +1,6 @@
 /*****************************************************************************
- * tray.h - QStarDict, a StarDict clone written with using Qt                *
+ * tray.h - QStarDict, a dictionary application for learning foreign         *
+ *          languages                                                        *
  * Copyright (C) 2008-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
@@ -30,9 +31,19 @@ class Tray: public QSystemTrayIcon
     Q_OBJECT
 
     public:
-        Tray(QObject *parent = 0);
+        /**
+         * Constructor.
+         */
+        Tray(QObject *parent = nullptr);
+
+        /**
+         * Destructor.
+         */
         virtual ~Tray();
 
+        /**
+         * Save settings, such as the visibility of the tray item.
+         */
         void saveSettings();
 
     private slots:

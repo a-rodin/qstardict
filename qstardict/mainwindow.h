@@ -1,5 +1,6 @@
 /*****************************************************************************
- * mainwindow.h - QStarDict, a StarDict clone written with using Qt          *
+ * mainwindow.h - QStarDict, a dictionary application for learning foreign   *
+ *                languages                                                  *
  * Copyright (C) 2007-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
@@ -41,20 +42,21 @@ class MainWindow: public QMainWindow, private Ui::MainWindow
         /**
          * Create new MainWindow.
          */
-        MainWindow(QWidget *parent = 0);
+        MainWindow(QWidget *parent = nullptr);
         /**
          * Destructor.
          */
         ~MainWindow();
 
         /**
-         * Return true if instant search is on, otherwise false.
+         * Return true if the instant search is on, otherwise false.
          */
         bool isInstantSearch() const
         { return m_instantSearch; }
+
         /**
          * Set instant search mode. If instantSearch is true
-         * translation will be shown when typing, otherwise only when
+         * the translation will be shown when typing, otherwise only when
          * "Search" button clicked. \
          */
         void setInstantSearch(bool instantSearch);
@@ -82,13 +84,27 @@ class MainWindow: public QMainWindow, private Ui::MainWindow
         QString defaultStyleSheet() const
         { return translationView->defaultStyleSheet(); }
 
+        /**
+         * Show buttons for pronouncing IPA transcriptions.
+         */
         void setShowIpaPronouncers(bool showIpaPronouncers)
         { translationView->setShowIpaPronouncers(showIpaPronouncers); }
+
+        /**
+         * Return true of the buttons for pronouncing IPA transcriptions are on,
+         * otherwise false.
+         */
         bool showIpaPronouncers() const
         { return translationView->showIpaPronouncers(); }
 
+        /**
+         * Reload the translation.
+         */
         void reload();
 
+        /**
+         * Save settings of the widget.
+         */
         void saveSettings();
 
     public slots:

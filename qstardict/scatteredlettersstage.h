@@ -33,7 +33,7 @@ class ScatteredLettersStage: public QWidget, private Ui::ScatteredLettersStage
     Q_OBJECT
 
     public:
-        ScatteredLettersStage(QWidget *parent = 0);
+        ScatteredLettersStage(QWidget *parent = nullptr);
 
         void setWords(const QVector<WordForTraining> &wordsList);
         void startStage();

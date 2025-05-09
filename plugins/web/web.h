@@ -1,6 +1,7 @@
 /*****************************************************************************
- * web.h - QStarDict, a StarDict clone written with using Qt                 *
- * Copyright (C) 2008 Alexander Rodin                                        *
+ * web.h - QStarDict, a dictionary application for learning foreign          *
+ *         languages                                                         *
+ * Copyright (C) 2008-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -33,7 +34,7 @@ class Web: public QObject, public QStarDict::DictPlugin
 #endif
 
 	public:
-		Web(QObject *parent = 0);
+		Web(QObject *parent = nullptr);
 
 		QString name() const
 		{ return "web"; }

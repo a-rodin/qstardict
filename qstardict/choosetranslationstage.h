@@ -34,7 +34,7 @@ class ChooseTranslationStage: public QWidget, private Ui::ChooseTranslationStage
     Q_OBJECT
 
     public:
-        ChooseTranslationStage(QWidget *parent = 0);
+        ChooseTranslationStage(QWidget *parent = nullptr);
         virtual ~ChooseTranslationStage();
 
         void setWords(const QVector<WordForTraining> &wordsList);

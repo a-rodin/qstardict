@@ -1,5 +1,6 @@
 /*****************************************************************************
- * dictbrowser.h - QStarDict, a StarDict clone written with using Qt         *
+ * dictbrowser.h - QStarDict, a dictionary application for learning foreign  *
+ *                 languages                                                 *
  * Copyright (C) 2007-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
@@ -37,9 +38,9 @@ class DictBrowser: public QTextBrowser
     Q_OBJECT
     public:
         /**
-         * Construct empty DictWidget.
+         * Construct an empty DictWidget.
          */
-        DictBrowser(QWidget *parent = 0);
+        DictBrowser(QWidget *parent = nullptr);
 
         /**
          * Set source dictionary.
@@ -49,7 +50,7 @@ class DictBrowser: public QTextBrowser
         void setDict(DictCore *dict)
         { m_dict = dict; }
         /**
-         * Return pointer to dictionary.
+         * Return the pointer to the dictionary.
          */
         const DictCore* dict() const
         { return m_dict; }

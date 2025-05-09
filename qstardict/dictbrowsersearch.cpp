@@ -1,5 +1,6 @@
 /*****************************************************************************
- * keyboard.h - QStarDict, a StarDict clone written with using Qt            *
+ * dictbrowsersearch.cpp - QStarDict, a dictionary application for learning  *
+ *                         foreign languages                                 *
  * Copyright (C) 2007 Petr Vanek                                             *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *

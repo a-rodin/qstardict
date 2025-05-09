@@ -1,6 +1,7 @@
 /*****************************************************************************
- * dictcore.h - QStarDict, a StarDict clone written with using Qt            *
- * Copyright (C) 2007 Alexander Rodin                                        *
+ * dictcore.h - QStarDict, a dictionary application for learning foreign     *
+ *              languages                                                    *
+ * Copyright (C) 2007-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -71,21 +72,21 @@ class DictCore: public QObject
         };
 
         /**
-         * Construct dictionary.
+         * Construct a dictionary.
          */
-        DictCore(QObject *parent = 0);
+        DictCore(QObject *parent = nullptr);
         /**
          * Destructor.
          */
         ~DictCore();
 
         /**
-         * Returns true if word is exists in dictionaries,
+         * Returns true if word exists in dictionaries,
          * otherwise false.
          */
         bool isTranslatable(const QString &word);
         /**
-         * Returns translation for word. If word not found, returns
+         * Returns translation for the word. If word not found, returns
          * "Not found!"
          */
         QString translate(const QString &word);

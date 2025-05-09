@@ -1,6 +1,7 @@
 /*****************************************************************************
- * dictwidget.cpp - QStarDict, a StarDict clone written with using Qt        *
- * Copyright (C) 2007 Alexander Rodin                                        *
+ * dictwidget.cpp - QStarDict, a dictionary application for learning foreign *
+ *                  languages                                                *
+ * Copyright (C) 2007-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -41,7 +42,7 @@ namespace
 class DictWidgetToolbar: public QToolBar
 {
 	public:
-		DictWidgetToolbar(QWidget *parent = 0)
+		DictWidgetToolbar(QWidget *parent = nullptr)
 			: QToolBar(parent)
 		{ }
 

@@ -1,6 +1,7 @@
 /*****************************************************************************
- * settingsdialog.h - QStarDict, a StarDict clone written with using Qt      *
- * Copyright (C) 2008 Alexander Rodin                                        *
+ * settingsdialog.h - QStarDict, a dictionary application for learning       *
+ *                    foreign languages                                      *
+ * Copyright (C) 2008-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -29,7 +30,7 @@ class SettingsDialog: public QDialog, public Ui::SettingsDialog
 {
     Q_OBJECT
     public:
-        SettingsDialog(Web *plugin, QWidget *parent = 0);
+        SettingsDialog(Web *plugin, QWidget *parent = nullptr);
 
         void accept();
 

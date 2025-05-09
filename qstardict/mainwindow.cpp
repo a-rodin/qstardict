@@ -140,7 +140,7 @@ void MainWindow::saveSettings()
 void MainWindow::on_actionStartTraining_triggered()
 {
     auto words = Application::instance()->vocabulary()->getWordsForTraining(5);
-    Trainer *trainer = new Trainer;
+    Trainer *trainer = new Trainer(this);
     trainer->setWords(words);
     trainer->start();
 }

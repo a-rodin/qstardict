@@ -1,6 +1,8 @@
 /*****************************************************************************
- * keyboard.h - QStarDict, a StarDict clone written with using Qt            *
+ * dictbrowsersearch.h - QStarDict, a dictionary application for learning    *
+ *                       foreign languages                                   *
  * Copyright (C) 2007 Petr Vanek                                             *
+ * Copyright (C) 2025 Alexander Rodin                                        *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -32,9 +34,15 @@ class DictBrowserSearch : public QWidget, private Ui::DictBrowserSearch
     Q_OBJECT
 
 public:
-    explicit DictBrowserSearch(QWidget *parent = 0);
+    /**
+     * Constructor.
+     */
+    explicit DictBrowserSearch(QWidget *parent = nullptr);
 
 signals:
+    /**
+     * Emitted when a search is executed.
+     */
     void search(const QString & exp, QTextDocument::FindFlags options);
 
 public slots:

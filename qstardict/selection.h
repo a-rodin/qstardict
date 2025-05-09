@@ -1,6 +1,7 @@
 /*****************************************************************************
- * selection.h - QStarDict, a StarDict clone written with using Qt           *
- * Copyright (C) 2007 Alexander Rodin                                        *
+ * selection.h - QStarDict, a dictionary application for learning foreign    *
+ *               languages                                                   *
+ * Copyright (C) 2007-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -38,23 +39,23 @@ class Selection: public QObject
         /**
          * Constructor.
          */
-        Selection(QObject *parent = 0);
+        Selection(QObject *parent = nullptr);
 
         /**
-         * Return scan state.
+         * Return the scan state.
          */
         bool isScan() const
         { return m_scan; }
 
     public slots:
         /**
-         * Set scan mode.
+         * Set the scan mode.
          */
         void setScan(bool scan);
 
     signals:
         /**
-         * Emits when selection text is changed.
+         * Emits when the selection text is changed.
          */
         void changed(const QString &newText);
 

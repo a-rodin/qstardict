@@ -34,7 +34,7 @@ class TypeInStage: public QWidget, private Ui::TypeInStage
     Q_OBJECT
 
     public:
-        TypeInStage(QWidget *parent = 0);
+        TypeInStage(QWidget *parent = nullptr);
         virtual ~TypeInStage();
 
         void setWords(const QVector<WordForTraining> &wordsList);

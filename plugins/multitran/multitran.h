@@ -1,7 +1,9 @@
 /*****************************************************************************
- * This file is a part of QStarDict, a StarDict clone written using Qt       *
+ * This file is a part of QStarDict, a dictionary application for learning   *
+ * foreign languages.                                                        *
  * multitran.cpp - Plugin for multitran-data (multitran.sf.net)              *
  * Copyright (C) 2008 Nick Shaforostoff                                      *
+ * Copyright (C) 2025 Alexander Rodin                                        *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -36,7 +38,7 @@ class Multitran: public QObject, public QStarDict::DictPlugin
 #endif
 
 	public:
-		Multitran(QObject *parent = 0);
+		Multitran(QObject *parent = nullptr);
 		~Multitran();
 
 		QString name() const

@@ -1,6 +1,7 @@
 /*****************************************************************************
- * stardict.h - QStarDict, a StarDict clone written using Qt                 *
- * Copyright (C) 2008 Alexander Rodin                                        *
+ * stardict.h - QStarDict, a dictionary application for learning foreign     *
+ *              languages                                                    *
+ * Copyright (C) 2008-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -37,7 +38,7 @@ class StarDict: public QObject, public QStarDict::DictPlugin
 	Q_INTERFACES(QStarDict::DictPlugin)
 
 	public:
-		StarDict(QObject *parent = 0);
+		StarDict(QObject *parent = nullptr);
 		~StarDict();
 
 		QString name() const

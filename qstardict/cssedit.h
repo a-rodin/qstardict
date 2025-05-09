@@ -1,6 +1,7 @@
 /*****************************************************************************
- * cssedit.h - QStarDict, a StarDict clone written with using Qt             *
- * Copyright (C) 2008 Alexander Rodin                                        *
+ * cssedit.h - QStarDict, a dictionary application for learning foreign      *
+ *             languages                                                     *
+ * Copyright (C) 2008-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -37,19 +38,22 @@ class CSSEdit: public QWidget, private Ui::CSSEdit
         /**
          * Constructor.
          */
-        CSSEdit(QWidget *parent = 0);
+        CSSEdit(QWidget *parent = nullptr);
 
         /**
          * Set CSS style for editing.
          */
         void setCSS(const QString &css);
+
         /**
          * Returns edited CSS style.
          */
         QString css() const;
+
         /**
          * Set aliases for elements.
          */
+
         void setElementsAliases(const QHash<QString, QString> &aliases);
         /**
          * Returns elements aliases.

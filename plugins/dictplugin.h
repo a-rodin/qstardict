@@ -1,6 +1,7 @@
 /*****************************************************************************
- * dictplugin.h - QStarDict, a StarDict clone written using Qt               *
- * Copyright (C) 2008 Alexander Rodin                                        *
+ * dictplugin.h - QStarDict, a dictionary application for learning foregin   *
+ *                languages                                                  *
+ * Copyright (C) 2008-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -237,18 +238,20 @@ class DictPlugin
          * otherwise returns false.
          */
         virtual bool isTranslatable(const QString &dict, const QString &word) = 0;
+
         /**
          * Return translation for word from dictionary. If word not found
          * returns empty string.
          */
         virtual Translation translate(const QString &dict, const QString &word) = 0;
+
         /**
          * Return a list of similar to "word" words from all loaded dictionaries.
          * Works only if SearchSimilar feature is enabled.
          */
         virtual QStringList findSimilarWords([[maybe_unused]] const QString &dict, const QString &word)
         { return QStringList(word); }
-        
+
         /**
          * Return a required resource. Scheme of URLs:
          *   plugin://plugin_name/...
@@ -265,7 +268,7 @@ class DictPlugin
         /**
          * Run a settings dialog and return QDialog::DialogCode.
          */
-        virtual int execSettingsDialog([[maybe_unused]] QWidget *parent = 0)
+        virtual int execSettingsDialog([[maybe_unused]] QWidget *parent = nullptr)
         { return 0; }
 
     protected:
