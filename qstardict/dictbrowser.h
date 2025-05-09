@@ -1,5 +1,5 @@
 /*****************************************************************************
- * dictbrowser.h - QStarDict, a dictionary application for learning foreign  *
+ * dictbrowser.h - QStarDict, a dictionary application for learning          *
  *                 languages                                                 *
  * Copyright (C) 2007-2025 Alexander Rodin                                   *
  *                                                                           *

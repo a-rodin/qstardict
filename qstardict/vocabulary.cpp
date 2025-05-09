@@ -1,5 +1,6 @@
 /*****************************************************************************
- * vocabulary.cpp - QStarDict, a StarDict clone written using Qt             *
+ * vocabulary.cpp - QStarDict, a dictionary application for learning         *
+ *                  languages                                                *
  * Copyright (C) 2025 Alexander Rodin                                        *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *

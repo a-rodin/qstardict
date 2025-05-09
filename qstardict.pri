@@ -1,5 +1,5 @@
 #############################################################################
-# qstardict.pri - QStarDict, a dictionary application for learning foreign  #
+# qstardict.pri - QStarDict, a dictionary application for learning          #
 #                 languages                                                 #
 # Copyright (C) 2008-2025 Alexander Rodin                                   #
 #                                                                           #

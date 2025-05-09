@@ -1,5 +1,5 @@
 /*****************************************************************************
- * speaker.cpp - QStarDict, a StarDict clone written using Qt                *
+ * speaker.cpp - QStarDict, a dictionary application for learning languages  *
  * Copyright (C) 2008 Alexander Rodin                                        *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *

@@ -1,6 +1,5 @@
 /*****************************************************************************
- * ipa.cpp - QStarDict, a dictionary application for learning foreign        *
- *           languages                                                       *
+ * ipa.cpp - QStarDict, a dictionary application for learning languages      *
  * Copyright (C) 2017 itinerarium                                            *
  * Copyright (C) 2023 Alexander Rodin                                        *
  *                                                                           *

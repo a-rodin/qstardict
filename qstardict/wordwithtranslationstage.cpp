@@ -1,6 +1,6 @@
 /*****************************************************************************
  * wordwithtranslationstage.cpp - QStarDict, a dictionary application for    *
- *                                learning foreign languages                 *
+ *                                learning languages                         *
  * Copyright (C) 2025 Alexander Rodin                                        *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *

@@ -1,6 +1,6 @@
 /*****************************************************************************
  * dictbrowsersearch.h - QStarDict, a dictionary application for learning    *
- *                       foreign languages                                   *
+ *                       languages                                           *
  * Copyright (C) 2007 Petr Vanek                                             *
  * Copyright (C) 2025 Alexander Rodin                                        *
  *                                                                           *

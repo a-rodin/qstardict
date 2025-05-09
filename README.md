@@ -1,4 +1,4 @@
-**QStarDict** is a dictionary application for learning foreign languages.
+**QStarDict** is a dictionary application for learning languages.
 
 # Main features
 

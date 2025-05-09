@@ -1,6 +1,5 @@
 #############################################################################
-# stardict.pro - QStarDict, a dictionary application for learning foreign   #
-#                languages                                                  #
+# stardict.pro - QStarDict, a dictionary application for learning languages #
 # Copyright (C) 2008 Alexander Rodin                                        #
 #                                                                           #
 # This program is free software; you can redistribute it and/or modify      #

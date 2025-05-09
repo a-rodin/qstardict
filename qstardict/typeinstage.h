@@ -1,5 +1,5 @@
 /*****************************************************************************
- * typeinstage.h - QStarDict, a dictionary application for learning foreign  *
+ * typeinstage.h - QStarDict, a dictionary application for learning          *
  *                 languages                                                 *
  * Copyright (C) 2024-2025 Alexander Rodin                                   *
  *                                                                           *

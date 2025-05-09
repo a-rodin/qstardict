@@ -1,5 +1,5 @@
 /*****************************************************************************
- * dictwidget.cpp - QStarDict, a dictionary application for learning foreign *
+ * dictwidget.cpp - QStarDict, a dictionary application for learning         *
  *                  languages                                                *
  * Copyright (C) 2007-2025 Alexander Rodin                                   *
  *                                                                           *

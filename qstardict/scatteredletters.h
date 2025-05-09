@@ -1,6 +1,6 @@
 /*****************************************************************************
  * scatteredletters.h - QStarDict, a dictionary application for learning     *
- *                      foreign languages                                    *
+ *                      languages                                            *
  * Copyright (C) 2024 Alexander Rodin                                        *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
