@@ -140,7 +140,7 @@ void DictBrowser::showToast(const QString &html)
     while (m_toast->verticalScrollBar()->isVisible())
         m_toast->setGeometry(m_toast->geometry().x(), m_toast->geometry().y(),
                 m_toast->geometry().width(), m_toast->geometry().height() + 1);
-    m_toastTimer->start(10);
+    m_toastTimer->start(5);
 }
 
 void DictBrowser::on_toastTimer_timeout()
