@@ -77,9 +77,9 @@ void Trainer::start()
 {
     if (m_wordsList.size() == 0)
     {
-        QMessageBox::warning(this, tr("No words for training"),
+        QMessageBox::warning(nullptr, tr("No words for training"),
                 tr("There are no words for training. Please add words for training using the "
-                "<img width=\"24\" height=\"24\" src=\":/pics/word-add.png\"> button before starting studying."));
+                "<img width=\"24\" height=\"24\" src=\":/pics/word-add.png\"> button in translations before training."));
     }
     else
     {
