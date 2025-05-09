@@ -24,8 +24,6 @@
 #include <QCloseEvent>
 #include <QDesktopServices>
 #include <QDir>
-#include <QFile>
-#include <QFileDialog>
 #include <QListWidgetItem>
 #include <QKeyEvent>
 #include <QMenu>
