@@ -138,9 +138,9 @@ void DictWidget::addWord()
 {
     auto html = m_translationView->loadedArticleHtml();
 
-    static QRegularExpression titleRegExp("<font class=\"title\">([^(</font>)]*)</font>");
+    static QRegularExpression titleRegExp("<font class=\"title\">([^<]*)</font>");
     auto word = titleRegExp.match(html).captured(1);
-    static QRegularExpression transcriptionRegExp("<font class=\"transcription\">([^(</font>)]*)</font>");
+    static QRegularExpression transcriptionRegExp("<font class=\"transcription\">([^<]*)</font>");
     auto transcription = transcriptionRegExp.match(html).captured(1);
 
     QTextCursor cursor = m_translationView->textCursor();
