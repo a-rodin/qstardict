@@ -67,8 +67,8 @@ void Vocabulary::addWord(const QString &word, const QString &translation, const 
     QSqlQuery query(m_db);
     query.prepare(
             "INSERT INTO words\n"
-            "    (word, translation, transcription)\n"
-            "    VALUES (:word, :translation, :transcription)\n"
+            "    (word, translation, transcription, studied)\n"
+            "    VALUES (:word, :translation, :transcription, 0)\n"
             "    ON CONFLICT (word)\n"
             "    DO UPDATE SET translation = :word, transcription = :transcription, studied = 0;");
     query.bindValue(":word", word);

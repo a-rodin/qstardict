@@ -143,6 +143,12 @@ void MainWindow::on_actionStartTraining_triggered()
     trainer->start();
 }
 
+void MainWindow::on_actionVocabulary_triggered()
+{
+    VocabularyDialog *vocabularyDialog = new VocabularyDialog(this);
+    vocabularyDialog->exec();
+}
+
 void MainWindow::on_actionAbout_triggered()
 {
     QMessageBox::about(this,

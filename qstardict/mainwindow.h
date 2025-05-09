@@ -119,6 +119,7 @@ class MainWindow: public QMainWindow, private Ui::MainWindow
 
     private slots:
         void on_actionStartTraining_triggered();
+        void on_actionVocabulary_triggered();
         void on_actionSettings_triggered();
         void on_actionHelp_triggered();
         void on_actionAbout_triggered();

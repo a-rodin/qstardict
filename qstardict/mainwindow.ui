@@ -136,6 +136,7 @@
      <string>&amp;Training</string>
     </property>
     <addaction name="actionStartTraining"/>
+    <addaction name="actionVocabulary"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuTraining"/>
@@ -196,6 +197,11 @@
   <action name="actionStartTraining">
    <property name="text">
     <string>&amp;Start training</string>
+   </property>
+  </action>
+  <action name="actionVocabulary">
+   <property name="text">
+    <string>&amp;Vocabulary</string>
    </property>
   </action>
  </widget>

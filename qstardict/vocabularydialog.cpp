@@ -1,6 +1,6 @@
 /*****************************************************************************
- * vocabulary.h - QStarDict, a dictionary application for learning languages *
- * Copyright (C) 2025 Alexander Rodin                                        *
+ * vocabularydialog.cpp - QStarDict, a dictionary for learning languages     *
+ * Copyright (C) 2024-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -17,53 +17,45 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               *
  *****************************************************************************/
 
-#ifndef VOCABULARY_H
-#define VOCABULARY_H
-
-#include <QString>
-#include <QSqlDatabase>
-
 #include "vocabularydialog.h"
-#include "wordfortraining.h"
+
+#include "application.h"
+#include "vocabulary.h"
+
+#include <QInputDialog>
+#include <QSqlTableModel>
 
 namespace QStarDict
 {
 
-class Vocabulary
+VocabularyDialog::VocabularyDialog(QWidget *parent)
+    : QDialog(parent),
+      m_tableModel(nullptr)
 {
-    public:
-        Vocabulary();
-        virtual ~Vocabulary();
-
-        /**
-         * Add a new word to the vocabulary. If the word already exists, the translation and transcription
-         * are updated and the "studied" field is reset.
-         */
-        void addWord(const QString &word, const QString &translation, const QString &transcription);
-
-        /**
-         * Return n words for a training.
-         */
-        QVector<WordForTraining> getWordsForTraining(unsigned n);
-
-        /**
-         * Return n random translations.
-         */
-        QStringList getRandomTranslations(unsigned n, const QStringList &skipList = QStringList());
-
-        /**
-         * Update the "studied" and "lastExcersize" fields for a word.
-         * "lastExcersize" is set to the current time.
-         */
-        void updateWord(const QString &word, bool studied);
-
-        friend class VocabularyDialog;
-
-    private:
-        QSqlDatabase m_db;
-};
-
+    setupUi(this);
+    loadVocabulary();
 }
 
-#endif // VOCABULARY_H
+VocabularyDialog::~VocabularyDialog()
+{
+    delete m_tableModel;
+}
 
+void VocabularyDialog::on_removeWordButton_clicked()
+{
+    QItemSelection selection = wordsView->selectionModel()->selection();
+    for (QModelIndex index: selection.indexes())
+        m_tableModel->removeRow(index.row());
+    loadVocabulary();
+}
+
+void VocabularyDialog::loadVocabulary()
+{
+    delete m_tableModel;
+    m_tableModel = new QSqlTableModel(nullptr, Application::instance()->vocabulary()->m_db);
+    m_tableModel->setTable("words");
+    m_tableModel->select();
+    wordsView->setModel(m_tableModel);
+}
+
+}

@@ -1,6 +1,6 @@
 /*****************************************************************************
- * vocabulary.h - QStarDict, a dictionary application for learning languages *
- * Copyright (C) 2025 Alexander Rodin                                        *
+ * vocabularydialog.h - QStarDict, a dictionary for learning languages       *
+ * Copyright (C) 2024-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -17,53 +17,35 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               *
  *****************************************************************************/
 
-#ifndef VOCABULARY_H
-#define VOCABULARY_H
+#ifndef VOCABULARYDIALOG_H
+#define VOCABULARYDIALOG_H
 
-#include <QString>
-#include <QSqlDatabase>
+#include <QWidget>
+#include "ui_vocabularydialog.h"
 
-#include "vocabularydialog.h"
-#include "wordfortraining.h"
+class QSqlTableModel;
 
 namespace QStarDict
 {
 
-class Vocabulary
+class VocabularyDialog: public QDialog, private Ui::VocabularyDialog
 {
+    Q_OBJECT
+
     public:
-        Vocabulary();
-        virtual ~Vocabulary();
+        VocabularyDialog(QWidget *parent = nullptr);
+        virtual ~VocabularyDialog();
 
-        /**
-         * Add a new word to the vocabulary. If the word already exists, the translation and transcription
-         * are updated and the "studied" field is reset.
-         */
-        void addWord(const QString &word, const QString &translation, const QString &transcription);
-
-        /**
-         * Return n words for a training.
-         */
-        QVector<WordForTraining> getWordsForTraining(unsigned n);
-
-        /**
-         * Return n random translations.
-         */
-        QStringList getRandomTranslations(unsigned n, const QStringList &skipList = QStringList());
-
-        /**
-         * Update the "studied" and "lastExcersize" fields for a word.
-         * "lastExcersize" is set to the current time.
-         */
-        void updateWord(const QString &word, bool studied);
-
-        friend class VocabularyDialog;
+    private slots:
+        void on_removeWordButton_clicked();
 
     private:
-        QSqlDatabase m_db;
+        void loadVocabulary();
+
+        QSqlTableModel *m_tableModel;
 };
 
 }
 
-#endif // VOCABULARY_H
+#endif // VOCABULARYDIALOG_H
 

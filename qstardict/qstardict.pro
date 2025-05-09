@@ -33,6 +33,7 @@ FORMS += \
     scatteredlettersstage.ui \
     settingsdialog.ui \
     typeinstage.ui \
+    vocabularydialog.ui \
     wordwithtranslationstage.ui
 HEADERS += \
     application.h \
@@ -58,6 +59,7 @@ HEADERS += \
     tray.h \
     typeinstage.h \
     vocabulary.h \
+    vocabularydialog.h \
     wordfortraining.h \
     wordwithtranslationstage.h
 unix:isEmpty(NO_DBUS):HEADERS += \
@@ -86,6 +88,7 @@ SOURCES += \
     tray.cpp \
     typeinstage.cpp \
     vocabulary.cpp \
+    vocabularydialog.cpp \
     wordwithtranslationstage.cpp
  unix:isEmpty(NO_DBUS):SOURCES += \
     dbusadaptor.cpp
