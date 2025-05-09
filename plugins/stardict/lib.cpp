@@ -205,7 +205,9 @@ gchar* DictBase::GetWordData(guint32 idxitem_offset, guint32 idxitem_size)
         gchar *origin_data = (gchar *)g_malloc(idxitem_size);
 
         if (dictfile)
-            fread(origin_data, idxitem_size, 1, dictfile);
+        {
+            [[maybe_unused]] size_t read_bytes = fread(origin_data, idxitem_size, 1, dictfile);
+        }
         else
             dictdzfile->read(origin_data, idxitem_offset, idxitem_size);
 
@@ -327,7 +329,9 @@ gchar* DictBase::GetWordData(guint32 idxitem_offset, guint32 idxitem_size)
     {
         data = (gchar *)g_malloc(idxitem_size + sizeof(guint32));
         if (dictfile)
-            fread(data + sizeof(guint32), idxitem_size, 1, dictfile);
+        {
+            [[maybe_unused]] size_t read_bytes = fread(data + sizeof(guint32), idxitem_size, 1, dictfile);
+        }
         else
             dictdzfile->read(data + sizeof(guint32), idxitem_offset, idxitem_size);
         *reinterpret_cast<guint32 *>(data) = idxitem_size + sizeof(guint32);
@@ -359,7 +363,9 @@ bool DictBase::SearchData(std::vector<std::string> &SearchWords, guint32 idxitem
     if (dictfile)
         fseek(dictfile, idxitem_offset, SEEK_SET);
     if (dictfile)
-        fread(origin_data, idxitem_size, 1, dictfile);
+    {
+        [[maybe_unused]] size_t read_bytes = fread(origin_data, idxitem_size, 1, dictfile);
+    }
     else
         dictdzfile->read(origin_data, idxitem_offset, idxitem_size);
     gchar *p = origin_data;
@@ -569,7 +575,8 @@ inline const gchar *offset_index::read_first_on_page_key(glong page_idx)
 {
     fseek(idxfile, wordoffset[page_idx], SEEK_SET);
     guint page_size = wordoffset[page_idx + 1] - wordoffset[page_idx];
-    fread(wordentry_buf, std::min<guint>(sizeof(wordentry_buf), page_size), 1, idxfile); //TODO: check returned values, deal with word entry that strlen>255.
+    //TODO: check returned values, deal with word entry that strlen>255.
+    [[maybe_unused]] size_t read_bytes = fread(wordentry_buf, std::min<guint>(sizeof(wordentry_buf), page_size), 1, idxfile);
     return wordentry_buf;
 }
 
@@ -715,7 +722,7 @@ inline gulong offset_index::load_page(glong page_idx)
     {
         page_data.resize(wordoffset[page_idx + 1] - wordoffset[page_idx]);
         fseek(idxfile, wordoffset[page_idx], SEEK_SET);
-        fread(&page_data[0], 1, page_data.size(), idxfile);
+        [[maybe_unused]] size_t read_bytes = fread(&page_data[0], 1, page_data.size(), idxfile);
         page.fill(&page_data[0], nentr, page_idx);
     }
 
