@@ -22,10 +22,12 @@
 
 #include <QDesktopServices>
 #include <QMouseEvent>
+#include <QScrollBar>
 #include <QTextBlock>
 #include <QTextCharFormat>
 #include <QTextDocument>
 #include <QTextDocumentFragment>
+#include <QTimer>
 #include "../plugins/dictplugin.h"
 #include "application.h"
 #include "ipa.h"
@@ -57,6 +59,25 @@ const QString translationCSS =
 namespace QStarDict
 {
 
+class Toast: public QTextBrowser
+{
+    public:
+        Toast(QWidget *parent = nullptr)
+            :QTextBrowser(parent)
+        { }
+
+        void hide()
+        {
+            setGeometry(geometry().x(), -geometry().height(), geometry().width(), geometry().height());
+        }
+
+    protected:
+        void mousePressEvent(QMouseEvent*)
+        {
+            hide();
+        }
+};
+
 DictBrowser::DictBrowser(QWidget *parent)
     : QTextBrowser(parent),
       m_dict(0),
@@ -64,6 +85,13 @@ DictBrowser::DictBrowser(QWidget *parent)
       m_searchUndo(false),
       m_showIpaPronouncers(true)
 {
+    m_toast = new Toast(this);
+    m_toast->setVisible(false);
+    m_toastTimer = new QTimer(this);
+    m_toastCloseTimer = new QTimer(this);
+    connect(m_toastTimer, &QTimer::timeout, this, &DictBrowser::on_toastTimer_timeout);
+    connect(m_toastCloseTimer, &QTimer::timeout, this, &DictBrowser::on_toastCloseTimer_timeout);
+
     document()->setDefaultStyleSheet(translationCSS);
     setOpenLinks(false);
     setOpenExternalLinks(false);
@@ -93,6 +121,43 @@ QVariant DictBrowser::loadResource(int type, const QUrl &name)
         return plugin->resource(type, name);
     }
     return QTextBrowser::loadResource(type, name);
+}
+
+void DictBrowser::showToast(const QString &html)
+{
+    m_toast->setText(
+            "<html>\n"
+            "<head>\n"
+            "<style>body { background-color: #aaaaaa; }</style>\n"
+            "</head>\n"
+            "<body>\n"
+            "<p align=\"center\">\n" +
+            html +
+            "</p>");
+    int toastWidth = int(width() * 0.8);
+    m_toast->setGeometry((width() - toastWidth) / 2, -m_toast->height(), toastWidth, 70);
+    m_toast->show();
+    while (m_toast->verticalScrollBar()->isVisible())
+        m_toast->setGeometry(m_toast->geometry().x(), m_toast->geometry().y(),
+                m_toast->geometry().width(), m_toast->geometry().height() + 1);
+    m_toastTimer->start(10);
+}
+
+void DictBrowser::on_toastTimer_timeout()
+{
+    m_toast->setGeometry(m_toast->geometry().x(), m_toast->geometry().y() + 1,
+            m_toast->geometry().width(), m_toast->geometry().height());
+    if (m_toast->geometry().y() >= 0)
+    {
+        m_toastTimer->stop();
+        m_toastCloseTimer->start(5000);
+    }
+}
+
+void DictBrowser::on_toastCloseTimer_timeout()
+{
+    m_toast->hide();
+    m_toastCloseTimer->stop();
 }
 
 void DictBrowser::search(const QString & exp, QTextDocument::FindFlags options)

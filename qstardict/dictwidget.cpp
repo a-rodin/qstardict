@@ -136,6 +136,17 @@ void DictWidget::setDefaultStyleSheet(const QString &css)
 
 void DictWidget::addWord()
 {
+    QTextCursor cursor = m_translationView->textCursor();
+    QString translation;
+    if (cursor.hasSelection())
+        translation = cursor.selection().toPlainText().trimmed();
+    else {
+        m_translationView->showToast(
+            tr("Please select a part of the article with the translation that " \
+               "you want to add for studying and try again."));
+        return;
+    }
+
     auto html = m_translationView->loadedArticleHtml();
 
     static QRegularExpression titleRegExp("<font class=\"title\">([^<]*)</font>");
@@ -143,24 +154,11 @@ void DictWidget::addWord()
     static QRegularExpression transcriptionRegExp("<font class=\"transcription\">([^<]*)</font>");
     auto transcription = transcriptionRegExp.match(html).captured(1);
 
-    QTextCursor cursor = m_translationView->textCursor();
-    QString translation;
-    if (cursor.hasSelection())
-        translation = cursor.selection().toPlainText().trimmed();
-    else {
-        QMessageBox::warning(
-            this,
-            tr("Adding a word for studying"),
-            tr("Please select a part of the article with the translation that " \
-               "you want to add for studying and try again."));
-        return;
-    }
-
-    qDebug("word: %s", word.toUtf8().data());
-    qDebug("translation: %s", translation.toUtf8().data());
-    qDebug("transcription: %s", transcription.toUtf8().data());
-
     Application::instance()->vocabulary()->addWord(word, translation, transcription);
+    m_translationView->showToast(
+            tr("The word \"%1\" is added for studying.").arg(word) + "<br>\n" +
+            tr("Transcription: <b>%1</b>.").arg(transcription) + "<br>\n" +
+            tr("Translation: %1.").arg(translation));
 }
 
 }

@@ -30,6 +30,8 @@
 namespace QStarDict
 {
 
+class Toast;
+
 /**
  * The DictBrowser widget provides view of translations from given dictionary.
  */
@@ -63,7 +65,7 @@ class DictBrowser: public QTextBrowser
         { m_showIpaPronouncers = showIpaPronouncers; }
 
         /**
-          * Return true if the IPA pronouncer is enabled.
+          * Return true if the IPA pronouncers are enabled.
           */
         bool showIpaPronouncers() const
         { return m_showIpaPronouncers; }
@@ -80,6 +82,11 @@ class DictBrowser: public QTextBrowser
         const QString &loadedArticleHtml()
         { return m_loadedArticleHtml; }
 
+        /**
+         * Show a toast message inside of the dictionary browser.
+         */
+        void showToast(const QString &html);
+
     signals:
         void searchResult(bool success);
 
@@ -94,6 +101,8 @@ class DictBrowser: public QTextBrowser
     private slots:
         void on_anchorClicked(const QUrl &link);
         void on_sourceChanged(const QUrl &link);
+        void on_toastTimer_timeout();
+        void on_toastCloseTimer_timeout();
 
     private:
         DictCore *m_dict;
@@ -105,6 +114,10 @@ class DictBrowser: public QTextBrowser
         bool m_searchUndo;
 
         bool m_showIpaPronouncers;
+
+        Toast *m_toast;
+        QTimer *m_toastTimer;
+        QTimer *m_toastCloseTimer;
 
         void addIpaPronouncers();
 };

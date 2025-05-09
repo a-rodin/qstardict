@@ -53,11 +53,13 @@ class DictWidget: public QFrame
          */
         void setDict(DictCore *dict)
         { m_translationView->setDict(dict); }
+
         /**
-         * Return pointer to dictionary.
+         * Return a pointer to the dictionary.
          */
         const DictCore* dict() const
         { return m_translationView->dict(); }
+
         /**
          * Clear translation text.
          */
@@ -74,6 +76,7 @@ class DictWidget: public QFrame
          * Show translation of str.
          */
         void translate(const QString &str);
+
         /**
          * Return last translated word.
          */
@@ -86,16 +89,33 @@ class DictWidget: public QFrame
         QToolBar *toolBar()
         { return m_toolBar; }
 
+        /**
+         * Set the stylesheet to use in translations.
+         */
         void setDefaultStyleSheet(const QString &css);
 
+        /**
+         * Return the used stylesheet.
+         */
         QString defaultStyleSheet() const
         { return m_translationView->document()->defaultStyleSheet(); }
 
+        /**
+          * Set whether to show buttons near IPA transcriptions which allow
+          * the user to listen the pronunciation of these transcriptions.
+          */
         void setShowIpaPronouncers(bool showIpaPronouncers)
         { m_translationView->setShowIpaPronouncers(showIpaPronouncers); }
+
+        /**
+          * Return true if the IPA pronouncer is enabled.
+          */
         bool showIpaPronouncers() const
         { return m_translationView->showIpaPronouncers(); }
         
+        /**
+         * Reload the translation.
+         */
         void reload()
         { m_translationView->reload(); }
 
