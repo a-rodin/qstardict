@@ -77,17 +77,19 @@ void ChooseTranslationStage::setProposedTranslations(const QStringList &translat
     {
         QStringList translationsForWord;
         int correctTranslationPosition = random() % TRANSLATIONS_PER_WORD;
-        for (int j = 0; j < correctTranslationPosition; j++)
-        {
-            translationsForWord << translations[translationsCounter % translations.size()];
-            translationsCounter++;
-        }
+        if (translations.size() > 0)
+            for (int j = 0; j < correctTranslationPosition; j++)
+            {
+                translationsForWord << translations[translationsCounter % translations.size()];
+                translationsCounter++;
+            }
         translationsForWord << m_wordsList[i].translation();
-        for (int j = correctTranslationPosition + 1; j < TRANSLATIONS_PER_WORD; j++)
-        {
-            translationsForWord << translations[translationsCounter % translations.size()];
-            translationsCounter++;
-        }
+        if (translations.size() > 0)
+            for (int j = correctTranslationPosition + 1; j < TRANSLATIONS_PER_WORD; j++)
+            {
+                translationsForWord << translations[translationsCounter % translations.size()];
+                translationsCounter++;
+            }
         m_proposedTranslations[m_wordsList[i]] = translationsForWord;
     }
 }
@@ -164,7 +166,8 @@ void ChooseTranslationStage::displayWord()
     wordLabel->setText(m_wordsList[m_currentWordIndex].word());
     const QStringList &proposedTranslations = m_proposedTranslations[m_wordsList[m_currentWordIndex]];
 
-    for (int i = 0; i < proposedTranslations.size(); i++)
+    int i;
+    for (i = 0; i < proposedTranslations.size(); i++)
     {
         m_translationButtons[i]->setText(proposedTranslations[i]);
         m_translationButtons[i]->setChecked(false);
@@ -172,6 +175,11 @@ void ChooseTranslationStage::displayWord()
         font.setBold(false);
         m_translationButtons[i]->setFont(font);
         m_translationButtons[i]->setEnabled(true);
+        m_translationButtons[i]->setVisible(true);
+    }
+    for (; i < m_translationButtons.size(); i++)
+    {
+        m_translationButtons[i]->setVisible(false);
     }
 
     correctLabel->setVisible(false);

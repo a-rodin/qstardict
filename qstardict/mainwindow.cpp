@@ -1,6 +1,7 @@
 /*****************************************************************************
- * mainwindow.cpp - QStarDict, a StarDict clone written with using Qt        *
- * Copyright (C) 2007-2009 Alexander                                         *
+ * mainwindow.cpp - QStarDict, a dictionary application for learning         *
+ *                  foreign languages                                        *
+ * Copyright (C) 2007-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -142,7 +143,6 @@ void MainWindow::on_actionStartTraining_triggered()
     Trainer *trainer = new Trainer;
     trainer->setWords(words);
     trainer->start();
-    trainer->show();
 }
 
 void MainWindow::on_actionAbout_triggered()

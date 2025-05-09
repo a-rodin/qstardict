@@ -20,6 +20,7 @@
 
 #include "trainer.h"
 
+#include <QMessageBox>
 #include <QVBoxLayout>
 
 #include "application.h"
@@ -75,7 +76,17 @@ void Trainer::setWords(const QVector<WordForTraining> &wordsList)
 
 void Trainer::start()
 {
-    wordWithTranslationStage();
+    if (m_wordsList.size() == 0)
+    {
+        QMessageBox::warning(this, tr("No words for training"),
+                tr("There are no words for training. Please add words for training using the "
+                "<img width=\"24\" height=\"24\" src=\":/pics/word-add.png\"> button before starting studying."));
+    }
+    else
+    {
+        wordWithTranslationStage();
+        show();
+    }
 }
 
 void Trainer::wordWithTranslationStage()
