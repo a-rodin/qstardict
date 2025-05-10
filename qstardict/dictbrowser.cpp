@@ -261,6 +261,7 @@ void DictBrowser::on_anchorClicked(const QUrl &link)
 
 void DictBrowser::on_sourceChanged(const QUrl &)
 {
+    m_toast->hide();
     if (m_showIpaPronouncers)
         addIpaPronouncers();
 }
