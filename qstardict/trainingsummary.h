@@ -1,5 +1,6 @@
 /*****************************************************************************
- * vocabulary.h - QStarDict, a dictionary application for learning languages *
+ * trainingsummary.h - QStarDict, a dictionary application for learning      *
+ *                     languages                                             *
  * Copyright (C) 2025 Alexander Rodin                                        *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
@@ -17,58 +18,41 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               *
  *****************************************************************************/
 
-#ifndef VOCABULARY_H
-#define VOCABULARY_H
+#ifndef TRAININGSUMMARY_H
+#define TRAININGSUMMARY_H
 
-#include <QString>
-#include <QSqlDatabase>
-
-#include "vocabularydialog.h"
-#include "wordfortraining.h"
+#include "ui_trainingsummary.h"
 
 namespace QStarDict
 {
 
-class Vocabulary
+class TrainingSummary: public QWidget, private Ui::TrainingSummary
 {
+    Q_OBJECT
+
     public:
-        Vocabulary();
-        virtual ~Vocabulary();
+        /**
+         * Constructor.
+         */
+        TrainingSummary(QWidget *parent = nullptr);
 
         /**
-         * Add a new word to the vocabulary. If the word already exists, the translation and transcription
-         * are updated and the "studied" field is reset.
+         * Set the number of studed words.
          */
-        void addWord(const QString &word, const QString &translation, const QString &transcription);
+        void setStudiedWords(unsigned n);
 
         /**
-         * Return n words for a training.
+         * Set the number of words for repetition.
          */
-        QVector<WordForTraining> getWordsForTraining(unsigned n);
+        void setWordsForRepetition(unsigned n);
 
         /**
-         * Return n random translations.
+         * Update the displayed progress.
          */
-        QStringList getRandomTranslations(unsigned n, const QStringList &skipList = QStringList());
-
-        /**
-         * Update the "studied" and "lastExcersize" fields for a word.
-         * "lastExcersize" is set to the current time.
-         */
-        void updateWord(const QString &word, bool studied);
-
-        /**
-         * Return the number of words that have been studied in past 24 hours.
-         */
-        unsigned numberOfWordsStudiedToday();
-
-        friend class VocabularyDialog;
-
-    private:
-        QSqlDatabase m_db;
+        void setProgress(unsigned studiedToday, unsigned plannedToday);
 };
 
 }
 
-#endif // VOCABULARY_H
+#endif // TRAININGSUMMARY_H
 

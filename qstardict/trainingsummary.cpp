@@ -1,5 +1,6 @@
 /*****************************************************************************
- * vocabulary.h - QStarDict, a dictionary application for learning languages *
+ * trainingsummary.cpp - QStarDict, a dictionary application for learning    *
+ *                       languages                                           *
  * Copyright (C) 2025 Alexander Rodin                                        *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
@@ -17,58 +18,44 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               *
  *****************************************************************************/
 
-#ifndef VOCABULARY_H
-#define VOCABULARY_H
+#include "trainingsummary.h"
 
-#include <QString>
-#include <QSqlDatabase>
-
-#include "vocabularydialog.h"
-#include "wordfortraining.h"
+#include "application.h"
+#include "vocabulary.h"
 
 namespace QStarDict
 {
 
-class Vocabulary
+TrainingSummary::TrainingSummary(QWidget *parent)
+    : QWidget(parent)
 {
-    public:
-        Vocabulary();
-        virtual ~Vocabulary();
-
-        /**
-         * Add a new word to the vocabulary. If the word already exists, the translation and transcription
-         * are updated and the "studied" field is reset.
-         */
-        void addWord(const QString &word, const QString &translation, const QString &transcription);
-
-        /**
-         * Return n words for a training.
-         */
-        QVector<WordForTraining> getWordsForTraining(unsigned n);
-
-        /**
-         * Return n random translations.
-         */
-        QStringList getRandomTranslations(unsigned n, const QStringList &skipList = QStringList());
-
-        /**
-         * Update the "studied" and "lastExcersize" fields for a word.
-         * "lastExcersize" is set to the current time.
-         */
-        void updateWord(const QString &word, bool studied);
-
-        /**
-         * Return the number of words that have been studied in past 24 hours.
-         */
-        unsigned numberOfWordsStudiedToday();
-
-        friend class VocabularyDialog;
-
-    private:
-        QSqlDatabase m_db;
-};
-
+    setupUi(this);
 }
 
-#endif // VOCABULARY_H
+void TrainingSummary::setStudiedWords(unsigned n)
+{
+    if (n == 1)
+        studiedLabel->setText(tr("<font color=\"#2FAA23\"><b>Studied:</b></font> 1 word"));
+    else
+        studiedLabel->setText(tr("<font color=\"#2FAA23\"><b>Studied:</b></font> %1 words").arg(n));
+}
 
+void TrainingSummary::setWordsForRepetition(unsigned n)
+{
+    if (n == 0)
+        forRepetitionLabel->setText(tr("<font color=\"#FF0000\"><b>For repetition:</b></font> 1 word"));
+    else
+        forRepetitionLabel->setText(tr("<font color=\"#FF0000\"><b>For repetition:</b></font> %1 words").arg(n));
+}
+
+void TrainingSummary::setProgress(unsigned studiedToday, unsigned plannedToday)
+{
+    if (studiedToday == 1)
+        progressLabel->setText(tr("Progress today: 1/%1 word").arg(plannedToday));
+    else
+        progressLabel->setText(tr("Progress today: %1/%2 words").arg(studiedToday).arg(plannedToday));
+    progressBar->setValue(studiedToday);
+    progressBar->setMaximum(plannedToday);
+}
+
+}

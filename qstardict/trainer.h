@@ -32,6 +32,7 @@ namespace QStarDict
 
 class ChooseTranslationStage;
 class ScatteredLettersStage;
+class TrainingSummary;
 class TypeInStage;
 class WordWithTranslationStage;
 
@@ -40,10 +41,24 @@ class Trainer: public QDialog
     Q_OBJECT
 
     public:
+        /**
+         * Constructor.
+         */
         Trainer(QWidget *parent = nullptr);
+
+        /**
+         * Destructor.
+         */
         virtual ~Trainer();
 
+        /**
+         * Set the words for training.
+         */
         void setWords(const QVector<WordForTraining> &wordsList);
+
+        /**
+         * Start training.
+         */
         void start();
 
     private slots:
@@ -71,7 +86,7 @@ class Trainer: public QDialog
         ChooseTranslationStage *m_chooseTranslationStage;
         ScatteredLettersStage *m_scatteredLettersStage;
         TypeInStage *m_typeInStage;
-        QLabel *m_allStagesFinishedLabel;
+        TrainingSummary *m_trainingSummary;
 
         void removeWidgets();
 };

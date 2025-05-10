@@ -32,6 +32,7 @@ FORMS += \
     mainwindow.ui \
     scatteredlettersstage.ui \
     settingsdialog.ui \
+    trainingsummary.ui \
     typeinstage.ui \
     vocabularydialog.ui \
     wordwithtranslationstage.ui
@@ -56,6 +57,7 @@ HEADERS += \
     settingsdialog.h \
     speaker.h \
     trainer.h \
+    trainingsummary.h \
     tray.h \
     typeinstage.h \
     vocabulary.h \
@@ -85,6 +87,7 @@ SOURCES += \
     settingsdialog.cpp \
     speaker.cpp \
     trainer.cpp \
+    trainingsummary.cpp \
     tray.cpp \
     typeinstage.cpp \
     vocabulary.cpp \

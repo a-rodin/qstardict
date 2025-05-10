@@ -149,4 +149,19 @@ void Vocabulary::updateWord(const QString &word, bool studied)
         qDebug() << "updateWord error: " << query.lastError();
 }
 
+unsigned Vocabulary::numberOfWordsStudiedToday()
+{
+    QSqlQuery query(m_db);
+    query.prepare(
+        "SELECT count() FROM words\n"
+        "WHERE studied AND strftime(\"%s\", datetime()) - strftime(\"%s\", last_excercise) < 60 * 60 * 24");
+    if (! query.exec())
+        qDebug() << "numberOfWordsStudiedToday error: " << query.lastError();
+
+    if (query.next())
+        return query.value(0).toUInt();
+    else
+        return 0;
+}
+
 }
