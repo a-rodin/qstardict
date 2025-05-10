@@ -35,6 +35,8 @@ namespace QStarDict
 Trainer::Trainer(QWidget *parent)
     : QDialog(parent)
 {
+    setWindowTitle(tr("QStarDict Training"));
+
     m_wordWithTranslationStage = new WordWithTranslationStage;
     m_chooseTranslationStage = new ChooseTranslationStage;
     m_scatteredLettersStage = new ScatteredLettersStage;
