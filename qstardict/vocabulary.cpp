@@ -70,7 +70,7 @@ void Vocabulary::addWord(const QString &word, const QString &translation, const 
             "    (word, translation, transcription, studied)\n"
             "    VALUES (:word, :translation, :transcription, 0)\n"
             "    ON CONFLICT (word)\n"
-            "    DO UPDATE SET translation = :word, transcription = :transcription, studied = 0;");
+            "    DO UPDATE SET translation = :translation, transcription = :transcription, studied = 0;");
     query.bindValue(":word", word);
     query.bindValue(":translation", translation);
     query.bindValue(":transcription", transcription);
