@@ -108,9 +108,10 @@ class MainWindow: public QMainWindow, private Ui::MainWindow
 
     public slots:
         /**
-         * Show translation of word.
+         * Show translation of word. The "focusTranslation" parameter controls
+         * whether the translation view should be focused instead of the search bar.
          */
-        void showTranslation(const QString &word);
+        void showTranslation(const QString &word, bool focusTranslation = false);
 
     protected:
         void timerEvent(QTimerEvent *event);

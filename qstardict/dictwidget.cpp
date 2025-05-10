@@ -178,7 +178,7 @@ void DictWidget::addWord()
 void DictWidget::openMainWindow()
 {
     MainWindow *mainWindow = Application::instance()->mainWindow();
-    mainWindow->showTranslation(translatedWord());
+    mainWindow->showTranslation(translatedWord(), true);
     mainWindow->setVisible(false);
     mainWindow->setVisible(true);
 }

@@ -64,10 +64,12 @@ MainWindow::~MainWindow()
 {
 }
 
-void MainWindow::showTranslation(const QString &text)
+void MainWindow::showTranslation(const QString &text, bool focusTranslation)
 {
     searchBox->setText(text);
     on_queryButton_clicked();
+    if (focusTranslation)
+        translationView->setFocus();
 }
 
 void MainWindow::createConnections()
