@@ -1,6 +1,6 @@
 /*****************************************************************************
  * dictwidget.h - QStarDict, a dictionary application for learning languages *
- * Copyright (C) 2007 Alexander Rodin                                        *
+ * Copyright (C) 2007-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -42,9 +42,9 @@ class DictWidget: public QFrame
 
     public:
         /**
-         * Construct empty DictWidget.
+         * Construct a DictWidget.
          */
-        DictWidget(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::Widget);
+        DictWidget(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::Widget, bool openMainWindowAction = false);
 
         /**
          * Set source dictionary.
@@ -130,6 +130,7 @@ class DictWidget: public QFrame
         void speak();
         void handleSearch();
         void addWord();
+        void openMainWindow();
 
     private:
         DictBrowser *m_translationView;

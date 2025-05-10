@@ -1,7 +1,7 @@
 /*****************************************************************************
  * popupwindow.cpp - QStarDict, a dictionary application for learning        *
  *                   languages                                               *
- * Copyright (C) 2007 Alexander Rodin                                        *
+ * Copyright (C) 2007-2025 Alexander Rodin                                   *
  *                                                                           *
  * This program is free software; you can redistribute it and/or modify      *
  * it under the terms of the GNU General Public License as published by      *
@@ -38,7 +38,7 @@ PopupWindow::PopupWindow(QWidget *parent)
         : ResizablePopup(parent)
 {
     m_dict = 0;
-    translationView = new DictWidget(this);
+    translationView = new DictWidget(this, Qt::Widget, true);
     translationView->setFrameStyle(QFrame::NoFrame);
     translationView->setDict(m_dict);
     translationView->setMouseTracking(true);

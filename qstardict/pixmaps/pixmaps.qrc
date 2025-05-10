@@ -23,6 +23,7 @@
         <file>search-filter.png</file>
         <file>system-search.png</file>
         <file>speaker.png</file>
+        <file>view-fullscreen.png</file>
         <file>view-refresh.png</file>
         <file>word-add.png</file>
     </qresource>

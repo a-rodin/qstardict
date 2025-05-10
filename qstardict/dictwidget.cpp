@@ -34,6 +34,7 @@
 #include "dictbrowser.h"
 #include "dictbrowsersearch.h"
 #include "ipa.h"
+#include "mainwindow.h"
 #include "speaker.h"
 #include "vocabulary.h"
 
@@ -58,7 +59,7 @@ class DictWidgetToolbar: public QToolBar
 namespace QStarDict
 {
 
-DictWidget::DictWidget(QWidget *parent, Qt::WindowFlags f)
+DictWidget::DictWidget(QWidget *parent, Qt::WindowFlags f, bool openMainWindowAction)
 	: QFrame(parent, f)
 {
 	m_translationView = new DictBrowser(this);
@@ -75,6 +76,7 @@ DictWidget::DictWidget(QWidget *parent, Qt::WindowFlags f)
 	connect(m_translationView, &DictBrowser::searchResult, m_search, &DictBrowserSearch::searchResult);
 	m_search->hide();
 
+    // Primary toolbar
 	m_toolBar = new DictWidgetToolbar(this);
 	m_toolBar->setMouseTracking(true);
 
@@ -99,13 +101,25 @@ DictWidget::DictWidget(QWidget *parent, Qt::WindowFlags f)
     m_toolBar->addAction(QIcon(":/pics/word-add.png"), tr("&Add word for studying"),
             this, &DictWidget::addWord);
 
-	QVBoxLayout *layout = new QVBoxLayout(this);
-	layout->setContentsMargins(0, 0, 0, 0);
-	layout->setSpacing(0);
-	layout->addWidget(m_toolBar);
-	layout->addWidget(m_translationView);
-	layout->addWidget(m_search);
-	setLayout(layout);
+    m_toolBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+
+    // Right toolbar
+    DictWidgetToolbar *rightToolBar = new DictWidgetToolbar(this);
+    rightToolBar->setMouseTracking(true);
+    if (openMainWindowAction)
+    {
+        rightToolBar->addAction(QIcon(":pics/view-fullscreen.png"),
+            tr("Open in the main window"), this, &DictWidget::openMainWindow);
+    }
+
+    QGridLayout *layout = new QGridLayout(this);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
+    layout->addWidget(m_toolBar, 0, 0);
+    layout->addWidget(rightToolBar, 0, 1);
+    layout->addWidget(m_translationView, 1, 0, 1, 2);
+    layout->addWidget(m_search, 2, 0, 1, 2);
+    setLayout(layout);
 }
 
 void DictWidget::translate(const QString &str)
@@ -159,6 +173,14 @@ void DictWidget::addWord()
             tr("The word \"%1\" is added for studying.").arg(word) + "<br>\n" +
             tr("Transcription: <b>%1</b>.").arg(transcription) + "<br>\n" +
             tr("Translation: %1.").arg(translation));
+}
+
+void DictWidget::openMainWindow()
+{
+    MainWindow *mainWindow = Application::instance()->mainWindow();
+    mainWindow->showTranslation(translatedWord());
+    mainWindow->setVisible(false);
+    mainWindow->setVisible(true);
 }
 
 }
