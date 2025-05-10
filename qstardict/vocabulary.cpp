@@ -85,8 +85,7 @@ QVector<WordForTraining> Vocabulary::getWordsForTraining(unsigned n)
             "SELECT DISTINCT word, translation, transcription\n"
             "FROM words\n"
             "WHERE\n"
-            "	(studied IS NULL OR NOT studied) AND\n"
-            "	(last_excercise IS NULL OR strftime(\"%s\", datetime()) - strftime(\"%s\", last_excercise) > 60 * 60 * 24)\n"
+            "	(studied IS NULL OR NOT studied)\n"
             "ORDER BY random()\n"
             "LIMIT :limit\n");
     query.bindValue(":limit", n);
