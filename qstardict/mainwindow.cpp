@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent)
 {
     setupUi(this);
-    m_dict = 0;
+    m_dict = nullptr;
     translationView->setDict(m_dict);
 
     menuFile->insertActions(actionQuit, translationView->toolBar()->actions());
@@ -139,8 +139,8 @@ void MainWindow::saveSettings()
 
 void MainWindow::on_actionStartTraining_triggered()
 {
-    auto words = Application::instance()->vocabulary()->getWordsForTraining(5);
-    Trainer *trainer = new Trainer(this);
+    auto *trainer = Application::instance()->trainer();
+    auto words = Application::instance()->vocabulary()->getWordsForTraining(trainer->wordsPerRound());
     trainer->setWords(words);
     trainer->start();
 }

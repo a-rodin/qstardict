@@ -35,6 +35,7 @@
 #include "popupwindow.h"
 #include "application.h"
 #include "speaker.h"
+#include "trainer.h"
 #include "tray.h"
 #include "../qxt/qxtglobalshortcut.h"
 
@@ -135,6 +136,11 @@ SettingsDialog::SettingsDialog(QWidget *parent)
     popupDefaultHeightSpin->setValue(popup->defaultSize().height());
     pronounceWordBox->setChecked(popup->pronounceWord());
 
+    // Load the trainer settings
+    Trainer *trainer = app->trainer();
+    wordsPerRoundBox->setValue(trainer->wordsPerRound());
+    wordsPerDayBox->setValue(trainer->wordsPerDay());
+
     // Load translations CSS
     QHash<QString, QString> cssAliases;
     cssAliases["body"] = tr("All translation");
@@ -232,9 +238,14 @@ void SettingsDialog::accept()
     popup->setDefaultSize(QSize(popupDefaultWidthSpin->value(), popupDefaultHeightSpin->value()));
     popup->setPronounceWord(pronounceWordBox->isChecked());
 
+    // Save the trainer settings
+    Trainer *trainer = app->trainer();
+    trainer->setWordsPerRound(wordsPerRoundBox->value());
+    trainer->setWordsPerDay(wordsPerDayBox->value());
+
     // Save translations CSS
-    Application::instance()->mainWindow()->setDefaultStyleSheet(appearanceCSSEdit->css());
-    Application::instance()->popupWindow()->setDefaultStyleSheet(appearanceCSSEdit->css());
+    app->mainWindow()->setDefaultStyleSheet(appearanceCSSEdit->css());
+    app->popupWindow()->setDefaultStyleSheet(appearanceCSSEdit->css());
 
     if (! app->tray()->isVisible())
         app->mainWindow()->show();
@@ -245,6 +256,7 @@ void SettingsDialog::accept()
     app->mainWindow()->saveSettings();
     app->tray()->saveSettings();
     app->popupWindow()->saveSettings();
+    app->trainer()->saveSettings();
 
     QDialog::accept();
 }

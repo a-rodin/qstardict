@@ -34,6 +34,7 @@ class ChooseTranslationStage;
 class ScatteredLettersStage;
 class TrainingSummary;
 class TypeInStage;
+class Vocabulary;
 class WordWithTranslationStage;
 
 class Trainer: public QDialog
@@ -52,6 +53,12 @@ class Trainer: public QDialog
         virtual ~Trainer();
 
         /**
+         * Set a vocabulary instance.
+         */
+        void setVocabulary(Vocabulary *vocabulary)
+        { m_vocabulary = vocabulary; }
+
+        /**
          * Set the words for training.
          */
         void setWords(const QVector<WordForTraining> &wordsList);
@@ -60,6 +67,35 @@ class Trainer: public QDialog
          * Start training.
          */
         void start();
+
+        /**
+         * Return the number of words per round.
+         */
+        unsigned wordsPerRound()
+        { return m_wordsPerRound; }
+
+        /**
+         * Set the number of words per round.
+         */
+        void setWordsPerRound(unsigned wordsPerRound)
+        { m_wordsPerRound = wordsPerRound; }
+
+        /**
+         * Return the number of words planned for studying per day.
+         */
+        unsigned wordsPerDay()
+        { return m_wordsPerDay; }
+
+        /**
+         * Set the number of words planned for studying per day.
+         */
+        void setWordsPerDay(unsigned wordsPerDay)
+        { m_wordsPerDay = wordsPerDay; }
+
+        /**
+         * Save the settings of the trainer.
+         */
+        void saveSettings();
 
     private slots:
         void wordWithTranslationStage();
@@ -73,6 +109,10 @@ class Trainer: public QDialog
         void allStagesFinished();
 
     private:
+        Vocabulary *m_vocabulary;
+        unsigned m_wordsPerRound;
+        unsigned m_wordsPerDay;
+
         QVector<WordForTraining> m_wordsList;
 
         QVector<WordForTraining> m_wordWithTranslationWordsList;
@@ -89,6 +129,7 @@ class Trainer: public QDialog
         TrainingSummary *m_trainingSummary;
 
         void removeWidgets();
+        void loadSettings();
 };
 
 };

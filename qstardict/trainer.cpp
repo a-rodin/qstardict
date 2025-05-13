@@ -35,7 +35,8 @@ namespace QStarDict
 {
 
 Trainer::Trainer(QWidget *parent)
-    : QDialog(parent)
+    : QDialog(parent),
+    m_vocabulary(nullptr)
 {
     setWindowTitle(tr("QStarDict Training"));
 
@@ -57,6 +58,8 @@ Trainer::Trainer(QWidget *parent)
     QLayout *layout = new QHBoxLayout(this);
     setLayout(layout);
     setMinimumSize(640, 300);
+
+    loadSettings();
 }
 
 Trainer::~Trainer()
@@ -92,6 +95,13 @@ void Trainer::start()
     }
 }
 
+void Trainer::saveSettings()
+{
+    QSettings config;
+    config.setValue("Trainer/wordsPerRound", m_wordsPerRound);
+    config.setValue("Trainer/wordsPerDay", m_wordsPerDay);
+}
+
 void Trainer::wordWithTranslationStage()
 {
     m_wordWithTranslationStage->setWords(m_wordWithTranslationWordsList);
@@ -115,8 +125,7 @@ void Trainer::chooseTranslationStage()
     QStringList skipTranslations;
     for (const auto &word: m_chooseTranslationWordsList)
         skipTranslations << word.translation();
-    QStringList translations =
-            Application::instance()->vocabulary()->getRandomTranslations(count, skipTranslations);
+    QStringList translations = m_vocabulary->getRandomTranslations(count, skipTranslations);
     m_chooseTranslationStage->setProposedTranslations(translations);
 
     removeWidgets();
@@ -194,18 +203,16 @@ void Trainer::typeInStageFinished()
 
 void Trainer::allStagesFinished()
 {
-    Vocabulary *vocabulary = Application::instance()->vocabulary();
-
     for (auto word: m_wordsList)
-        vocabulary->updateWord(word.word(), ! m_wordsWithErrorsList.contains(word));
+        m_vocabulary->updateWord(word.word(), ! m_wordsWithErrorsList.contains(word));
 
     removeWidgets();
     m_trainingSummary->setStudiedWords(m_wordsList.size() - m_wordsWithErrorsList.size());
     m_trainingSummary->setWordsForRepetition(m_wordsWithErrorsList.size());
     QSettings config;
     m_trainingSummary->setProgress(
-            vocabulary->numberOfWordsStudiedToday(),
-            config.value("Trainer/wordsPerDay", 20).toUInt());
+            m_vocabulary->numberOfWordsStudiedToday(),
+            m_wordsPerDay);
 
     layout()->addWidget(m_trainingSummary);
 }
@@ -220,6 +227,13 @@ void Trainer::removeWidgets()
     m_chooseTranslationStage->setVisible(false);
     m_typeInStage->setVisible(false);
     m_scatteredLettersStage->setVisible(false);
+}
+
+void Trainer::loadSettings()
+{
+    QSettings config;
+    m_wordsPerRound = config.value("Trainer/wordsPerRound", 5).toUInt();
+    m_wordsPerDay = config.value("Trainer/wordsPerDay", 20).toUInt();
 }
 
 }

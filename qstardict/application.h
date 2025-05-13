@@ -35,6 +35,7 @@ class IpaSpeaker;
 class MainWindow;
 class PopupWindow;
 class Speaker;
+class Trainer;
 class Tray;
 class Vocabulary;
 #ifdef QSTARDICT_WITH_DBUS
@@ -117,6 +118,12 @@ class Application: public QApplication
         Vocabulary *vocabulary()
         { return m_vocabulary; }
 
+        /**
+         * Returns a pointer to the trainer instance.
+         */
+        Trainer *trainer()
+        { return m_trainer; }
+
 #ifdef QSTARDICT_WITH_DBUS
         /**
          * Returns a pointer to the DBusAdaptor instance.
@@ -144,6 +151,7 @@ class Application: public QApplication
         Tray *m_tray;
         QxtGlobalShortcut *m_popupShortcut;
         Vocabulary *m_vocabulary;
+        Trainer *m_trainer;
 #ifdef QSTARDICT_WITH_DBUS
         DBusAdaptor *m_dbusAdaptor;
 #endif // QSTARDICT_WITH_DBUS

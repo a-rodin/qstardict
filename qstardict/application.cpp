@@ -36,6 +36,7 @@
 #include "mainwindow.h"
 #include "popupwindow.h"
 #include "speaker.h"
+#include "trainer.h"
 #include "tray.h"
 #include "vocabulary.h"
 #ifdef QSTARDICT_WITH_DBUS
@@ -90,11 +91,14 @@ Application::Application(int &argc, char **argv)
         Application::instance()->popupWindow(), &PopupWindow::showClipboardTranslation);
 
     m_vocabulary = new Vocabulary();
+    m_trainer = new Trainer();
+    m_trainer->setVocabulary(m_vocabulary);
 }
 
 Application::~Application()
 {
     QSettings settings;
+    delete m_trainer;
     delete m_vocabulary;
     delete m_popupShortcut;
     delete m_tray;
@@ -138,6 +142,7 @@ void Application::saveSettingsAndQuit()
     m_mainWindow->saveSettings();
     m_tray->saveSettings();
     m_popupWindow->saveSettings();
+    m_trainer->saveSettings();
     quit();
 }
 
