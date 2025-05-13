@@ -42,7 +42,7 @@ void TrainingSummary::setStudiedWords(unsigned n)
 
 void TrainingSummary::setWordsForRepetition(unsigned n)
 {
-    if (n == 0)
+    if (n == 1)
         forRepetitionLabel->setText(tr("<font color=\"#FF0000\"><b>For repetition:</b></font> 1 word"));
     else
         forRepetitionLabel->setText(tr("<font color=\"#FF0000\"><b>For repetition:</b></font> %1 words").arg(n));
