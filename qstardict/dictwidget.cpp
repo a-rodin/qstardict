@@ -98,7 +98,7 @@ DictWidget::DictWidget(QWidget *parent, Qt::WindowFlags f, bool openMainWindowAc
 	actionSearch->setCheckable(true);
 	actionSearch->setShortcut(QKeySequence::Find);
 
-    m_toolBar->addAction(QIcon(":/pics/word-add.png"), tr("&Add word for studying"),
+    m_toolBar->addAction(QIcon(":/pics/word-add.png"), tr("&Add the word for studying"),
             this, &DictWidget::addWord);
 
     m_toolBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
