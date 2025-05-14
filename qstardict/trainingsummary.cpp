@@ -20,6 +20,8 @@
 
 #include "trainingsummary.h"
 
+#include <QKeyEvent>
+
 #include "application.h"
 #include "mainwindow.h"
 #include "settingsdialog.h"
@@ -58,6 +60,20 @@ void TrainingSummary::setProgress(unsigned studiedToday, unsigned plannedToday)
         progressLabel->setText(tr("Progress today: %1/%2 words").arg(studiedToday).arg(plannedToday));
     progressBar->setValue(studiedToday);
     progressBar->setMaximum(plannedToday);
+}
+
+void TrainingSummary::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key())
+    {
+        case Qt::Key_Enter:
+            continueTrainingButton->click();
+        case Qt::Key_Escape:
+            endTrainingButton->click();
+        default:
+            QWidget::keyPressEvent(event);
+            break;
+    }
 }
 
 void TrainingSummary::on_configureButton_clicked()

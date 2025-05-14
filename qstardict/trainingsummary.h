@@ -51,6 +51,9 @@ class TrainingSummary: public QWidget, private Ui::TrainingSummary
          */
         void setProgress(unsigned studiedToday, unsigned plannedToday);
 
+    protected:
+        void keyPressEvent(QKeyEvent *event);
+
     private slots:
         void on_configureButton_clicked();
 };

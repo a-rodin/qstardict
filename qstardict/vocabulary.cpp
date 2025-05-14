@@ -138,7 +138,7 @@ void Vocabulary::updateWord(const QString &word, bool studied)
     QSqlQuery query(m_db);
     query.prepare(
         "UPDATE words\n"
-        "SET studied = studed + :studied, last_excercise = datetime()\n"
+        "SET studied = studied + :studied, last_excercise = datetime()\n"
         "WHERE word = :word");
     query.bindValue(":studied", studied ? 1 : 0);
     query.bindValue(":word", word);
