@@ -90,7 +90,7 @@ DictWidget::DictWidget(QWidget *parent, Qt::WindowFlags f, bool openMainWindowAc
 	actionForward->setDisabled(true);
 	connect(m_translationView, &DictBrowser::forwardAvailable, actionForward, &QAction::setEnabled);
 
-	m_toolBar->addAction(QIcon(":/pics/speaker.png"), tr("Speak &word"),
+	m_toolBar->addAction(QIcon(":/pics/speaker.png"), tr("Pronounce the &word"),
 			this, &DictWidget::speak);
 
 	QAction *actionSearch = m_toolBar->addAction(QIcon(":/pics/system-search.png"), tr("Search"),
