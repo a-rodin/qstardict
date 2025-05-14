@@ -84,9 +84,7 @@ QVector<WordForTraining> Vocabulary::getWordsForTraining(unsigned n)
     query.prepare(
             "SELECT DISTINCT word, translation, transcription\n"
             "FROM words\n"
-            "WHERE\n"
-            "	(studied IS NULL OR NOT studied)\n"
-            "ORDER BY random()\n"
+            "ORDER BY studied, random()\n"
             "LIMIT :limit\n");
     query.bindValue(":limit", n);
     if (! query.exec())
@@ -140,7 +138,7 @@ void Vocabulary::updateWord(const QString &word, bool studied)
     QSqlQuery query(m_db);
     query.prepare(
         "UPDATE words\n"
-        "SET studied = :studied, last_excercise = datetime()\n"
+        "SET studied = studed + :studied, last_excercise = datetime()\n"
         "WHERE word = :word");
     query.bindValue(":studied", studied ? 1 : 0);
     query.bindValue(":word", word);
