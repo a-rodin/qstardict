@@ -21,6 +21,8 @@
 #include "trainingsummary.h"
 
 #include "application.h"
+#include "mainwindow.h"
+#include "settingsdialog.h"
 #include "vocabulary.h"
 
 namespace QStarDict
@@ -56,6 +58,12 @@ void TrainingSummary::setProgress(unsigned studiedToday, unsigned plannedToday)
         progressLabel->setText(tr("Progress today: %1/%2 words").arg(studiedToday).arg(plannedToday));
     progressBar->setValue(studiedToday);
     progressBar->setMaximum(plannedToday);
+}
+
+void TrainingSummary::on_configureButton_clicked()
+{
+    SettingsDialog dialog(Application::instance()->mainWindow(), SettingsDialog::Tab::Training);
+    dialog.exec();
 }
 
 }

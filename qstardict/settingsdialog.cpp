@@ -52,7 +52,7 @@ int toPercents(double value)
 
 namespace QStarDict {
 
-SettingsDialog::SettingsDialog(QWidget *parent)
+SettingsDialog::SettingsDialog(QWidget *parent, SettingsDialog::Tab activeTab)
         : QDialog(parent)
 {
     setupUi(this);
@@ -155,6 +155,8 @@ SettingsDialog::SettingsDialog(QWidget *parent)
 
     connect(m_pluginsModel, &QStandardItemModel::itemChanged,
             this, &SettingsDialog::pluginsItemChanged);
+
+    tabWidget->setCurrentIndex(static_cast<int>(activeTab));
 }
 
 void SettingsDialog::accept()

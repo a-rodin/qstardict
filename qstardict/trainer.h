@@ -89,8 +89,7 @@ class Trainer: public QDialog
         /**
          * Set the number of words planned for studying per day.
          */
-        void setWordsPerDay(unsigned wordsPerDay)
-        { m_wordsPerDay = wordsPerDay; }
+        void setWordsPerDay(unsigned wordsPerDay);
 
         /**
          * Save the settings of the trainer.

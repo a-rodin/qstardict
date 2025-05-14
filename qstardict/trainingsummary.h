@@ -50,6 +50,9 @@ class TrainingSummary: public QWidget, private Ui::TrainingSummary
          * Update the displayed progress.
          */
         void setProgress(unsigned studiedToday, unsigned plannedToday);
+
+    private slots:
+        void on_configureButton_clicked();
 };
 
 }

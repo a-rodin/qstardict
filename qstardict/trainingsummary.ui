@@ -99,6 +99,9 @@
      </item>
      <item>
       <widget class="QToolButton" name="configureButton">
+       <property name="toolTip">
+        <string>Open progress settings</string>
+       </property>
        <property name="text">
         <string>&amp;Configure</string>
        </property>

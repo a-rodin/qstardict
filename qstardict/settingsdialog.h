@@ -42,9 +42,21 @@ class SettingsDialog: public QDialog, private Ui::SettingsDialog
 
     public:
         /**
-         * Construct new SettingsDialog widget with parent MainWindow.
+         * A enum describing the tabs of the settings dialog.
          */
-        SettingsDialog(QWidget *parent = nullptr);
+        enum class Tab: int
+        {
+            General = 0,
+            Dictionaries = 1,
+            PopupWindow = 2,
+            Training = 3,
+            Appearance = 4
+        };
+
+        /**
+         * Construct a new SettingsDialog widget with parent MainWindow.
+         */
+        SettingsDialog(QWidget *parent = nullptr, Tab activeTab = Tab::General);
 
         void accept();
         void reject();

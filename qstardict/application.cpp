@@ -91,7 +91,7 @@ Application::Application(int &argc, char **argv)
         Application::instance()->popupWindow(), &PopupWindow::showClipboardTranslation);
 
     m_vocabulary = new Vocabulary();
-    m_trainer = new Trainer();
+    m_trainer = new Trainer(m_mainWindow);
     m_trainer->setVocabulary(m_vocabulary);
 }
 

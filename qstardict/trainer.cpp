@@ -95,6 +95,17 @@ void Trainer::start()
     }
 }
 
+void Trainer::setWordsPerDay(unsigned wordsPerDay)
+{
+    m_wordsPerDay = wordsPerDay;
+    if (m_trainingSummary->isVisible())
+    {
+        m_trainingSummary->setProgress(
+                m_vocabulary->numberOfWordsStudiedToday(),
+                m_wordsPerDay);
+    }
+}
+
 void Trainer::saveSettings()
 {
     QSettings config;
@@ -209,12 +220,12 @@ void Trainer::allStagesFinished()
     removeWidgets();
     m_trainingSummary->setStudiedWords(m_wordsList.size() - m_wordsWithErrorsList.size());
     m_trainingSummary->setWordsForRepetition(m_wordsWithErrorsList.size());
-    QSettings config;
     m_trainingSummary->setProgress(
             m_vocabulary->numberOfWordsStudiedToday(),
             m_wordsPerDay);
 
     layout()->addWidget(m_trainingSummary);
+    m_trainingSummary->setVisible(true);
 }
 
 void Trainer::removeWidgets()
@@ -223,10 +234,12 @@ void Trainer::removeWidgets()
     layout()->removeWidget(m_chooseTranslationStage);
     layout()->removeWidget(m_typeInStage);
     layout()->removeWidget(m_scatteredLettersStage);
+    layout()->removeWidget(m_trainingSummary);
     m_wordWithTranslationStage->setVisible(false);
     m_chooseTranslationStage->setVisible(false);
     m_typeInStage->setVisible(false);
     m_scatteredLettersStage->setVisible(false);
+    m_trainingSummary->setVisible(false);
 }
 
 void Trainer::loadSettings()
