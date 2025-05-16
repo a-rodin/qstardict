@@ -83,18 +83,17 @@ void WordWithTranslationStage::showCurrentWord()
     wordLabel->setText(m_wordsList[m_currentWordIndex].word());
     transcriptionLabel->setText(m_wordsList[m_currentWordIndex].transcription());
     translationLabel->setText(m_wordsList[m_currentWordIndex].translation());
+    translationLabel->setFocus();
 
     if (m_currentWordIndex == m_wordsList.size() - 1)
         {
             nextWordButton->setVisible(false);
             nextStageButton->setVisible(true);
-            nextStageButton->setFocus();
         }
         else
         {
             nextWordButton->setVisible(true);
             nextStageButton->setVisible(false);
-            nextStageButton->setFocus();
         }
     }
 }

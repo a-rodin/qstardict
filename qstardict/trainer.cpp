@@ -119,7 +119,6 @@ void Trainer::wordWithTranslationStage()
     layout()->addWidget(m_wordWithTranslationStage);
     m_wordWithTranslationStage->setVisible(true);
     m_wordWithTranslationStage->startStage();
-    m_wordWithTranslationStage->setFocus();
 }
 
 void Trainer::wordWithTranslationStageFinished()
