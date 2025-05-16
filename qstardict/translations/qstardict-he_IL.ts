@@ -197,11 +197,6 @@
 <context>
     <name>QStarDict::MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="114"/>
-        <source>Ctrl+T</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="140"/>
         <source>About QStarDict</source>
         <translation>אודות QStarDict</translation>

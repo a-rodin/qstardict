@@ -113,7 +113,7 @@ void MainWindow::loadSettings()
     setShowIpaPronouncers(config.value("MainWindow/showIpaPronouncers", showIpaPronouncers()).toBool());
 
     app->popupShortcut()->setShortcut(QKeySequence(
-        config.value("MainWindow/popupShortcutString", tr("Ctrl+T")).toString()));
+        config.value("MainWindow/popupShortcutString", "Shift+Ctrl+Alt+T").toString()));
     app->popupShortcut()->setEnabled(
         config.value("MainWindow/popupShortcutEnabled", false).toBool());
 }

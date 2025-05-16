@@ -239,10 +239,6 @@
         <source>F1</source>
         <translation></translation>
     </message>
-    <message>
-        <source>Ctrl+T</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QStarDict::SettingsDialog</name>
