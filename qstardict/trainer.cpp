@@ -54,6 +54,10 @@ Trainer::Trainer(QWidget *parent)
             this, &Trainer::scatteredLettersStageFinished);
     connect(m_typeInStage, &TypeInStage::nextStage,
             this, &Trainer::typeInStageFinished);
+    connect(m_trainingSummary, &TrainingSummary::continueTraining,
+            this, &Trainer::start);
+    connect(m_trainingSummary, &TrainingSummary::endTraining,
+            this, &QDialog::reject);
 
     QLayout *layout = new QHBoxLayout(this);
     setLayout(layout);

@@ -140,9 +140,6 @@
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <widget class="QPushButton" name="continueTrainingButton">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
        <property name="text">
         <string>Continue training (Enter)</string>
        </property>
@@ -150,9 +147,6 @@
      </item>
      <item>
       <widget class="QPushButton" name="endTrainingButton">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
        <property name="text">
         <string>End training (Esc)</string>
        </property>

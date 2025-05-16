@@ -68,8 +68,10 @@ void TrainingSummary::keyPressEvent(QKeyEvent *event)
     {
         case Qt::Key_Enter:
             continueTrainingButton->click();
+            [[fallthrough]];
         case Qt::Key_Escape:
             endTrainingButton->click();
+            [[fallthrough]];
         default:
             QWidget::keyPressEvent(event);
             break;
@@ -80,6 +82,16 @@ void TrainingSummary::on_configureButton_clicked()
 {
     SettingsDialog dialog(Application::instance()->mainWindow(), SettingsDialog::Tab::Training);
     dialog.exec();
+}
+
+void on_continueTrainingButton_clicked()
+{
+    emit continueTraining();
+}
+
+void on_endTrainingButton_clicked()
+{
+    emit endTraining();
 }
 
 }
