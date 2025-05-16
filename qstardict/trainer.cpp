@@ -76,19 +76,12 @@ Trainer::~Trainer()
     delete m_trainingSummary;
 }
 
-void Trainer::setWords(const QVector<WordForTraining> &wordsList)
-{
-    m_wordsList = wordsList;
-    m_wordWithTranslationWordsList = wordsList;
-    m_chooseTranslationWordsList = wordsList;
-    m_scatteredLettersWordsList = wordsList;
-    m_typeInWordsList = wordsList;
-}
-
 void Trainer::start()
 {
+    setWords(m_vocabulary->getWordsForTraining(m_wordsPerRound));
     if (m_wordsList.size() == 0)
     {
+        hide();
         QMessageBox::warning(Application::instance()->mainWindow(), tr("QStarDict Training"),
                 tr("There are no words for training. Please add words for training using the "
                 "<img width=\"24\" height=\"24\" src=\":/pics/word-add.png\"> button in translations before training."));
@@ -126,6 +119,7 @@ void Trainer::wordWithTranslationStage()
     layout()->addWidget(m_wordWithTranslationStage);
     m_wordWithTranslationStage->setVisible(true);
     m_wordWithTranslationStage->startStage();
+    m_wordWithTranslationStage->setFocus();
 }
 
 void Trainer::wordWithTranslationStageFinished()
@@ -147,7 +141,6 @@ void Trainer::chooseTranslationStage()
     removeWidgets();
     layout()->addWidget(m_chooseTranslationStage);
     m_chooseTranslationStage->setVisible(true);
-    m_chooseTranslationStage->setFocus();
     m_chooseTranslationStage->startStage();
 }
 
@@ -231,6 +224,16 @@ void Trainer::allStagesFinished()
 
     layout()->addWidget(m_trainingSummary);
     m_trainingSummary->setVisible(true);
+    m_trainingSummary->setFocus();
+}
+
+void Trainer::setWords(const QVector<WordForTraining> &wordsList)
+{
+    m_wordsList = wordsList;
+    m_wordWithTranslationWordsList = wordsList;
+    m_chooseTranslationWordsList = wordsList;
+    m_scatteredLettersWordsList = wordsList;
+    m_typeInWordsList = wordsList;
 }
 
 void Trainer::removeWidgets()

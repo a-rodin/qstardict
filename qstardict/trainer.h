@@ -59,11 +59,6 @@ class Trainer: public QDialog
         { m_vocabulary = vocabulary; }
 
         /**
-         * Set the words for training.
-         */
-        void setWords(const QVector<WordForTraining> &wordsList);
-
-        /**
          * Start training.
          */
         void start();
@@ -127,6 +122,7 @@ class Trainer: public QDialog
         TypeInStage *m_typeInStage;
         TrainingSummary *m_trainingSummary;
 
+        void setWords(const QVector<WordForTraining> &wordsList);
         void removeWidgets();
         void loadSettings();
 };
