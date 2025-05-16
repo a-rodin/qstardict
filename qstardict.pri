@@ -31,7 +31,7 @@ QT = \
 CONFIG += \
     qt \
     warn_on \
-    relase
+    release
 unix {
     CONFIG += link_pkgconfig
     PKGCONFIG += glib-2.0 zlib x11
