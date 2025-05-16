@@ -84,12 +84,12 @@ void TrainingSummary::on_configureButton_clicked()
     dialog.exec();
 }
 
-void on_continueTrainingButton_clicked()
+void TrainingSummary::on_continueTrainingButton_clicked()
 {
     emit continueTraining();
 }
 
-void on_endTrainingButton_clicked()
+void TrainingSummary::on_endTrainingButton_clicked()
 {
     emit endTraining();
 }
