@@ -25,6 +25,7 @@
 
 #include "application.h"
 #include "choosetranslationstage.h"
+#include "mainwindow.h"
 #include "scatteredlettersstage.h"
 #include "trainingsummary.h"
 #include "typeinstage.h"
@@ -88,7 +89,7 @@ void Trainer::start()
 {
     if (m_wordsList.size() == 0)
     {
-        QMessageBox::warning(nullptr, tr("QStarDict Training"),
+        QMessageBox::warning(Application::instance()->mainWindow(), tr("QStarDict Training"),
                 tr("There are no words for training. Please add words for training using the "
                 "<img width=\"24\" height=\"24\" src=\":/pics/word-add.png\"> button in translations before training."));
     }
