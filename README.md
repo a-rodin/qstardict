@@ -8,6 +8,6 @@
 selected words
 * Translations reformatting
 * Pronuncation of translated words
-* Pronunciation if IPA transcriptions in the translations
+* Pronunciation of IPA transcriptions in the translations
 * Plugins support
 * Training for studying words
