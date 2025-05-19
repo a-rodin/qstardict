@@ -139,3 +139,7 @@
 * Version 3.0.0
 	- drop Qt5 support
 	- improve documentation
+* Version 4.0.0
+	- added support for pronouncing IPA transcription
+	- added a button for switching to the main window from the popup window
+	- added a trainer for studying words
