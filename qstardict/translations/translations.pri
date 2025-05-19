@@ -18,22 +18,22 @@
 #############################################################################
 
 TRANSLATIONS += \
-    qstardict-bg_BG.ts \
-    qstardict-cs_CZ.ts \
-    qstardict-de_DE.ts \
-    qstardict-es_ES.ts \
-    qstardict-fr_FR.ts \
-    qstardict-he_IL.ts \
-    qstardict-it_IT.ts \
-    qstardict-ka_GE.ts \
-    qstardict-lt_LT.ts \
-    qstardict-pl_PL.ts \
-    qstardict-pt_BR.ts \
-    qstardict-ru_RU.ts \
-    qstardict-ua_UA.ts \
-    qstardict-tr_TR.ts \
-    qstardict-zh_CN.ts \
-    qstardict-zh_TW.ts
+    translations/qstardict-bg_BG.ts \
+    translations/qstardict-cs_CZ.ts \
+    translations/qstardict-de_DE.ts \
+    translations/qstardict-es_ES.ts \
+    translations/qstardict-fr_FR.ts \
+    translations/qstardict-he_IL.ts \
+    translations/qstardict-it_IT.ts \
+    translations/qstardict-ka_GE.ts \
+    translations/qstardict-lt_LT.ts \
+    translations/qstardict-pl_PL.ts \
+    translations/qstardict-pt_BR.ts \
+    translations/qstardict-ru_RU.ts \
+    translations/qstardict-ua_UA.ts \
+    translations/qstardict-tr_TR.ts \
+    translations/qstardict-zh_CN.ts \
+    translations/qstardict-zh_TW.ts
 
 COMPILED_TRANSLATIONS += \
     qstardict-bg_BG.qm \

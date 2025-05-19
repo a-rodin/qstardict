@@ -25,6 +25,19 @@
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="../vocabulary.cpp" line="+44"/>
+        <source>Database error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cannot open vocabulary database at %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QStarDict::CSSEdit</name>
     <message>
         <location filename="../cssedit.ui" line="+16"/>
@@ -120,9 +133,62 @@
     </message>
 </context>
 <context>
+    <name>QStarDict::ChooseTranslationStage</name>
+    <message>
+        <location filename="../choosetranslationstage.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished">ფორმა</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Word</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Translation 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Translation 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Translation 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Translation 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+46"/>
+        <source>Correct!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+42"/>
+        <source>Wrong...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Next word (Enter)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Next stage (Enter)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QStarDict::DictBrowser</name>
     <message>
-        <location filename="../dictbrowser.cpp" line="+75"/>
+        <location filename="../dictbrowser.cpp" line="+110"/>
         <source>The word &lt;b&gt;%1&lt;/b&gt; is not found.</source>
         <translation>სიტყვა &lt;b&gt;%1&lt;/b&gt; აღმოჩენილი არაა.</translation>
     </message>
@@ -130,45 +196,36 @@
 <context>
     <name>QStarDict::DictWidget</name>
     <message>
-        <location filename="../dictwidget.cpp" line="+129"/>
         <source>Save translation</source>
-        <translation>თარგმანის შენახვა</translation>
+        <translation type="vanished">თარგმანის შენახვა</translation>
     </message>
     <message>
-        <location line="+11"/>
-        <location line="+14"/>
         <source>HTML files (*.html, *.htm)</source>
-        <translation>HTML ფაილები (*.html, *.htm)</translation>
+        <translation type="vanished">HTML ფაილები (*.html, *.htm)</translation>
     </message>
     <message>
-        <location line="-27"/>
-        <location line="+5"/>
-        <location line="+11"/>
         <source>Text files (*.txt)</source>
-        <translation>ტექსტური ფაილები (*.txt)</translation>
+        <translation type="vanished">ტექსტური ფაილები (*.txt)</translation>
     </message>
     <message>
-        <location line="-42"/>
+        <location filename="../dictwidget.cpp" line="+96"/>
         <source>Search</source>
         <translation>ძებნა</translation>
     </message>
     <message>
-        <location line="+31"/>
         <source>HTML files (*.html *.htm)</source>
-        <translation>HTML ფაილები (*.html *.htm)</translation>
+        <translation type="vanished">HTML ფაილები (*.html *.htm)</translation>
     </message>
     <message>
-        <location line="+17"/>
         <source>Error</source>
-        <translation>შეცდომა</translation>
+        <translation type="vanished">შეცდომა</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Cannot save translation as %1</source>
-        <translation>ვერ შევინახე თარგმანი, როგორც %1</translation>
+        <translation type="vanished">ვერ შევინახე თარგმანი, როგორც %1</translation>
     </message>
     <message>
-        <location line="-68"/>
+        <location line="-13"/>
         <source>Go to &amp;previous translation</source>
         <translation>გადასვლა &amp;წინა თარგმანზე</translation>
     </message>
@@ -179,24 +236,56 @@
     </message>
     <message>
         <location line="+5"/>
+        <source>Pronounce the &amp;word</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>&amp;Add the word for studying</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Open in the main window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+47"/>
+        <source>Please select a part of the article with the translation that you want to add for studying and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>The word &quot;%1&quot; is added for studying.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Transcription: &lt;b&gt;%1&lt;/b&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Translation: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&amp;Save to file</source>
-        <translation>&amp;ფაილში შენახვა</translation>
+        <translation type="vanished">&amp;ფაილში შენახვა</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Speak &amp;word</source>
-        <translation>სიტყვის &amp;წარმოთქმა</translation>
+        <translation type="vanished">სიტყვის &amp;წარმოთქმა</translation>
     </message>
     <message>
-        <location line="-3"/>
         <source>Prin&amp;t translation</source>
-        <translation>თარგმანის &amp;დაბეჭდვა</translation>
+        <translation type="vanished">თარგმანის &amp;დაბეჭდვა</translation>
     </message>
 </context>
 <context>
     <name>QStarDict::MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="+118"/>
+        <location filename="../mainwindow.cpp" line="+155"/>
         <source>About QStarDict</source>
         <translation>QStarDict-ის შესახებ</translation>
     </message>
@@ -211,7 +300,7 @@
         <translation>ყველა უფლება დაცულია (C) 2007-2009 Alexander Rodin &lt;a href=&quot;http://qstardict.ylsoftware.com&quot;&gt;http://qstardict.ylsoftware.com&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="+13"/>
+        <location filename="../mainwindow.ui" line="+14"/>
         <location filename="../mainwindow.cpp" line="+19"/>
         <location line="+39"/>
         <source>QStarDict</source>
@@ -244,7 +333,7 @@
         <translation>ძებნა</translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+23"/>
         <source>Words list</source>
         <translation>სიტყვების სია</translation>
     </message>
@@ -264,7 +353,12 @@
         <translation>&amp;პარამეტრები</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+7"/>
+        <source>&amp;Training</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
         <source>&amp;Quit</source>
         <translation>გა&amp;სვლა</translation>
     </message>
@@ -303,11 +397,59 @@
         <source>F1</source>
         <translation>F1</translation>
     </message>
+    <message>
+        <location line="+5"/>
+        <source>&amp;Start training</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>&amp;Vocabulary</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QStarDict::ScatteredLettersStage</name>
+    <message>
+        <location filename="../scatteredlettersstage.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished">ფორმა</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>&lt;p align=&quot;right&quot;&gt;&lt;font color=&quot;#0000ff&quot;&gt;&lt;b&gt;Errors: 0&lt;/b&gt;&lt;/font&gt;&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+58"/>
+        <source>I cannot remember the word (Enter)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Next word (Enter)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Next stage (Enter)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../scatteredlettersstage.cpp" line="+58"/>
+        <source>&lt;p align=&quot;right&quot;&gt;&lt;font color=&quot;%1&quot;&gt;&lt;b&gt;Errors: %2&lt;/b&gt;&lt;/font&gt;&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>&lt;p align=&quot;center&quot;&gt;%1&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QStarDict::SettingsDialog</name>
     <message>
-        <location filename="../settingsdialog.cpp" line="+61"/>
+        <location filename="../settingsdialog.cpp" line="+67"/>
         <location line="+8"/>
         <source>Enabled</source>
         <translation>ჩაირთო</translation>
@@ -324,7 +466,7 @@
         <translation>დამატება</translation>
     </message>
     <message>
-        <location line="+246"/>
+        <location line="+274"/>
         <source>Information about dictionary &quot;%1&quot;</source>
         <translation>ინფორმაცია &quot;%1&quot; ლექსიკონის შესახებ</translation>
     </message>
@@ -391,14 +533,19 @@
         <translation>QStarDict-ის მორგება</translation>
     </message>
     <message>
-        <location line="+155"/>
+        <location line="+210"/>
         <source>Show information about dictionary</source>
         <translation>ლექსიკონის შესახებ ინფორმაციის ჩვენება</translation>
     </message>
     <message>
-        <location line="-123"/>
+        <location line="-181"/>
         <source>Global settings</source>
         <translation>გლობალური პარამეტრები</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Application</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+13"/>
@@ -406,7 +553,12 @@
         <translation>გაშვება სისტემასთან ერთად</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+10"/>
+        <source>Translations browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Instant search</source>
         <translation>მყისი ძებნა</translation>
     </message>
@@ -421,7 +573,27 @@
         <translation>შეიყვანეთ ბრძანება წარმოთქმის პროგრამისთვის.&lt;br&gt;თუ ბრძანება შეიცავს &quot;%s&quot;-ს, ის სიტყვით ჩანაცვლდება. წინააღმდეგ შემთხვევაში სიტყვები წარმოთქმის პროცესის სტანდარტულ შეყვანაში ჩაიწერება.</translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+12"/>
+        <source>Show buttons for pronouncing IPA transcriptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Use this command for eSpeak for pronouncing IPA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Enter cmd for the speaching program.&lt;br&gt;If cmd contains &quot;%s&quot; it will be replaced to word, else word will be written to stdin of speech process.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>espeak</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
         <location line="+6"/>
         <source>Dictionaries</source>
         <translation>ლექსიკონები</translation>
@@ -487,7 +659,12 @@
         <translation>ქცევა</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+17"/>
+        <source>Show translation popup by shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
         <source>Pronounce the word</source>
         <translation>სიტყვის წარმოთქმა</translation>
     </message>
@@ -543,12 +720,12 @@
     </message>
     <message>
         <location line="+10"/>
-        <location line="+125"/>
+        <location line="+193"/>
         <source>Appearance</source>
         <translation>გარემოს იერსახე</translation>
     </message>
     <message>
-        <location line="-105"/>
+        <location line="-173"/>
         <source>Opacity</source>
         <translation>გაუმჭირვალობა</translation>
     </message>
@@ -568,6 +745,21 @@
         <translation>ნაგულისხმევი სიმაღლე</translation>
     </message>
     <message>
+        <location line="+39"/>
+        <source>Training</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Words per round</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Words per day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../settingsdialog.cpp" line="-18"/>
         <source>&lt;b&gt;Author:&lt;/b&gt; %1&lt;br&gt;</source>
         <translation>&lt;b&gt;ავტორი:&lt;/b&gt; %1&lt;br&gt;</translation>
@@ -578,7 +770,7 @@
         <translation>&lt;b&gt;სიტყვების რაოდენობა:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
-        <location line="-190"/>
+        <location line="-207"/>
         <source>All translation</source>
         <translation>ყველა თარგმანი</translation>
     </message>
@@ -613,15 +805,98 @@
         <translation>ტრანსკრიფცია</translation>
     </message>
     <message>
-        <location filename="../settingsdialog.ui" line="-465"/>
+        <location filename="../settingsdialog.ui" line="-609"/>
         <source>Use system tray</source>
         <translation>სისტემის კუთხეში</translation>
     </message>
 </context>
 <context>
+    <name>QStarDict::Trainer</name>
+    <message>
+        <location filename="../trainer.cpp" line="+42"/>
+        <location line="+43"/>
+        <source>QStarDict Training</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>There are no words for training. Please add words for training using the &lt;img width=&quot;24&quot; height=&quot;24&quot; src=&quot;:/pics/word-add.png&quot;&gt; button in translations before training.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QStarDict::TrainingSummary</name>
+    <message>
+        <location filename="../trainingsummary.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished">ფორმა</translation>
+    </message>
+    <message>
+        <location line="+36"/>
+        <source>Studied: %1 words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>For repetition: %1 words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+39"/>
+        <location filename="../trainingsummary.cpp" line="+60"/>
+        <source>Progress today: %1/%2 words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Open progress settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Configure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>Continue training (Enter)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>End training (Esc)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../trainingsummary.cpp" line="-18"/>
+        <source>&lt;font color=&quot;#2FAA23&quot;&gt;&lt;b&gt;Studied:&lt;/b&gt;&lt;/font&gt; 1 word</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>&lt;font color=&quot;#2FAA23&quot;&gt;&lt;b&gt;Studied:&lt;/b&gt;&lt;/font&gt; %1 words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>&lt;font color=&quot;#FF0000&quot;&gt;&lt;b&gt;For repetition:&lt;/b&gt;&lt;/font&gt; 1 word</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>&lt;font color=&quot;#FF0000&quot;&gt;&lt;b&gt;For repetition:&lt;/b&gt;&lt;/font&gt; %1 words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Progress today: 1/%1 word</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QStarDict::Tray</name>
     <message>
-        <location filename="../trayicon.cpp" line="+37"/>
+        <location filename="../tray.cpp" line="+37"/>
         <source>QStarDict</source>
         <translation>QStarDict</translation>
     </message>
@@ -631,17 +906,17 @@
         <translation>&amp;სკანირება</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+12"/>
         <source>&amp;Configure QStarDict</source>
         <translation>&amp;QStarDict-ის მორგება</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+5"/>
         <source>&amp;Quit</source>
         <translation>გა&amp;სვლა</translation>
     </message>
     <message>
-        <location line="+48"/>
+        <location line="+49"/>
         <source>QStarDict: scanning is %1</source>
         <translation>QStarDict: სკანირება %1</translation>
     </message>
@@ -654,6 +929,85 @@
         <location line="+0"/>
         <source>disabled</source>
         <translation>გათისული</translation>
+    </message>
+</context>
+<context>
+    <name>QStarDict::TypeInStage</name>
+    <message>
+        <location filename="../typeinstage.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished">ფორმა</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Pronounce the word</source>
+        <translation type="unfinished">სიტყვის წარმოთქმა</translation>
+    </message>
+    <message>
+        <location line="+57"/>
+        <source>I entered the word (Enter)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Next word (Enter)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Next stage (Enter)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../typeinstage.cpp" line="+92"/>
+        <source>&lt;p align=&quot;center&quot;&gt;%1&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QStarDict::VocabularyDialog</name>
+    <message>
+        <location filename="../vocabularydialog.ui" line="+14"/>
+        <source>Vocabulary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Remove the word</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QStarDict::WordWithTranslationStage</name>
+    <message>
+        <location filename="../wordwithtranslationstage.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished">ფორმა</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Word</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>[wɛ:d]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Translation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Next word (Enter)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Next stage (Enter)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
