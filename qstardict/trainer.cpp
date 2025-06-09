@@ -79,6 +79,7 @@ Trainer::~Trainer()
 void Trainer::start()
 {
     setWords(m_vocabulary->getWordsForTraining(m_wordsPerRound));
+    m_wordsWithErrorsList.clear();
     if (m_wordsList.size() == 0)
     {
         hide();
