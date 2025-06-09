@@ -89,11 +89,13 @@ void WordWithTranslationStage::showCurrentWord()
         {
             nextWordButton->setVisible(false);
             nextStageButton->setVisible(true);
+            nextStageButton->setFocus();
         }
         else
         {
-            nextWordButton->setVisible(true);
             nextStageButton->setVisible(false);
+            nextWordButton->setVisible(true);
+            nextWordButton->setFocus();
         }
     }
 }
